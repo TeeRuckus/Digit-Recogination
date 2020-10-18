@@ -32,7 +32,7 @@ class Data_Set(object):
             self.mode = mode
 
         def create_set(self, set_dir, mode):
-            im_set = Image_Loader(set_dir, mode)
+            return Image_Loader(set_dir, mode)
 
     def __init__(self, set_path):
         self._mode = 'HSV'

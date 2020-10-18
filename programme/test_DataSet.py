@@ -44,5 +44,8 @@ class test_DataSet(unittest.TestCase):
                 " of sets have been updated appropriately")
 
     def test_accessing_image_set(self):
-        print(self.digits_set.set)
+        curr_set = self.digits_set.set['1']
 
+        for ii, im in enumerate(curr_set.data):
+            cv.imshow("img %s" % ii, im)
+        cv.waitKey()
