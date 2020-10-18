@@ -137,6 +137,7 @@ class Image_Loader(object):
 
         return im
 
+
     def __validate_path(self, nw_path):
         """
         IMPORT: nw_path (string)
