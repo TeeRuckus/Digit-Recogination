@@ -26,8 +26,8 @@ class Image_Loader(object):
     def __init__(self, path, mode="HSV"):
         self._path = path
         self._mode = mode
-        self.data = self.load(self.path)
-        self.image_indx = 0
+        self._data = self.load(self.path)
+        self._image_indx = 0
 
     @property
     def path(self):
@@ -37,11 +37,15 @@ class Image_Loader(object):
     def mode(self):
         return self._mode
 
+    @property
+    def data(self):
+        return self._data
+
     @path.setter
     def path(self, nw_path):
         self._path = self.__validate_path(nw_path)
         #re-loading the data at the new path
-        self.data = self.load(self.path)
+        self._data = self.load(self.path)
 
     @mode.setter
     def mode(self, nw_mode):
@@ -102,6 +106,22 @@ class Image_Loader(object):
 
         return convert_img
 
+    def create_labels(self):
+        """
+        EXPORT: labels (list)
+        PURPOSE: to create labels from the loaded directories. Hence, it
+        will make the labels the same as the directory names
+        """
+        labels = []
+        for path in self._data:
+            consititutes = path.split('/')
+            #the name of the directory is always going to be the last index
+            #of the splitted list
+            labels.append(consititutes[-1])
+
+        return labels
+
+
     def __iter__(self):
         """
         EXPORT: reference to this object
@@ -109,7 +129,7 @@ class Image_Loader(object):
         PURPOSE: Defining how this class should be initialised when another function
         tries to iterate over this class
         """
-        self.image_indx = 0
+        self._image_indx = 0
         return self
 
     def __len__(self):
@@ -118,7 +138,7 @@ class Image_Loader(object):
         PURPOSE: Defining how this class should behave when the user calls then
         len() function on this class
         """
-        return len(self.data)
+        return len(self._data)
 
     def __next__(self):
         """
@@ -127,16 +147,15 @@ class Image_Loader(object):
         PURPOSE: Defining what this class should return and behave when the class
         is used in a for-each loop
         """
-        if self.image_indx == len(self.data):
+        if self._image_indx == len(self._data):
             raise StopIteration
-        curr_img_path = self.data[self.image_indx]
+        curr_img_path = self._data[self._image_indx]
         im = self.load_image(curr_img_path)
 
-        self.image_indx += 1
+        self._image_indx += 1
 
 
         return im
-
 
     def __validate_path(self, nw_path):
         """

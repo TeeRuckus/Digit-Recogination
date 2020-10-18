@@ -9,7 +9,6 @@ and to ensure that's operating as expected
 TO DO:
     - Testing of invalid data for all mutators, accesors, and methods
 """
-import ImageLoader
 import unittest
 from ImageLoader import *
 
@@ -27,6 +26,7 @@ class test_imageLoader(unittest.TestCase):
         PURPOSE: testin if the defined class length function will return
         the correct number files in a specified directory
         """
+        self.test.path = '../Digits-2020S2/0/'
         #test 1
         num_files = 13
         self.assertEqual(num_files, len(self.test), "number of 0 image files")
@@ -35,8 +35,16 @@ class test_imageLoader(unittest.TestCase):
         """
         PURPOSE: testing all the accessors available in the class
         """
+        self.test.path = '../Digits-2020S2/0/'
+        num_paths = 13
         self.assertEqual(self.rel_path, self.test.path, "testing path getter")
         self.assertEqual('HSV', self.test.mode, "test mode getter")
+        self.assertEqual(list, type(self.test.data), "testing if the object "+
+                "will return a list of paths")
+
+        self.assertEqual(num_paths, len(self.test.data), "testing the returned"+
+                " paths is equal to the number of image files in folder")
+
 
 
     def test_setters(self):
@@ -64,6 +72,7 @@ class test_imageLoader(unittest.TestCase):
         PURPOSE: visually testing the algorithm to enusre that we can
         display the images out onto the terminal
         """
+        self.test.path = '../Digits-2020S2/0/'
         #note: we're expecting it to display the images found in the 0
         #directory, as unittest will destroy any other objects made by
         #previous unit tests, and use the original object which we made
@@ -71,3 +80,16 @@ class test_imageLoader(unittest.TestCase):
             cv.imshow('%s' % ii, img)
 
         cv.waitKey()
+
+    def test_create_labels(self):
+        """
+        PURPOSE: to test if this funtion will create the correct labels from the
+        given file directories
+        """
+        num_labels = 10
+        self.test.path = '../Digits-2020S2/'
+        labels = self.test.create_labels()
+        print("visual inspection:\n \t %s" % labels)
+        self.assertEqual(num_labels,len(labels), "testing the number of created"+
+                " labels")
+
