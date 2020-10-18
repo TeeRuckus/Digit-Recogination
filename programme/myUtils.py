@@ -5,10 +5,17 @@ import matplotlib.pyplot as plt
 from debug import *
 import math
 import os
+import timeit
 np.set_printoptions(threshold=np.inf)
 
 
 TOL = 0.00001
+
+def time_it(func2Time):
+    def timer():
+        pass
+
+    return timer
 
 def clean():
     valid = False
