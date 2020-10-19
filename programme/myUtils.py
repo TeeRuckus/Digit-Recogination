@@ -3,6 +3,7 @@ import csv
 import numpy as np
 import matplotlib.pyplot as plt
 from debug import *
+from DataSet import *
 import math
 import os
 import timeit
@@ -10,12 +11,6 @@ np.set_printoptions(threshold=np.inf)
 
 
 TOL = 0.00001
-
-def time_it(func2Time):
-    def timer():
-        pass
-
-    return timer
 
 def clean():
     valid = False
@@ -922,3 +917,19 @@ def activity_four_watershed(im, invert_threshold=False):
     cv.imshow('resultant', im_copy)
     cv.waitKey()
     clean()
+
+def check_image_size():
+    all_data = Data_Set('../Digits-2020S2/')
+
+    all_labels = all_data.set.keys()
+    print(all_labels)
+
+
+    for set_num in all_labels:
+        print("set %s" % set_num)
+        for ii, im in enumerate(all_data.set[set_num].data):
+            print("\t id {} {}".format(ii, im.shape))
+
+
+if __name__ == '__main__':
+    check_image_size()

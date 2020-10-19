@@ -86,6 +86,7 @@ class test_imageLoader(unittest.TestCase):
         PURPOSE: to test if this funtion will create the correct labels from the
         given file directories
         """
+        #they're going to be 10 labels plus the test directory made
         num_labels = 10
         self.test.path = '../Digits-2020S2/'
         labels = self.test.create_labels()
