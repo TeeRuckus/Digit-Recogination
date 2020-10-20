@@ -11,19 +11,30 @@ for ii, path in  enumerate(interest):
 
     gray = cv.cvtColor(im, cv.COLOR_BGR2GRAY)
     gray = cv.GaussianBlur(gray, (5,5), 0)
-    cv.imshow("blurred image %s" %ii, gray)
+    #cv.imshow("blurred image %s" %ii, gray)
     thresh = cv.threshold(gray, 0, 255, cv.THRESH_BINARY+cv.THRESH_OTSU)[1]
 
-    cv.imshow("threshold image %s" %ii, thresh)
+    #cv.imshow("threshold image %s" %ii, thresh)
 
     edge_thresh = 100
     canny_trans = cv.Canny(thresh, edge_thresh, edge_thresh*2 )
-    cv.imshow("canny_trans before %s" %ii, canny_trans)
+    lines_im  = cv.HoughLines(canny_trans, 1, np.pi/180, 150, None, 0, 0)
+    #cv.imshow("canny_trans before %s" %ii, canny_trans)
 
     rect_kern = cv.getStructuringElement(cv.MORPH_RECT, (5,5))
-    canny_trans = cv.erode(canny_trans, None, iterations=1)
-    canny_trans = cv.dilate(thresh, None, iterations=1)
-    cv.imshow("found edges after morphology %s" %ii, canny_trans)
+    canny_trans = cv.erode(lines_im, None, iterations=1)
+    canny_trans = cv.dilate(lines_img, None, iterations=1)
+    cv.imshow("found edges after morphology %s" %ii, lines_im)
+
+    #white template image, to place all the background features
+    bg_img = 255 * np.ones_like(canny_trans)
+    #black template image to placea all foreground features
+    fg_img = np.zeros_like(canny_trans)
+
+
+    cv.imshow('white canvas image %s' % ii, bg_img)
+    cv.imshow('black canvas image %s' % ii, fg_img)
+    #
 #
 #    cnts, heirarchy = cv.findContours(canny_trans, cv.RETR_TREE,
 #            cv.CHAIN_APPROX_SIMPLE)[1:]
