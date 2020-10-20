@@ -20,14 +20,69 @@ def draw_boxes(bboxes, im):
             pass
         else:
             x,y,w,h = box
-            print('first coordinate:\n {} {}'.format(x,y))
-            print('distnace between them:\n {} {}'.format(w,h))
             cv.rectangle(im, (x,y), (x+w, y+h), (255,0,0), 2)
+
+def find_clusters(bboxes):
+    cluster = []
+
+    bboxes =  sorted(bboxes, key=lambda x: x[0])
+
+    for curr_box in bboxes:
+        if curr_box[0] == -1:
+            pass
+        else:
+            x,y,w,h = curr_box
+            pt1 = (x, y)
+            pt2 = (x+w, y+h)
+            for alt_box in bboxes:
+                if alt_box[0] == -1:
+                    pass
+                else:
+                    x,y,w,h = curr_box
+                    pt1_alt = (x,y)
+                    pt2_alt =(x+w, y+h)
+
+                    x_diff = abs(pt2[0] - pt1_alt[0])
+                    y_diff = abs(pt1[1] - pt1_alt[1])
+                    if x_diff <= w + 100:
+                        if y_diff <= h:
+                            cluster.append([curr_box, alt_box])
+
+    return cluster
+
+def group_cluster(clusters):
+    cluster_b = []
+
+    for indx, cluster in enumerate(clusters):
+        box_one = cluster[0]
+        box_two = cluster[1]
+
+        x_1, y_1, w_1, h_1 = box_one
+        x_2, y_2, w_2, h_2 = box_two
+
+        if x_1 < x_2:
+            nw_x = x_1
+        else:
+            nw_x = x_2
+
+        if y_1 < y_2:
+            nw_y =y_1
+        else:
+            nw_y = y_2
+
+        nw_w = w_1 + w_2
+        nw_h = h_1 + h_2
+
+        nw_box = np.array([nw_x, nw_y, nw_w, nw_h], dtype='int32')
+        clusters[indx] = nw_box
+
+    return clusters
+
 
 all_imgs = os.listdir('../train_updated/')
 interest = ["tr17.jpg"]
 
-for ii, path in  enumerate(all_imgs):
+for ii, path in  enumerate(interest):
     im = cv.imread('../train_updated/' + path)
     im_copy = im.copy()
     im_copy_2 = im.copy()
@@ -70,30 +125,21 @@ for ii, path in  enumerate(all_imgs):
         if (abs(pt1[0] - pt2[0]) >= abs(pt1[1] - pt2[1])):
             bboxes[indx] = -1
 
-    print('after filtering\n ', bboxes)
-
-    for box in bboxes:
+    for ii, box in enumerate(bboxes):
         if box[0] == -1:
             pass
         else:
             x,y,w,h = box
-            print('first coordinate:\n {} {}'.format(x,y))
-            print('distnace between them:\n {} {}'.format(w,h))
             cv.rectangle(im, (x,y), (x+w, y+h), (255,0,0), 2)
 
-    cv.imshow('bounding boxes filered %s' %ii, im)
+    cv.imshow('bounding boxes number %s' %ii, im)
 
-    #combing filtered boxes to create area where the numbers are most likely going to be
+    print('bounding before: \n {}'.format(bboxes))
+    bboxes = find_clusters(bboxes)
+    print('bounding after: \n {}'.format(bboxes))
+    print('found cluster pair: \n{}'.format(bboxes[0]))
 
-    #making one big bounding box of the area
-    print('boxes before: \n', bboxes)
-    bboxes = np.concatenate(bboxes)
-    print('big box: \n ', bboxes)
-    #draw_boxes(bboxes, im_copy_2)
-    #cv.imshow('approximate 1: %s' % ii, im_copy_2)
-
-
-
+    # print(bboxes.dtype)
 
     #making blank black templates to place the background and foreground
     #features on
