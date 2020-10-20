@@ -14,10 +14,20 @@ def extract_grounds(im):
 
     return extracted_labels
 
+def draw_boxes(bboxes, im):
+    for box in bboxes:
+        if box[0] == -1:
+            pass
+        else:
+            x,y,w,h = box
+            print('first coordinate:\n {} {}'.format(x,y))
+            print('distnace between them:\n {} {}'.format(w,h))
+            cv.rectangle(im, (x,y), (x+w, y+h), (255,0,0), 2)
+
 all_imgs = os.listdir('../train_updated/')
 interest = ["tr17.jpg"]
 
-for ii, path in  enumerate(interest):
+for ii, path in  enumerate(all_imgs):
     im = cv.imread('../train_updated/' + path)
     im_copy = im.copy()
     im_copy_2 = im.copy()
@@ -31,7 +41,7 @@ for ii, path in  enumerate(interest):
 
     edge_thresh = 100
     canny_trans = cv.Canny(thresh, edge_thresh, edge_thresh*2 )
-    cv.imshow("canny_trans before %s" %ii, canny_trans)
+    #cv.imshow("canny_trans before %s" %ii, canny_trans)
 
     rect_kern = cv.getStructuringElement(cv.MORPH_RECT, (5,5))
     canny_trans = cv.erode(thresh, None, iterations=1)
@@ -39,16 +49,51 @@ for ii, path in  enumerate(interest):
     canny_trans_invert = canny_trans.max() - canny_trans
 
 
-    cv.imshow("found edges after morphology %s" %ii, canny_trans)
+    #cv.imshow("found edges after morphology %s" %ii, canny_trans)
 
-    mser = cv.MSER_create()
+    mser = cv.MSER_create(35)
     regions, bboxes = mser.detectRegions(canny_trans)
+    print(type(bboxes))
+    print('before: \n {}'.format(bboxes))
 
-    hulls = [cv.convexHull(p.reshape(-1,1,2)) for p in regions]
+    #trying to filter the bounding boxes in relation to the heights, and the widths
+    #we know that for the bounding boxes which will contain the digits
+    #the height is going to be longer than the with
 
-    cv.polylines(im_copy, hulls, 2, (255,0,0))
+    #filetering the bounding boxes whihc are most likely not going to contain
+    #digits in them
+    for indx, box in  enumerate(bboxes):
+        x,y,w,h = box
+        pt1 = (x, y)
+        pt2 = (x+w, y+h)
+        #if (y + h) >= (x + w):
+        if (abs(pt1[0] - pt2[0]) >= abs(pt1[1] - pt2[1])):
+            bboxes[indx] = -1
 
-    cv.imshow('non inverted hulls %s' %ii, im_copy)
+    print('after filtering\n ', bboxes)
+
+    for box in bboxes:
+        if box[0] == -1:
+            pass
+        else:
+            x,y,w,h = box
+            print('first coordinate:\n {} {}'.format(x,y))
+            print('distnace between them:\n {} {}'.format(w,h))
+            cv.rectangle(im, (x,y), (x+w, y+h), (255,0,0), 2)
+
+    cv.imshow('bounding boxes filered %s' %ii, im)
+
+    #combing filtered boxes to create area where the numbers are most likely going to be
+
+    #making one big bounding box of the area
+    print('boxes before: \n', bboxes)
+    bboxes = np.concatenate(bboxes)
+    print('big box: \n ', bboxes)
+    #draw_boxes(bboxes, im_copy_2)
+    #cv.imshow('approximate 1: %s' % ii, im_copy_2)
+
+
+
 
     #making blank black templates to place the background and foreground
     #features on
