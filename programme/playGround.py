@@ -1,13 +1,26 @@
 import cv2 as cv
 import numpy as np
 import os
+np.set_printoptions(threshold=np.inf)
+def extract_grounds(im):
+    bg_colour = 0
+    fg_colour = 255
+    extracted_labels = []
+    rows, cols = im.shape
+
+    for ground in range(1, max_label_no + 1):
+        extracted_labels.append([[255 if labels[xx][yy] == label_no else 0 for yy
+            in range(cols)] for xx in range(rows)])
+
+    return extracted_labels
 
 all_imgs = os.listdir('../train_updated/')
-print(all_imgs)
 interest = ["tr17.jpg"]
 
 for ii, path in  enumerate(interest):
     im = cv.imread('../train_updated/' + path)
+    im_copy = im.copy()
+    im_copy_2 = im.copy()
 
     gray = cv.cvtColor(im, cv.COLOR_BGR2GRAY)
     gray = cv.GaussianBlur(gray, (5,5), 0)
@@ -18,22 +31,37 @@ for ii, path in  enumerate(interest):
 
     edge_thresh = 100
     canny_trans = cv.Canny(thresh, edge_thresh, edge_thresh*2 )
-    lines_im  = cv.HoughLines(canny_trans, 1, np.pi/180, 150, None, 0, 0)
-    #cv.imshow("canny_trans before %s" %ii, canny_trans)
+    cv.imshow("canny_trans before %s" %ii, canny_trans)
 
     rect_kern = cv.getStructuringElement(cv.MORPH_RECT, (5,5))
-    canny_trans = cv.erode(lines_im, None, iterations=1)
-    canny_trans = cv.dilate(lines_img, None, iterations=1)
-    cv.imshow("found edges after morphology %s" %ii, lines_im)
-
-    #white template image, to place all the background features
-    bg_img = 255 * np.ones_like(canny_trans)
-    #black template image to placea all foreground features
-    fg_img = np.zeros_like(canny_trans)
+    canny_trans = cv.erode(thresh, None, iterations=1)
+    canny_trans = cv.dilate(thresh, None, iterations=1)
+    canny_trans_invert = canny_trans.max() - canny_trans
 
 
-    cv.imshow('white canvas image %s' % ii, bg_img)
-    cv.imshow('black canvas image %s' % ii, fg_img)
+    cv.imshow("found edges after morphology %s" %ii, canny_trans)
+
+    mser = cv.MSER_create()
+    regions, bboxes = mser.detectRegions(canny_trans)
+
+    hulls = [cv.convexHull(p.reshape(-1,1,2)) for p in regions]
+
+    cv.polylines(im_copy, hulls, 2, (255,0,0))
+
+    cv.imshow('non inverted hulls %s' %ii, im_copy)
+
+    #making blank black templates to place the background and foreground
+    #features on
+#    bg_img = np.zeros_like(canny_trans)
+#    fg_img = np.zeros_like(canny_trans)
+#    rows, cols = canny_trans.shape
+
+
+    #do this if you want to invert the image for some reason
+    #same = canny_trans.max() - canny_trans
+
+
+    #cv.imshow('same results %s' % ii, same)
     #
 #
 #    cnts, heirarchy = cv.findContours(canny_trans, cv.RETR_TREE,
