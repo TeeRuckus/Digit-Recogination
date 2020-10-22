@@ -2,6 +2,7 @@ import cv2 as cv
 import numpy as np
 import os
 np.set_printoptions(threshold=np.inf)
+
 def extract_grounds(im):
     bg_colour = 0
     fg_colour = 255
@@ -14,13 +15,13 @@ def extract_grounds(im):
 
     return extracted_labels
 
-def draw_boxes(bboxes, im):
+def draw_boxes(bboxes, im, color):
     for box in bboxes:
         if box[0] == -1:
             pass
         else:
             x,y,w,h = box
-            cv.rectangle(im, (x,y), (x+w, y+h), (255,0,0), 2)
+            cv.rectangle(im, (x,y), (x+w, y+h), color, 2)
 
 def find_clusters(bboxes):
     cluster = []
@@ -38,17 +39,74 @@ def find_clusters(bboxes):
                 if alt_box[0] == -1:
                     pass
                 else:
-                    x,y,w,h = curr_box
-                    pt1_alt = (x,y)
-                    pt2_alt =(x+w, y+h)
+                    x_alt,y_alt,w_alt,h_alt = alt_box
+                    pt1_alt = (x_alt,y_alt)
+                    pt2_alt =(x_alt+w_alt, y_alt+h_alt)
 
                     x_diff = abs(pt2[0] - pt1_alt[0])
-                    y_diff = abs(pt1[1] - pt1_alt[1])
-                    if x_diff <= w + 100:
-                        if y_diff <= h:
-                            cluster.append([curr_box, alt_box])
+                    #y_diff = abs(pt1[0] - pt2_alt[1])
+                    y_diff = abs(pt2[1] - pt1_alt[1])
+
+                    #YOU'RE NOT COMPARING THE LENGTHS OF THE LINES HERE, YOU'RE
+                    #COMPARING THE POINTS, THAT'S MAYBE WHY YOUR POINTS ARE SHIT
+                    line_seg_x = max(pt2[0], pt2_alt[0])
+                    line_seg_y = max(pt2[1], pt2_alt[1])
+
+                    line_TOL_x  = line_seg_x * 0.15
+                    line_TOL_y = line_seg_y * 0.15
+
+                    line_TOL_x = 0
+                    line_TOL_y = 0
+
+                    if x_diff < pt2[0]  and x_diff < pt2_alt[0]:
+                            if y_diff < h:
+                                cluster.append([curr_box, alt_box])
 
     return cluster
+
+def create_one_bbox(bboxes):
+    #width is going to be the second index in the bounding box
+    width = 2
+    #height is going to be third index in the bounding box
+    height = 3
+
+    x,y = find_leftmost_point(bboxes)
+    w = create_longest_dim(bboxes, type_dim)
+    h = create_longest_dim(bboxes, type_dim)
+    box = np.array([x,y,w,h]. dtype='int32')
+    return box
+
+def find_leftmost_point(bboxs, reverse=False):
+    """
+    if reverse is true, it will find the right-most lower most point of the
+    bounding boxes
+    """
+    left_most_boxes = sorted(bboxes, key=lambda x: x[0], reverse=reverse)
+
+    temp_box = left_most_boxes[0]
+
+    #ensuring we're going to grab the upper-most box
+    for box in left_most_boxes:
+        #case: when two boxes have the same x-dimension but differing
+        #y-dimensions
+        if temp_box[0] == box[0]:
+            if temp_box[1] < box[1]:
+                temp_box = box
+
+    return temp_box[0], temp_box[1]
+
+
+
+
+
+
+def combine_all_clusters(clusters):
+    for indx, cluster in enumerate(clusters):
+        res_box = cluster[0] + cluster[0]
+        clusters[indx] = res_box
+
+    return clusters
+
 
 def group_cluster(clusters):
     cluster_b = []
@@ -60,23 +118,25 @@ def group_cluster(clusters):
         x_1, y_1, w_1, h_1 = box_one
         x_2, y_2, w_2, h_2 = box_two
 
-        if x_1 < x_2:
-            nw_x = x_1
-        else:
-            nw_x = x_2
+        #getting the longer lines out of the two boxes parsed in
+        nw_h = max(h_1, h_2)
+        nw_w = max(w_1, w_2)
 
-        if y_1 < y_2:
-            nw_y =y_1
-        else:
-            nw_y = y_2
-
-        nw_w = w_1 + w_2
-        nw_h = h_1 + h_2
-
+        #getting the left-most x and y points
+        nw_x = min(x_1, x_2)
+        nw_y = min(y_1, y_2)
         nw_box = np.array([nw_x, nw_y, nw_w, nw_h], dtype='int32')
         clusters[indx] = nw_box
 
+    #print('clusters \n', clusters)
+
     return clusters
+
+def non_max_suppression_fast(boxes, overlapThresh):
+    """
+    algorithm is adapted from:
+        Rosebrock, Adrian. 2015. https://www.pyimagesearch.com/2015/02/16/faster-non-maximum-suppression-python/
+    """
 
 
 all_imgs = os.listdir('../train_updated/')
@@ -86,6 +146,8 @@ for ii, path in  enumerate(interest):
     im = cv.imread('../train_updated/' + path)
     im_copy = im.copy()
     im_copy_2 = im.copy()
+    im_copy_3 = im.copy()
+    im_copy_4 = im.copy()
 
     gray = cv.cvtColor(im, cv.COLOR_BGR2GRAY)
     gray = cv.GaussianBlur(gray, (5,5), 0)
@@ -103,13 +165,10 @@ for ii, path in  enumerate(interest):
     canny_trans = cv.dilate(thresh, None, iterations=1)
     canny_trans_invert = canny_trans.max() - canny_trans
 
-
     #cv.imshow("found edges after morphology %s" %ii, canny_trans)
 
     mser = cv.MSER_create(35)
     regions, bboxes = mser.detectRegions(canny_trans)
-    print(type(bboxes))
-    print('before: \n {}'.format(bboxes))
 
     #trying to filter the bounding boxes in relation to the heights, and the widths
     #we know that for the bounding boxes which will contain the digits
@@ -132,13 +191,14 @@ for ii, path in  enumerate(interest):
             x,y,w,h = box
             cv.rectangle(im, (x,y), (x+w, y+h), (255,0,0), 2)
 
-    cv.imshow('bounding boxes number %s' %ii, im)
+    cv.imshow('raw bounding boxes for the image %s' %ii, im)
 
-    print('bounding before: \n {}'.format(bboxes))
     bboxes = find_clusters(bboxes)
-    print('bounding after: \n {}'.format(bboxes))
-    print('found cluster pair: \n{}'.format(bboxes[0]))
+    bboxes = group_cluster(bboxes)
+    #bboxes = combine_all_clusters(bboxes)
+    draw_boxes(bboxes, im_copy_3, (0,0,255))
 
+    cv.imshow("new clusters found in algorithm: %s" %ii, im_copy_3)
     # print(bboxes.dtype)
 
     #making blank black templates to place the background and foreground
