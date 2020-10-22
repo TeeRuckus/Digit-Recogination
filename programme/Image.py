@@ -37,16 +37,16 @@ class Image(object):
         class
         """
         if self.DEBUG:
-            self.DEBUG == False
+            self._DEBUG = False
         else:
-            self.DEBUG == True
+            self._DEBUG = True
 
     def get_interest_area(self, im):
         return im
 
     #FUNCTIONS WHICH WILL HELP TO FIND THE INTEREST AREA
 
-    def find_leftmost_point(self, bboxes, reverse=False):
+    def find_leftmost_pt(self, bboxes, reverse=False):
         """
         if reverse is true, it will find the right-most lower most point of the
         bounding boxes
@@ -55,14 +55,58 @@ class Image(object):
 
         temp_box = left_most_boxes[0]
 
-        #ensuring we're going to grab the upper-most box
+        #CASE 1: clear left most box will be met if it fails CASE 2's and
+        #CASE 3's checks
+
+        #CASE 2: boxes are the same x-coordinate hence to enusre that
+        #the upper-most box is selected
         for box in left_most_boxes:
             #case: when two boxes have the same x-dimension but differing
             #y-dimensions
             if temp_box[0] == box[0]:
-                if temp_box[1] < box[1]:
+                if temp_box[1] > box[1]:
                     temp_box = box
-    return temp_box[0], temp_box[1]
+
+        #CASE 3: the left most box is selected but if they's a box which is
+        #higher than the current box combine find the intersecting points
+        highest_boxes = sorted(bboxes, key=lambda y: y[1], reverse=reverse)
+        highest_box = highest_boxes[0]
+
+        equal = highest_box == temp_box
+        #if the current box is not the highest box, form an intersection
+        #with the highest box
+        if not equal.all():
+            temp_box = self.find_intersection(highest_box, temp_box,
+                    reverse=reverse)
+
+        return temp_box[0], temp_box[1], temp_box[2], temp_box[3]
+
+    def find_intersection(self, box_one, box_two, reverse=False):
+        """
+        IMPORT:
+        EXPORT:
+
+        PURPOSE
+            if you're trying to find the right most corner, set reverse to
+            true, and add the width, and the height of the object of interset
+        """
+        temp_boxes = [box_one, box_two]
+        #placing the box with the lowest x value at the front
+        temp_boxes = sorted(temp_boxes, key=lambda x: x[0], reverse=reverse)
+        #the first boxes x coordinate
+        nw_x = temp_boxes[0][0]
+        #the right most point will be the temp box's in reverse, and it
+        #will be the that boxes x value plus that boxes w value
+        nw_w = temp_boxes[0][2]
+        #placing the box withthe lowest y value at the front
+        temp_boxes = sorted(temp_boxes, key=lambda  y: y[1], reverse=reverse)
+        #the first boxes y coordinate
+        nw_y = temp_boxes[0][1]
+        #the right most point will be the temp boxes in reverse, and it
+        #will be that  box's y value plus box's h value
+        nw_h = temp_boxes[0][3]
+
+        return nw_x, nw_y, nw_w, nw_h
 
     #AUGMENTATION OPERATION METHODS
     def rotate_im(self):
@@ -87,6 +131,7 @@ class Image(object):
 
     #FEATURE DECRIPTOR METHODS
     def SIFT(self):
+
         """
         """
 
