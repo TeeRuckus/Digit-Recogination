@@ -96,10 +96,6 @@ def find_leftmost_point(bboxs, reverse=False):
     return temp_box[0], temp_box[1]
 
 
-
-
-
-
 def combine_all_clusters(clusters):
     for indx, cluster in enumerate(clusters):
         res_box = cluster[0] + cluster[0]

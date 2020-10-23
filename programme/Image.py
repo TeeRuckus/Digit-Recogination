@@ -9,12 +9,16 @@ TO DO:
 """
 
 from abc import abstractmethod
+import numpy as np
+from Errors import *
+from Colours import *
+import cv2 as cv
 
 class Image(object):
     """
     """
     def __init__(self, im):
-       self._im = self.get_interest_area(im)
+       self._im = self.get_ROI(im)
        #I don't know how to use unittest with images :(, so I am going to build
        #the debugging into this module
        self._DEBUG = False
@@ -41,8 +45,23 @@ class Image(object):
         else:
             self._DEBUG = True
 
-    def get_interest_area(self, im):
-        return im
+    def get_ROI(self, im, **kwargs):
+        im = self._validate_image(im)
+
+        gray = cv.cvtColor(im, cv.COLOR_BGR2GRAY)
+        #decreasing the required memory the image needs but still keeping the
+        #important features
+        gray = cv.GaussianBlur(gray, (5,5), 0)
+        thresh = cv.threshold(gray, 0, 255, cv.THRESH_BINARY+cv.THRESH_OTSU)[1]
+
+        edge_thresh = 100
+        #the openCV doc recommends that you will have your upper thresh hold
+        #twice as the lower threshold
+        canny_trans = cv.canny(thresh, edge_thresh, edge_thresh * 2)
+        rect_kern = cv.getStructuringElement(cv.MORPH_RECT, (5,5))
+        canny_trans = cv.erode(thresh, None, iterations=1)
+        canny_trans = cv.dilate(thresh, None, iterations=1)
+        canny_trans_invert = canny_trans.max() - canny_trans
 
     #FUNCTIONS WHICH WILL HELP TO FIND THE INTEREST AREA
 
@@ -79,6 +98,12 @@ class Image(object):
             temp_box = self.find_intersection(highest_box, temp_box,
                     reverse=reverse)
 
+        if self._DEBUG:
+            print('='*80)
+            print(red, 'find_leftmost_p() | temp box',reset)
+            print('\t {}'.format(temp_box))
+            print('='*80)
+
         return temp_box[0], temp_box[1], temp_box[2], temp_box[3]
 
     def find_intersection(self, box_one, box_two, reverse=False):
@@ -106,39 +131,80 @@ class Image(object):
         #will be that  box's y value plus box's h value
         nw_h = temp_boxes[0][3]
 
+        if self._DEBUG:
+            print('='* 80)
+            print(red, 'find_intersection() | interesction',reset)
+            print('\t {}, {}, {}, {}'.format(nw_x, nw_y, nw_w, nw_h))
+            print('='* 80)
+
         return nw_x, nw_y, nw_w, nw_h
 
-    #AUGMENTATION OPERATION METHODS
-    def rotate_im(self):
+    def draw_boxes(self, bboxes, im, color=(0,0,255)):
         """
-        """
+        IMPORT:
+        EXPORT:
 
-    def scale_im(self):
+        PURPOSE: it's to draw a bounding box which is either a shape of a
+        rectangle or a square
         """
-        """
+        for box in bboxes:
+            #if the box has been labelled by a negative -1 by a filtering
+            #algorithm we should skip over this box
+            if box[0] == -1:
+                pass
+            else:
+                x,y,w,h = box
+                cv.rectangle(im, (x,y), (x+w, y+h), color, 2)
 
-    def bias_im(self):
-        """
-        """
 
-    def gain_im(self):
+    def find_clusters(self, bboxes):
         """
+        YOU HAVEN'T TESTED THIS AS YET
         """
+        cluster = []
 
-    def equalize_hists(self):
-        """
-        """
+        bboxes =  sorted(bboxes, key=lambda x: x[0])
 
-    #FEATURE DECRIPTOR METHODS
-    def SIFT(self):
+        for curr_box in bboxes:
+            if curr_box[0] == -1:
+                pass
+            else:
+                x,y,w,h = curr_box
+                pt1 = (x, y)
+                pt2 = (x+w, y+h)
+                for alt_box in bboxes:
+                    if alt_box[0] == -1:
+                        pass
+                    else:
+                        x_alt,y_alt,w_alt,h_alt = alt_box
+                        pt1_alt = (x_alt,y_alt)
+                        pt2_alt =(x_alt+w_alt, y_alt+h_alt)
 
-        """
-        """
+                        x_diff = abs(pt2[0] - pt1_alt[0])
+                        #y_diff = abs(pt1[0] - pt2_alt[1])
+                        y_diff = abs(pt2[1] - pt1_alt[1])
 
-    def harris(self, thresh):
-        """
-        """
+                        #YOU'RE NOT COMPARING THE LENGTHS OF THE LINES HERE, YOU'RE
+                        #COMPARING THE POINTS, THAT'S MAYBE WHY YOUR POINTS ARE SHIT
+                        line_seg_x = max(pt2[0], pt2_alt[0])
+                        line_seg_y = max(pt2[1], pt2_alt[1])
 
-    def hog_des(self, im):
-        """
-        """
+                        line_TOL_x  = line_seg_x * 0.15
+                        line_TOL_y = line_seg_y * 0.15
+
+                        line_TOL_x = 0
+                        line_TOL_y = 0
+
+                        if x_diff < pt2[0]  and x_diff < pt2_alt[0]:
+                                if y_diff < h:
+                                    cluster.append([curr_box, alt_box])
+
+
+    def validate_image(self, in_im):
+        #an image is going to be an numpy matrice
+        if not type(in_im) == np.ndarry:
+            #all loaded images, are an unsigned interger by defualt
+            if not in_im.dtype == 'uint8':
+                raise ImageError("Error: an image wasn't laoded in the system")
+
+        return in_im

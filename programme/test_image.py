@@ -82,12 +82,15 @@ class test_image(unittest.TestCase):
 
         #CASE 4: same as case 3 but on the right side and it needs to be
         #lower most box which is going to be selected
-        bboxes = np.array([[110, 20, 20, 20], [110,50,20,20]])
-        right_most_pt = (130, 40)
+        bboxes = np.array([[50, 20, 20, 20], [110,50,20,20]])
+        right_most_pt = (130, 70)
         found_pt = self.test.find_leftmost_pt(bboxes, True)
+
         for indx, cord in enumerate(right_most_pt):
-            self.assertEqual(cord, found_pt[indx] + found_pt[indx+2], "CASE 4"+
-                    " right most lower most box is selected (110, 50)")
+            res_pnt = found_pt[indx] + found_pt[indx + 2]
+            self.assertEqual(cord, res_pnt, "the right most point is used"+
+            "but, the box is not the lowest box hence the intersection is "+
+            "formed of (130, 70)")
 
         #CASE 5: left_most box selected is not the upper most box, hence,
         #where the eges of the boxes intersect should be selected
@@ -100,10 +103,20 @@ class test_image(unittest.TestCase):
         bboxes = np.array([[110,25,20,20], [90,50, 20,20]], dtype='int32')
         intersect = (130,70)
         found_intersect = self.test.find_leftmost_pt(bboxes, True)
+        print('intersection ', found_intersect)
         for indx, cord in enumerate(intersect):
             self.assertEqual(cord,found_intersect[indx] +
                     found_intersect[indx+2], "found right most point | not"+
                     "lowest point | formed intersect @ (130, 70")
+
+
+        #I know this work, I will test it properly when I have time at
+        #the end :-)
+        def test_draw_box(self):
+            pass
+
+        def test_find_clusters(self):
+            pass
 
     def test_finding_right_most_box(self):
         pass

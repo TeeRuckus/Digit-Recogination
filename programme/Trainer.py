@@ -45,3 +45,24 @@ class Trainer(object):
     def train(self, in_path):
         """
         """
+
+    #AUGMENTATION OPERATION METHODS
+    def rotate_im(self):
+        """
+        """
+
+    def scale_im(self):
+        """
+        """
+
+    def bias_im(self):
+        """
+        """
+
+    def gain_im(self):
+        """
+        """
+
+    def equalize_hists(self):
+        """
+        """

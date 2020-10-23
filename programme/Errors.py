@@ -27,3 +27,8 @@ class modeError(Error):
     """
     def __init__(self, mssg):
         self.mssg = red + "ERROR " + reset + mssg
+
+
+class ImageError(self, mssg):
+    def __init__(self, mssg):
+        self.mssg = red + "ERROR " + reset + mssg
