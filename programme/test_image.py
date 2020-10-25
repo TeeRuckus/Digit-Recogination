@@ -12,9 +12,10 @@ import unittest
 import cv2 as cv
 import numpy as np
 from Image import *
+import os
 
 class test_image(unittest.TestCase):
-    im = cv.imread('../train_updated/tr06.jpg')
+    im = cv.imread('../train_updated/tr17.jpg')
     test = Image(im)
     shape = (220, 220, 3)
     def test_accessors(self):
@@ -24,6 +25,8 @@ class test_image(unittest.TestCase):
         " is an actual image given")
 
     def test_setters(self):
+        #toggling debugging off
+        self.test.debug()
         im = cv.imread('../val_updated/val04.jpg')
         self.test.im = im
         nw_size= (2430, 1980, 3)
@@ -108,15 +111,21 @@ class test_image(unittest.TestCase):
             self.assertEqual(cord,found_intersect[indx] +
                     found_intersect[indx+2], "found right most point | not"+
                     "lowest point | formed intersect @ (130, 70")
+    def test_get_ROI(self):
+        #toggling the debugging feature on
+        self.test.debug()
+        all_imgs = os.listdir('../train_updated/')
+        for path in all_imgs:
+            im = cv.imread("../train_updated/" + path)
+            self.test.get_ROI(im)
 
+    #I know this work, I will test it properly when I have time at
+    #the end :-)
+    def test_draw_box(self):
+        pass
 
-        #I know this work, I will test it properly when I have time at
-        #the end :-)
-        def test_draw_box(self):
-            pass
-
-        def test_find_clusters(self):
-            pass
+    def test_find_clusters(self):
+        pass
 
     def test_finding_right_most_box(self):
         pass

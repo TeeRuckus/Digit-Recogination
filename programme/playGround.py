@@ -73,7 +73,7 @@ def create_one_bbox(bboxes):
     x,y = find_leftmost_point(bboxes)
     w = create_longest_dim(bboxes, type_dim)
     h = create_longest_dim(bboxes, type_dim)
-    box = np.array([x,y,w,h]. dtype='int32')
+    box = np.array([x,y,w,h], dtype='int32')
     return box
 
 def find_leftmost_point(bboxs, reverse=False):
@@ -144,6 +144,8 @@ for ii, path in  enumerate(interest):
     im_copy_2 = im.copy()
     im_copy_3 = im.copy()
     im_copy_4 = im.copy()
+    im_copy_5 = im.copy()
+    im_copy_6 = im.copy()
 
     gray = cv.cvtColor(im, cv.COLOR_BGR2GRAY)
     gray = cv.GaussianBlur(gray, (5,5), 0)
@@ -161,14 +163,22 @@ for ii, path in  enumerate(interest):
     canny_trans = cv.dilate(thresh, None, iterations=1)
     canny_trans_invert = canny_trans.max() - canny_trans
 
-    #cv.imshow("found edges after morphology %s" %ii, canny_trans)
+
+
+    cv.imshow("found edges after morphology %s" %ii, canny_trans)
+    cv.imshow("the invented canny transform %s" %ii, canny_trans_invert)
+    diff_trans = abs(canny_trans_invert - canny_trans)
+    other  = canny_trans_invert - canny_trans
+    other_one = canny_trans - canny_trans_invert
+
+
 
     mser = cv.MSER_create(35)
     regions, bboxes = mser.detectRegions(canny_trans)
 
     #trying to filter the bounding boxes in relation to the heights, and the widths
     #we know that for the bounding boxes which will contain the digits
-    #the height is going to be longer than the with
+    #the height is going to be longer than the width
 
     #filetering the bounding boxes whihc are most likely not going to contain
     #digits in them
@@ -190,7 +200,11 @@ for ii, path in  enumerate(interest):
     cv.imshow('raw bounding boxes for the image %s' %ii, im)
 
     bboxes = find_clusters(bboxes)
+    cv.imshow('found clusters', im_copy_5)
     bboxes = group_cluster(bboxes)
+    yellow = (0, 255, 255)
+    draw_boxes(bboxes, im_copy_6,yellow)
+    cv.imshow("groued clusters", im_copy_6)
     #bboxes = combine_all_clusters(bboxes)
     draw_boxes(bboxes, im_copy_3, (0,0,255))
 
