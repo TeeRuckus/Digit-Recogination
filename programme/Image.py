@@ -17,6 +17,7 @@ import cv2 as cv
 class Image(object):
     def __init__(self, im):
         self._DEBUG = False
+        #self._DEBUG = True
         self._im = self.get_ROI(im)
 
     @property
@@ -43,7 +44,6 @@ class Image(object):
 
     def get_ROI(self, im, **kwargs):
         im = self._validate_image(im)
-
         gray = cv.cvtColor(im, cv.COLOR_BGR2GRAY)
         #decreasing the required memory the image needs but still keeping the
         #important features
@@ -73,31 +73,59 @@ class Image(object):
             self.show_debug_boxes(bboxes, im, "original bounding boxes found")
 
         bboxes = self.filter_bounding_boxes(bboxes)
-
         if self._DEBUG:
             self.show_debug_boxes(bboxes, im, "filtered bounding boxes")
 
-        #bboxes = self.find_clusters(bboxes)
-        #bboxes = self.group_clusters(bboxes)
+        bboxes = self.find_clusters(bboxes)
+        bboxes = self.group_clusters(bboxes)
+        #bboxes = self.non_max_suppression(bboxes)
+        #bboxes = self.filter_heights(bboxes)
+        #bboxes = self.filter_areas(bboxes)
 
         if self._DEBUG:
             self.show_debug_boxes(bboxes, im, "groups of bounding boxes found")
 
         left_pt = self.find_leftmost_pt(bboxes)
         right_pt = self.find_leftmost_pt(bboxes, True)
-        print('left poinrt ', left_pt)
-        print('right point ', right_pt)
 
-#        new_region = np.array([left_pt[0], left_pt[1], right_pt[2] ,
-#            right_pt[3]], dtype='int32')
+#        new_region = np.array([left_pt[0], left_pt[1], right_pt[0]+right_pt[2],
+#            right_pt[1]+right_pt[3]], dtype='int32')
 
-        new_region = np.array([left_pt[0], left_pt[1], right_pt[0]+right_pt[2],
-            right_pt[1]+right_pt[3]], dtype='int32')
+        print(red+"left point"+reset, left_pt)
+        print(red+"right point"+reset, right_pt)
+        new_region = self.make_new_region(left_pt, right_pt)
 
         if self._DEBUG:
             self.show_debug_boxes([new_region], im, "new region found")
 
         #make new image
+
+    def non_max_suppression(self, bboxes):
+        #sorting boxes by the smallest area to the largest area
+        bboxes = sorted(bboxes, key=lambda area:  bboxes[2] * bboxes[3])
+
+    def area_bboxes(self, bboxes):
+        #regardless where the bounding box is located the area is always
+        #going to be w * h
+        return bboxes[2] * bboxes[3]
+
+    def make_new_region(self, left_box, right_box):
+        print(red+"left_box"+reset, left_box)
+        print(red+"left_box"+reset, right_box)
+        #top left corner of the left-most upper most point in the image
+        #coordinates
+        x = left_box[0]
+        y = left_box[1]
+
+        #right most lower most corner in the image coordiantes
+        x_r =  right_box[0] + right_box[2]
+        y_r = right_box[1] + right_box[3]
+
+        w = x_r - x
+        h = y_r - y
+
+        return np.array([x, y, w, h], dtype='int32')
+
 
 
     def show_debug_boxes(self, bboxes, im, title):
@@ -131,12 +159,23 @@ class Image(object):
             nw_h = max(h_1, h_2)
             nw_w = max(w_1, w_2)
 
-            #getting the left-most x and y points
+            #getting the left-most x and y points so we know where the clusters
+            #are going to begin
             nw_x = min(x_1, x_2)
             nw_y = min(y_1, y_2)
+
+            #finding the gap between the clustered boxes
+            #the gap is given by the difference between the end point of the
+            #left most box and the box next to it
+            gap_x = abs(x_2 - (x_1 + w_1))
+            gap_y = abs((y_2 + h_2) - h_1)
+
             nw_box = np.array([nw_x, nw_y, nw_w, nw_h], dtype='int32')
             clusters[indx] = nw_box
 
+            #I have finished analysing the search space now, I want ot move onto
+            #the next pair. This is to avoid dupilcates, and doubling up
+            #of parameters in the programme
         return clusters
 
     def  find_clusters(self, bboxes):
@@ -149,42 +188,37 @@ class Image(object):
         cluster = []
 
         bboxes =  sorted(bboxes, key=lambda x: x[0])
+        bboxes = self.remove_invalid(bboxes)
 
-        for curr_box in bboxes:
-            if curr_box[0] == -1:
-                pass
-            else:
-                x,y,w,h = curr_box
-                pt1 = (x, y)
-                pt2 = (x+w, y+h)
-                for alt_box in bboxes:
-                    if alt_box[0] == -1:
-                        pass
-                    else:
-                        x_alt,y_alt,w_alt,h_alt = alt_box
-                        pt1_alt = (x_alt,y_alt)
-                        pt2_alt =(x_alt+w_alt, y_alt+h_alt)
+        for start, curr_box in enumerate(bboxes):
+            x,y,w,h = curr_box
+            pt1 = (x, y)
+            pt2 = (x+w, y+h)
+            search_region = bboxes[start:]
+            for alt_box in search_region:
+                if len(search_region) > 0:
+                    x_alt,y_alt,w_alt,h_alt = alt_box
+                    pt1_alt = (x_alt,y_alt)
+                    pt2_alt =(x_alt+w_alt, y_alt+h_alt)
 
-                        x_diff = abs(pt2[0] - pt1_alt[0])
-                        #y_diff = abs(pt1[0] - pt2_alt[1])
-                        y_diff = abs(pt2[1] - pt1_alt[1])
+                    x_diff = abs(pt2[0] - pt1_alt[0])
+                    y_diff = abs(pt2[1] - pt2_alt[1])
 
-                        #YOU'RE NOT COMPARING THE LENGTHS OF THE LINES HERE, YOU'RE
-                        #COMPARING THE POINTS, THAT'S MAYBE WHY YOUR POINTS ARE SHIT
-                        line_seg_x = max(pt2[0], pt2_alt[0])
-                        line_seg_y = max(pt2[1], pt2_alt[1])
+#                    line_seg_x = max(pt2[0], pt2_alt[0])
+#                    line_seg_y = max(pt2[1], pt2_alt[1])
+                    line_seg_x = max(w, w_alt)
+                    line_seg_y = max(h, h_alt)
 
-                        line_TOL_x  = line_seg_x * 1.10
-                        line_TOL_y = line_seg_y * 1.10
+                    line_TOL_x  = line_seg_x * 1.10
+                    line_TOL_y = line_seg_y * 0.25
 
-#                        line_TOL_x = 0
-#                        line_TOL_y = 0
-
-                        #if x_diff < pt2[0]  and x_diff < pt2_alt[0]:
-                        if x_diff < line_TOL_x:
-                                #if y_diff < h:
-                                if y_diff < line_TOL_y:
-                                    cluster.append([curr_box, alt_box])
+                    #if x_diff < pt2[0]  and x_diff < pt2_alt[0]:
+                    #I don't think you're doing this comparison correctly if I
+                    #am being honest
+                    if x_diff <= line_TOL_x:
+                            #if y_diff < h:
+                            if y_diff <= line_TOL_y:
+                                cluster.append([curr_box, alt_box])
         return cluster
 
     def filter_bounding_boxes(self, bboxes):
@@ -197,8 +231,16 @@ class Image(object):
             pt1 = (x, y)
             pt2 = (x+w, y+h)
 
-            if (abs(pt1[0] - pt2[0]) >= abs(pt1[1] - pt2[1])):
+            #if (abs(pt1[0] - pt2[0]) >= abs(pt1[1] - pt2[1])):
+            if w >= h:
                 bboxes[indx] = -1
+
+            ratio = h/w
+            #we're going to expect the height of the digits to be no more than
+            #250% of the widht of the image, and the length to be no less
+            #than the width of the bounding box
+            if ratio < 1.0 or ratio > 3.5:
+                bboxes[indx]  = -1
 
         return bboxes
 
@@ -214,7 +256,12 @@ class Image(object):
         """
         if reverse is true, it will find the right-most lower most point of the
         bounding boxes
+
+        Notes:
+            - if a box is inside another box, it's going to find the box  inside
+            because it's comparing in relation to the left point of the box
         """
+        bboxes = self.remove_invalid(bboxes)
         left_most_boxes = sorted(bboxes, key=lambda x: x[0], reverse=reverse)
 
         temp_box = left_most_boxes[0]
@@ -250,6 +297,32 @@ class Image(object):
             print('='*80)
 
         return temp_box[0], temp_box[1], temp_box[2], temp_box[3]
+
+    def remove_invalid(self, bboxes):
+        if self._DEBUG:
+            print('='*80)
+            print(red + "og array" + reset, bboxes)
+            print('='*80)
+
+        nw_bboxes = []
+        for indx, box in enumerate(bboxes):
+            #if the first index is equal to -1 the whole box will equal to -1,
+            #and that will be an invalid box
+            if box[0] == -1:
+                pass
+            else:
+                nw_bboxes.append(box)
+
+        #converting the new list into an array, so openCV function can use
+        #this array to draw the boxes
+        bboxes = np.array(nw_bboxes, dtype='int32')
+
+        if self._DEBUG:
+            print('='*80)
+            print(red + "resultant array" +reset, bboxes)
+            print('='*80)
+
+        return bboxes
 
     def find_intersection(self, box_one, box_two, reverse=False):
         """

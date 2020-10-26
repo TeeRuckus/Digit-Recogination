@@ -111,11 +111,17 @@ class test_image(unittest.TestCase):
             self.assertEqual(cord,found_intersect[indx] +
                     found_intersect[indx+2], "found right most point | not"+
                     "lowest point | formed intersect @ (130, 70")
+
+
+        #CASE 6: they is  a box inside a box
     def test_get_ROI(self):
         #toggling the debugging feature on
         self.test.debug()
         all_imgs = os.listdir('../train_updated/')
-        for path in all_imgs:
+        interest = ['tr01.jpg']
+        for path in interest:
+        #for path in all_imgs:
+            print(yellow + 'path'  + reset, path)
             im = cv.imread("../train_updated/" + path)
             self.test.get_ROI(im)
 
@@ -125,11 +131,5 @@ class test_image(unittest.TestCase):
         pass
 
     def test_find_clusters(self):
-        pass
-
-    def test_finding_right_most_box(self):
-        pass
-
-    def test_finding_right_most_box(self):
         pass
 
