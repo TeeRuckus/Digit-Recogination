@@ -12,7 +12,8 @@ bboxes = [[-1, -1, -1, -1], [-1, -1, -1, -1], [9,5,8,6], [10, 20, 30, 40],
 
 del bboxes[0]
 del bboxes[0]
-#mask = ma.masked_equal(bboxes, -1)
-#print("first mask \n", mask)
-#mask[~mask]
+
+
 print(bboxes)
+bboxes = np.array(bboxes, dtype='int32')
+print(bboxes.mean())

@@ -118,9 +118,11 @@ class test_image(unittest.TestCase):
         #toggling the debugging feature on
         self.test.debug()
         all_imgs = os.listdir('../train_updated/')
-        interest = ['tr01.jpg']
-        for path in interest:
-        #for path in all_imgs:
+        #interest = ['tr05.jpg', 'tr09.jpg']
+        #interest = ['tr08.jpg', 'tr25.jpg']
+        #interest = ['tr09.jpg', 'tr12.jpg', 'tr03.jpg', 'tr08.jpg', 'tr02.jpg']
+        interest = ['tr24.png']
+        for path in all_imgs:
             print(yellow + 'path'  + reset, path)
             im = cv.imread("../train_updated/" + path)
             self.test.get_ROI(im)

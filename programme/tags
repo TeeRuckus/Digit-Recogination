@@ -1,0 +1,184 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+DEBUG	Image.py	/^    def DEBUG(self):$/;"	m	class:Image
+Data_Set	DataSet.py	/^class Data_Set(object):$/;"	c
+Error	Errors.py	/^class Error(Exception):$/;"	c
+Image	Image.py	/^class Image(object):$/;"	c
+ImageError	Errors.py	/^class ImageError(Error):$/;"	c
+Image_Loader	ImageLoader.py	/^class Image_Loader(object):$/;"	c
+PathError	Errors.py	/^class PathError(Error):$/;"	c
+SIFT	myUtils.py	/^def SIFT(img):$/;"	f
+TOL	myUtils.py	/^TOL = 0.00001$/;"	v
+Trainer	Trainer.py	/^class Trainer(object):$/;"	c
+Trainer_CNN	Trainers.py	/^class Trainer_CNN(Trainer):$/;"	c
+Trainer_DecTree	Trainers.py	/^class Trainer_DecTree(Trainer):$/;"	c
+Trainer_KNN	Trainers.py	/^class Trainer_KNN(Trainer):$/;"	c
+Trainer_NN	Trainers.py	/^class Trainer_NN(Trainer):$/;"	c
+Trainer_SVM	Trainers.py	/^class Trainer_SVM(Trainer):$/;"	c
+Trainer_TempMat	Trainers.py	/^class Trainer_TempMat(Trainer):$/;"	c
+__init__	DataSet.py	/^        def __init__(self, label, set_dir, mode='HSV'):$/;"	m	class:Data_Set.__set
+__init__	DataSet.py	/^    def __init__(self, set_path):$/;"	m	class:Data_Set
+__init__	Errors.py	/^    def __init__(self, mssg):$/;"	m	class:ImageError
+__init__	Errors.py	/^    def __init__(self, mssg):$/;"	m	class:PathError
+__init__	Errors.py	/^    def __init__(self, mssg):$/;"	m	class:modeError
+__init__	Image.py	/^    def __init__(self, im):$/;"	m	class:Image
+__init__	ImageLoader.py	/^    def __init__(self, path, mode="HSV"):$/;"	m	class:Image_Loader
+__init__	Trainer.py	/^    def __init__(self, **kwargs):$/;"	m	class:Trainer
+__iter__	ImageLoader.py	/^    def __iter__(self):$/;"	m	class:Image_Loader	file:
+__len__	ImageLoader.py	/^    def __len__(self):$/;"	m	class:Image_Loader	file:
+__next__	ImageLoader.py	/^    def __next__(self):$/;"	m	class:Image_Loader	file:
+__set	DataSet.py	/^    class __set(object):$/;"	c	class:Data_Set
+__validate_mode	ImageLoader.py	/^    def __validate_mode(self, nw_mode):$/;"	m	class:Image_Loader	file:
+__validate_path	DataSet.py	/^    def __validate_path(self, nw_path):$/;"	m	class:Data_Set	file:
+__validate_path	ImageLoader.py	/^    def __validate_path(self, nw_path):$/;"	m	class:Image_Loader	file:
+_validate_image	Image.py	/^    def _validate_image(self, in_im):$/;"	m	class:Image
+activity_four_contours	myUtils.py	/^def activity_four_contours(im, thresh, **kwargs):$/;"	f
+activity_four_kMeans	myUtils.py	/^def activity_four_kMeans(raw_im, im, **kwargs):$/;"	f
+activity_four_watershed	myUtils.py	/^def activity_four_watershed(im, invert_threshold=False):$/;"	f
+activity_one_SIFT_rotated	myUtils.py	/^def activity_one_SIFT_rotated(im, **kwargs):$/;"	f
+activity_one_SIFT_scaled	myUtils.py	/^def activity_one_SIFT_scaled(im, **kwargs):$/;"	f
+activity_one_harris_rotated	myUtils.py	/^def activity_one_harris_rotated(im, channel, **kwargs):$/;"	f
+activity_one_harris_scaled	myUtils.py	/^def activity_one_harris_scaled(im, channel, **kwargs):$/;"	f
+activity_three	myUtils.py	/^def activity_three(im, invert_threshold=False, **kwargs):$/;"	f
+activity_two_SIFT_rotated	myUtils.py	/^def activity_two_SIFT_rotated(im, pt1, pt2, **kwargs):$/;"	f
+activity_two_SIFT_scaled	myUtils.py	/^def activity_two_SIFT_scaled(im, pt1, pt2, **kwargs):$/;"	f
+activity_two_hog_rotated	myUtils.py	/^def activity_two_hog_rotated(im, pt1, pt2):$/;"	f
+activity_two_hog_scaled	myUtils.py	/^def activity_two_hog_scaled(im, pt1, pt2):$/;"	f
+all_imgs	playGround.py	/^all_imgs = os.listdir('..\/train_updated\/')$/;"	v
+area_bboxes	Image.py	/^    def area_bboxes(self, bboxes):$/;"	m	class:Image
+bboxes	play.py	/^bboxes = [[-1, -1, -1, -1], [-1, -1, -1, -1], [9,5,8,6], [10, 20, 30, 40],$/;"	v
+bias_im	Trainer.py	/^    def bias_im(self):$/;"	m	class:Trainer
+calc_hist_dist	myUtils.py	/^def calc_hist_dist(primary_hist, in_ls, **kwargs):$/;"	f
+calc_histograms	myUtils.py	/^def calc_histograms(img, channel=0, hist_size=256, hist_range=(0,256)):$/;"	f
+check_image_size	myUtils.py	/^def check_image_size():$/;"	f
+check_sizes	debug.py	/^def check_sizes(in_ls):$/;"	f
+check_types	debug.py	/^def check_types(*args):$/;"	f
+check_types_ls	debug.py	/^def check_types_ls(in_ls):$/;"	f
+clean	myUtils.py	/^def clean():$/;"	f
+combine_all_clusters	playGround.py	/^def combine_all_clusters(clusters):$/;"	f
+count_pixels	myUtils.py	/^def count_pixels(img_ls):$/;"	f
+create_data	Trainer.py	/^    def create_data(self,in_path):$/;"	m	class:Trainer
+create_labels	ImageLoader.py	/^    def create_labels(self):$/;"	m	class:Image_Loader
+create_one_bbox	playGround.py	/^def create_one_bbox(bboxes):$/;"	f
+create_set	DataSet.py	/^        def create_set(self, set_dir, mode):$/;"	m	class:Data_Set.__set
+create_set	DataSet.py	/^    def create_set(self, in_path):$/;"	m	class:Data_Set
+crop_img	myUtils.py	/^def crop_img(img, pt1, pt2):$/;"	f
+data	ImageLoader.py	/^    def data(self):$/;"	m	class:Image_Loader
+debug	Image.py	/^    def debug(self):$/;"	m	class:Image
+digits_set	test_DataSet.py	/^    digits_set = Data_Set('..\/Digits-2020S2\/')$/;"	v	class:test_DataSet
+display_image	debug.py	/^def display_image(im):$/;"	f
+display_kp_ls	myUtils.py	/^def display_kp_ls(in_ls):$/;"	f
+display_ls	debug.py	/^def display_ls(in_ls):$/;"	f
+draw_boxes	Image.py	/^    def draw_boxes(self, bboxes, im, color=(0,0,255)):$/;"	m	class:Image
+draw_boxes	Image.py	/^    def draw_boxes(self,bboxes, im, color):$/;"	m	class:Image
+draw_boxes	playGround.py	/^def draw_boxes(bboxes, im, color):$/;"	f
+equalize_hists	Trainer.py	/^    def equalize_hists(self):$/;"	m	class:Trainer
+ext	ImageLoader.py	/^    ext = (".png", ".jpg", ".jpeg")$/;"	v	class:Image_Loader
+extract_grounds	playGround.py	/^def extract_grounds(im):$/;"	f
+filter_areas	Image.py	/^    def filter_areas(self, bboxes):$/;"	m	class:Image
+filter_bounding_boxes	Image.py	/^    def filter_bounding_boxes(self, bboxes):$/;"	m	class:Image
+find_IQR	Image.py	/^    def find_IQR(self, num_summary):$/;"	m	class:Image
+find_area	Image.py	/^    def find_area(self, box):$/;"	m	class:Image
+find_clusters	Image.py	/^    def  find_clusters(self, bboxes):$/;"	m	class:Image
+find_clusters	playGround.py	/^def find_clusters(bboxes):$/;"	f
+find_intersection	Image.py	/^    def find_intersection(self, box_one, box_two, reverse=False):$/;"	m	class:Image
+find_leftmost_point	playGround.py	/^def find_leftmost_point(bboxs, reverse=False):$/;"	f
+find_leftmost_pt	Image.py	/^    def find_leftmost_pt(self, bboxes, reverse=False):$/;"	m	class:Image
+gain_im	Trainer.py	/^    def gain_im(self):$/;"	m	class:Trainer
+generate_labels	myUtils.py	/^def generate_labels(num_images):$/;"	f
+get_ROI	Image.py	/^    def get_ROI(self, im, **kwargs):$/;"	m	class:Image
+get_diff_pixels	myUtils.py	/^def get_diff_pixels(base_comp, comp_ls):$/;"	f
+get_five_num_summary	Image.py	/^    def get_five_num_summary(self, area_ls):$/;"	m	class:Image
+green	Colours.py	/^green = '\\033[32m'$/;"	v
+group_cluster	playGround.py	/^def group_cluster(clusters):$/;"	f
+group_clusters	Image.py	/^    def group_clusters(self, clusters):$/;"	m	class:Image
+harris	myUtils.py	/^def harris(img, thresh, color=[0,0,255]):$/;"	f
+hog_descriptor	myUtils.py	/^def hog_descriptor(im, **kwargs):$/;"	f
+hog_preprocessing	myUtils.py	/^def hog_preprocessing(im):$/;"	f
+im	Image.py	/^    def im(self):$/;"	m	class:Image
+im	Image.py	/^    def im(self, in_im):$/;"	m	class:Image
+im	test_image.py	/^    im = cv.imread('..\/train_updated\/tr17.jpg')$/;"	v	class:test_image
+interest	playGround.py	/^interest = ["tr17.jpg"]$/;"	v
+labels	DataSet.py	/^    def labels(self):$/;"	m	class:Data_Set
+load	ImageLoader.py	/^    def load(self, path):$/;"	m	class:Image_Loader
+load_dir	ImageLoader.py	/^    def load_dir(self, path):$/;"	m	class:Image_Loader
+load_image	ImageLoader.py	/^    def load_image(self, path):$/;"	m	class:Image_Loader
+log	debug.py	/^def log(item=''):$/;"	f
+make_new_region	Image.py	/^    def make_new_region(self, left_box, right_box):$/;"	m	class:Image
+map_colors	myUtils.py	/^def map_colors(number):$/;"	f
+map_hex2RBG	myUtils.py	/^def map_hex2RBG(hex_num):$/;"	f
+mode	DataSet.py	/^    def mode(self):$/;"	m	class:Data_Set
+mode	DataSet.py	/^    def mode(self, nw_mode):$/;"	m	class:Data_Set
+mode	ImageLoader.py	/^    def mode(self):$/;"	m	class:Image_Loader
+mode	ImageLoader.py	/^    def mode(self, nw_mode):$/;"	m	class:Image_Loader
+modeError	Errors.py	/^class modeError(Error):$/;"	c
+modes	ImageLoader.py	/^    modes = ('RGB', 'HSV', 'LUV', 'BGR', 'LAB', 'GRAY')$/;"	v	class:Image_Loader
+no_set	DataSet.py	/^    def no_set(self):$/;"	m	class:Data_Set
+non_max_suppression	Image.py	/^    def non_max_suppression(self, bboxes):$/;"	m	class:Image
+non_max_suppression_fast	playGround.py	/^def non_max_suppression_fast(boxes, overlapThresh):$/;"	f
+open_file	myUtils.py	/^def open_file(fileName):$/;"	f
+pad_image	myUtils.py	/^def pad_image(im, row_pad, col_pad):$/;"	f
+path	ImageLoader.py	/^    def path(self):$/;"	m	class:Image_Loader
+path	ImageLoader.py	/^    def path(self, nw_path):$/;"	m	class:Image_Loader
+red	Colours.py	/^red = '\\033[31m'$/;"	v
+rel_path	test_ImageLoader.py	/^    rel_path = '..\/Digits-2020S2\/0\/'$/;"	v	class:test_imageLoader
+remove_invalid	Image.py	/^    def remove_invalid(self, bboxes):$/;"	m	class:Image
+remove_outliers	Image.py	/^    def remove_outliers(self, area_ls, bboxes):$/;"	m	class:Image
+reset	Colours.py	/^reset = '\\033[m'$/;"	v
+resize_image	Image.py	/^    def resize_image(self, im, x, y):$/;"	m	class:Image
+resize_img	myUtils.py	/^def resize_img(img, reduction=0.5):$/;"	f
+resize_img_dim	myUtils.py	/^def resize_img_dim(img, nw_width, nw_len):$/;"	f
+rotate_im	Trainer.py	/^    def rotate_im(self):$/;"	m	class:Trainer
+rotate_image	myUtils.py	/^def rotate_image(img, angle=45):$/;"	f
+rotate_image_b	myUtils.py	/^def rotate_image_b(img, angle=45):$/;"	f
+save_comparisons	myUtils.py	/^def save_comparisons(labels, raw_pixels, diff_frm_og, fileName):$/;"	f
+save_stats	myUtils.py	/^def save_stats(fileName, area_label_ls, num_labels):$/;"	f
+scale_im	Trainer.py	/^    def scale_im(self):$/;"	m	class:Trainer
+select_key_point	myUtils.py	/^def select_key_point(im, **kwargs):$/;"	f
+set	DataSet.py	/^    def set(self):$/;"	m	class:Data_Set
+set	DataSet.py	/^    def set(self, nw_set_dir):$/;"	m	class:Data_Set
+set_path	DataSet.py	/^    def set_path(self):$/;"	m	class:Data_Set
+shape	test_image.py	/^    shape = (220, 220, 3)$/;"	v	class:test_image
+show_debug_boxes	Image.py	/^    def show_debug_boxes(self, bboxes, im, title):$/;"	m	class:Image
+show_diff_dist	myUtils.py	/^def show_diff_dist(distance, **kwargs):$/;"	f
+show_diff_hists	myUtils.py	/^def show_diff_hists(base_hist, op_base_hist, op_hists, xLim, **kwargs):$/;"	f
+show_histograms	myUtils.py	/^def show_histograms(image):$/;"	f
+show_img_ls	myUtils.py	/^def show_img_ls(img_ls, fileName):$/;"	f
+test	test_ImageLoader.py	/^    test= Image_Loader(rel_path)$/;"	v	class:test_imageLoader
+test	test_Trainer.py	/^    test = Trainer(test_path=test_path,train_path=train_path,$/;"	v	class:test_Trainer
+test	test_image.py	/^    test = Image(im)$/;"	v	class:test_image
+test_DataSet	test_DataSet.py	/^class test_DataSet(unittest.TestCase):$/;"	c
+test_Trainer	test_Trainer.py	/^class test_Trainer(unittest.TestCase):$/;"	c
+test_accessing_image_set	test_DataSet.py	/^    def test_accessing_image_set(self):$/;"	m	class:test_DataSet
+test_accessors	test_DataSet.py	/^    def test_accessors(self):$/;"	m	class:test_DataSet
+test_accessors	test_Trainer.py	/^    def test_accessors(self):$/;"	m	class:test_Trainer
+test_accessors	test_image.py	/^    def test_accessors(self):$/;"	m	class:test_image
+test_create_labels	test_ImageLoader.py	/^    def test_create_labels(self):$/;"	m	class:test_imageLoader
+test_debug	test_image.py	/^    def test_debug(self):$/;"	m	class:test_image
+test_display_images	test_ImageLoader.py	/^    def test_display_images(self):$/;"	m	class:test_imageLoader
+test_draw_box	test_image.py	/^    def test_draw_box(self):$/;"	m	class:test_image
+test_find_clusters	test_image.py	/^    def test_find_clusters(self):$/;"	m	class:test_image
+test_find_intersection	test_image.py	/^    def test_find_intersection(self):$/;"	m	class:test_image
+test_finding_left_most_pt	test_image.py	/^    def test_finding_left_most_pt(self):$/;"	m	class:test_image
+test_get_ROI	test_image.py	/^    def test_get_ROI(self):$/;"	m	class:test_image
+test_getters	test_ImageLoader.py	/^    def test_getters(self):$/;"	m	class:test_imageLoader
+test_image	test_image.py	/^class test_image(unittest.TestCase):$/;"	c
+test_imageLoader	test_ImageLoader.py	/^class test_imageLoader(unittest.TestCase):$/;"	c
+test_len	test_ImageLoader.py	/^    def test_len(self):$/;"	m	class:test_imageLoader
+test_mutators	test_DataSet.py	/^    def test_mutators(self):$/;"	m	class:test_DataSet
+test_path	test_Trainer.py	/^    test_path = '..\/Digits-2020S2\/'$/;"	v	class:test_Trainer
+test_set	Trainer.py	/^    def test_set(self):$/;"	m	class:Trainer
+test_setters	test_ImageLoader.py	/^    def test_setters(self):$/;"	m	class:test_imageLoader
+test_setters	test_image.py	/^    def test_setters(self):$/;"	m	class:test_image
+test_visual_set	test_Trainer.py	/^    def test_visual_set(self):$/;"	m	class:test_Trainer
+train	Trainer.py	/^    def train(self, in_path):$/;"	m	class:Trainer
+train_path	test_Trainer.py	/^    train_path = '..\/train_updated\/'$/;"	v	class:test_Trainer
+train_set	Trainer.py	/^    def train_set(self):$/;"	m	class:Trainer
+val_path	test_Trainer.py	/^            val_path=val_path)$/;"	v	class:test_Trainer
+val_path	test_Trainer.py	/^    val_path = '..\/val_updated\/'$/;"	v	class:test_Trainer
+val_set	Trainer.py	/^    def val_set(self):$/;"	m	class:Trainer
+yellow	Colours.py	/^yellow = '\\033[33m'$/;"	v
