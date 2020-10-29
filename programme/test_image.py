@@ -115,10 +115,26 @@ class test_image(unittest.TestCase):
         for img_id, path in enumerate(all_imgs):
             print(yellow + 'path'  + reset, path)
             im = cv.imread("../train_updated/" + path)
-            self.test.get_ROI(im,img_id)
+            digits = self.test.get_ROI(im,img_id)[1]
+            for num, digit in enumerate(digits):
+                cv.imshow("digit: %s" %num, digit)
+            cv.waitKey()
+            cv.destroyAllWindows()
 
-    def test_extract_digits(self):
-        pass
+
+#    def test_extract_digits(self):
+#        #toggling the debugging feature on
+#        self.test.debug()
+#        all_imgs = os.listdir('output/')
+#        #interest = ['tr05.jpg', 'tr09.jpg']
+#        #interest = ['tr08.jpg', 'tr25.jpg']
+#        #interest = ['tr09.jpg', 'tr12.jpg', 'tr03.jpg', 'tr08.jpg', 'tr02.jpg']
+#        image_files = [ii for ii in all_imgs if ii[0] == 'D']
+#
+#        for img_id, path in enumerate(image_files):
+#            print(red+"this is the path: "+reset, path)
+#            im = cv.imread("output/" + path)
+#            self.test.extract_digits(im, img_id)
 
     #I know this work, I will test it properly when I have time at
     #the end :-)

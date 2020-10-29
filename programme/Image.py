@@ -112,16 +112,30 @@ class Image(object):
         if self._DEBUG:
             self.show_debug_boxes(bboxes, im, "filtering by widths of the image")
 
+
         bboxes = self.filter_dominant_color(im.copy(), bboxes)
 
         if self._DEBUG:
             self.show_debug_boxes(bboxes, im, "filtering done by dominant color")
 
+
         left_pt = self.find_leftmost_pt(bboxes)
         right_pt = self.find_leftmost_pt(bboxes, True)
 
+
         new_region = self.make_new_region(left_pt, right_pt)
         cropped_image = self.crop_img(im.copy(),new_region)
+        cropped_image = self.pad_image(cropped_image)
+
+        #doing it this way picks up a lot of duplicates
+        #digits = [self.crop_img(im.copy(), box) for box in bboxes]
+        digits = self.extract_digits(cropped_image)
+
+        file_name = 'output/DetectedArea' + str(img_id) + ".jpg"
+        bbox_file_name = 'output/BoundingBox' +str(img_id) + ".txt"
+
+        cv.imwrite(file_name, cropped_image)
+        np.savetxt(bbox_file_name, new_region, delimiter=',')
 
         if self._DEBUG:
             self.show_debug_boxes([new_region], im, "new region found")
@@ -131,12 +145,52 @@ class Image(object):
             cv.waitKey()
             cv.destroyAllWindows()
 
-        return cropped_image
+        return cropped_image, digits
 
+    def extract_digits(self, im):
+        im = self._validate_image(im)
+        gray = cv.cvtColor(im, cv.COLOR_BGR2GRAY)
+        #decreasing the required memory the image needs but still keeping the
+        #important features
+        gray = cv.GaussianBlur(gray, (5,5), 0)
+        thresh = cv.threshold(gray, 0, 255, cv.THRESH_BINARY+cv.THRESH_OTSU)[1]
 
-    def extract_digits(self, cropped_image):
-        pass
+        edge_thresh = 100
+        #the openCV doc recommends that you will have your upper thresh hold
+        #twice as the lower threshold
+        canny_trans = cv.Canny(thresh, edge_thresh, edge_thresh * 2)
+        rect_kern = cv.getStructuringElement(cv.MORPH_RECT, (5,5))
+        canny_trans = cv.erode(thresh, None, iterations=1)
+        canny_trans = cv.dilate(thresh, None, iterations=1)
+        #canny_trans_invert = canny_trans.max() - canny_trans
 
+        if self._DEBUG:
+            cv.imshow("found edges after morphology" , canny_trans)
+            #cv.imshow("the inversion of that image", canny_trans_invert)
+            cv.waitKey()
+            cv.destroyAllWindows()
+
+        #mser = cv.MSER_create(35)
+        mser = cv.MSER_create()
+        regions, bboxes = mser.detectRegions(canny_trans)
+        #trying to filter the bounding boxes in relation to the heights, and the width
+
+        if self._DEBUG:
+            self.show_debug_boxes(bboxes, im, "original bounding boxes found")
+
+        bboxes = self.filter_bounding_boxes(bboxes, 1.1, 4.8)
+        bboxes = self.non_max_suppression(bboxes)
+        #sorting the bounding boxes so they read left to right, and it's
+        #displayed in the right order
+        bboxes = sorted(bboxes, key=lambda x: x[0])
+
+        return [self.crop_img(im.copy(), box) for box in bboxes]
+
+    def pad_image(self, im):
+        row_pad = 2
+        col_pad = 2
+        npad = ((row_pad, col_pad), (row_pad, col_pad), (0,0))
+        return np.pad(im, pad_width=npad, mode='constant', constant_values=0)
 
     def filter_heights(self, bboxes):
         """
@@ -611,7 +665,7 @@ class Image(object):
                             cluster.append([curr_box, alt_box])
         return cluster
 
-    def filter_bounding_boxes(self, bboxes):
+    def filter_bounding_boxes(self, bboxes, lower_thresh=1.10, upper_thresh=3.21):
         """
         we know that for the bounding boxes which will contain the digits
         the height is going to be longer than the width
@@ -629,11 +683,13 @@ class Image(object):
                 bboxes[indx] = [-1, -1, -1, -1]
 
             ratio = h/w
+            print(yellow+"RATIO"+reset, ratio)
             #we're going to expect the height of the digits to be no more than
             #250% of the widht of the image, and the length to be no less
             #than the width of the bounding box
             print(green+"ratio"+reset, ratio)
-            if ratio < 1.10 or ratio > 3.21:
+            #if ratio < 1.10 or ratio > 3.21:
+            if ratio < lower_thresh or ratio > upper_thresh:
             #if ratio <= 1.5 or ratio >= 2.0:
             #if ratio < 1.0 and ratio > 2.0:
                 bboxes[indx]  = [-1, -1, -1, -1]

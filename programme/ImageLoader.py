@@ -43,7 +43,8 @@ class Image_Loader(object):
 
     @path.setter
     def path(self, nw_path):
-        self._path = self.__validate_path(nw_path)
+        self._path = nw_path
+        #self._path = self.__validate_path(nw_path)
         #re-loading the data at the new path
         self._data = self.load(self.path)
 
