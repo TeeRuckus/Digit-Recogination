@@ -16,12 +16,13 @@ import numpy as np
 from Errors import *
 from Colours import *
 import cv2 as cv
+from statistics import mode
 
 class Image(object):
-    def __init__(self, im):
+    def __init__(self, im, img_id):
         self._DEBUG = False
         #self._DEBUG = True
-        self._im = self.get_ROI(im)
+        self._im = self.get_ROI(im, img_id)
 
     @property
     def im(self):
@@ -45,7 +46,7 @@ class Image(object):
         else:
             self._DEBUG = True
 
-    def get_ROI(self, im, **kwargs):
+    def get_ROI(self, im, img_id, **kwargs):
 
         im = self._validate_image(im)
         gray = cv.cvtColor(im, cv.COLOR_BGR2GRAY)
@@ -69,7 +70,8 @@ class Image(object):
             cv.waitKey()
             cv.destroyAllWindows()
 
-        mser = cv.MSER_create(35)
+        #mser = cv.MSER_create(35)
+        mser = cv.MSER_create()
         regions, bboxes = mser.detectRegions(canny_trans)
         #trying to filter the bounding boxes in relation to the heights, and the width
 
@@ -77,6 +79,7 @@ class Image(object):
             self.show_debug_boxes(bboxes, im, "original bounding boxes found")
 
         bboxes = self.filter_bounding_boxes(bboxes)
+
         if self._DEBUG:
             self.show_debug_boxes(bboxes, im, "filtered bounding boxes")
 
@@ -91,39 +94,201 @@ class Image(object):
         if self._DEBUG:
             self.show_debug_boxes(bboxes, im, "filtering by the area")
 
-        #bboxes = self.filter_heights(bboxes)
 
         #THIS WAS WORKING BEFORE
         bboxes = self.non_max_suppression(bboxes)
+
         if self._DEBUG:
             self.show_debug_boxes(bboxes, im, "non max suppression")
 
-        #filtering the bounding boxes by color, they're just a couple of
-        #noise boxes left. Hence, I should be able to filter them out by the
-        #colors
-        #bboxes = self.filter_colors(bboxes)
+
+        bboxes  = self.filter_heights(bboxes)
 
         if self._DEBUG:
-            self.show_debug_boxes(bboxes, im, "second grouping found")
+            self.show_debug_boxes(bboxes, im, "filtering by the heights in image")
+
+        bboxes  = self.filter_width(bboxes)
+
+        if self._DEBUG:
+            self.show_debug_boxes(bboxes, im, "filtering by widths of the image")
+
+        bboxes = self.filter_dominant_color(im.copy(), bboxes)
+
+        if self._DEBUG:
+            self.show_debug_boxes(bboxes, im, "filtering done by dominant color")
 
         left_pt = self.find_leftmost_pt(bboxes)
         right_pt = self.find_leftmost_pt(bboxes, True)
 
-#        new_region = np.array([left_pt[0], left_pt[1], right_pt[0]+right_pt[2],
-#            right_pt[1]+right_pt[3]], dtype='int32')
-
         new_region = self.make_new_region(left_pt, right_pt)
+        cropped_image = self.crop_img(im.copy(),new_region)
 
         if self._DEBUG:
             self.show_debug_boxes([new_region], im, "new region found")
 
-    def filter_colors(self, bboxes):
+        if self._DEBUG:
+            cv.imshow("extracted area", cropped_image)
+            cv.waitKey()
+            cv.destroyAllWindows()
+
+        return cropped_image
+
+
+    def extract_digits(self, cropped_image):
+        pass
+
+
+    def filter_heights(self, bboxes):
         """
-        calculating the average color in each bounding box, and then comparing
-        each bounding boxes color with one another, and if a bounding box is
-        doesn't follow the average color then that bounding box is considered
-        as noise to the image
         """
+        #sorting the bounding boxes in relation to the poistion on the image
+        bboxes = sorted(bboxes, key=lambda y: y[1])
+        heights = [box[1] for box in bboxes]
+        #finding the median height of the bbounding boxes
+        common_height =  np.median(heights)
+
+        #getting the smalles height, at this stage it should be mostly numbers
+        #which are left as the bounding box
+        #TOL =  bboxes[0][1]
+        #YOU HAVEN'T TRIED THIS ONE OUT AS YET
+        TOL = bboxes[-1][3]
+        print(red+"Tolerance of the image"+reset, TOL)
+
+        for indx, box in enumerate(bboxes):
+            if indx < len(bboxes):
+                print(yellow+"box of the image"+reset, box)
+                if (abs(box[1] - common_height)) >= TOL:
+                    bboxes[indx] = [-1,-1,-1,-1]
+
+        bboxes = self.remove_invalid(bboxes)
+
+        return bboxes
+
+    def filter_width(self, bboxes):
+        bboxes = sorted(bboxes, key=lambda x: x[0])
+        widths = [box[0] for box in bboxes]
+
+        common_width = np.median(widths)
+
+        TOL = bboxes[-1][2] * 4
+
+        for indx, box in enumerate(bboxes):
+            if indx < len(bboxes):
+                if (abs(box[0] - common_width)) >= TOL:
+                    bboxes[indx] = [-1,-1,-1,-1]
+
+
+        bboxes = self.remove_invalid(bboxes)
+
+        return bboxes
+
+
+    def filter_dominant_color(self, img, bboxes):
+        """
+        the idea is that the numbers should be on the same coloured background
+        and the dominant color should be the background of the image, or that
+        each bounding box should have the same average colours in each bounding
+        box
+        """
+        #normalising the image, removing any effects from brightness and contrast
+        img = cv.normalize(img, img, 0, 255, cv.NORM_MINMAX)
+        #HSV is the best color space for color based manipulation
+        img = cv.cvtColor(img, cv.COLOR_BGR2GRAY) # the gray-scale images worked
+        #the best from experimenting
+        img_sections = []
+
+        for box in bboxes:
+            img_sections.append(self.crop_img(img.copy(), box))
+        #sorting the bboxes from left to right
+
+        section_colors = []
+
+        for section in img_sections:
+#            cv.imshow("section found", section)
+#            cv.waitKey()
+            section_colors.append(self.find_dominant_color(section))
+
+        section_colors = self.remove_invalid(section_colors)
+        dominant_color = self.find_dominant_color_ls(section_colors)
+
+        #this gave the best results  so far
+        TOL = [25, 25, 25]
+        #TOL = [25.5, 25.5, 25.5]
+
+        #anything which doesn't have this dominant color should be deleted in
+        for indx, color in enumerate(section_colors):
+            #safe gaurd to try stop the algorithm from accessing an invalid index
+            if  indx < len(section_colors):
+                print(green+"color"+reset, color)
+                print(green+"dominant color"+reset, dominant_color)
+                if (abs(color - dominant_color) > TOL).all():
+                    #deleting the bounding box which doesn't have the dominant color
+                    #in it
+                    bboxes[indx] = [-1,-1,-1,-1]
+
+        bboxes = self.remove_invalid(bboxes)
+
+        return bboxes
+
+    def find_dominant_color(self, img):
+        #THIS IS ACTUALLY FINDING THE DOMINANT COLOR WITH OPENCV
+        """
+        use the refernce which you used for assigment one for this
+        """
+        #they should be only two colors the background and the foreground of
+        #the plate
+        #img = cv.cvtColor(img.copy(), cv.COLOR_BGR2HSV)
+
+        #pixels = np.float32(img.reshape(-1,3))
+        pixels = np.float32(img.flatten())
+        n_colors = 2
+
+        criteria = (cv.TERM_CRITERIA_EPS + cv.TERM_CRITERIA_MAX_ITER, 200, 1)
+        #flags = cv.KMEANS_RANDOM_CENTERS
+        flags = cv.KMEANS_PP_CENTERS
+
+        labels, palette  = cv.kmeans(pixels, n_colors, None, criteria, 10,
+                flags)[1:]
+
+        counts = np.unique(labels, return_counts=True)[1]
+
+        return palette[np.argmax(counts)]
+
+    def find_dominant_color_ls(self, color_ls):
+        """
+        to find the domiannt color given a list. This algorihtm is going to use
+        brute force to find the dominant color, and therefore is going to be
+        in-efficient
+        """
+
+        temp_color = None
+        prev_found_times = 0
+        found_times = 0
+
+        for color in color_ls:
+            temp_color = color
+            for count in color_ls:
+                if (count == temp_color).all():
+                    found_times += 1
+
+            if  found_times >= prev_found_times:
+                dominant_color = color
+                prev_found_times = found_times
+                found_times = 0
+
+        return dominant_color
+
+
+    def crop_img(self, img, bbox):
+        #want to make sure that extracted area has padding so it will be easier
+        #to detect the digits in the next sections of the programme
+        padding = 0  # this caused one of your indexes to be invalid
+        x_l = int(bbox[0] - padding)
+        y_l = int(bbox[1] - padding)
+        x_r = int(bbox[0] + bbox[2] + padding)
+        y_r = int(bbox[1] + bbox[3] + padding)
+
+        return img[y_l:y_r, x_l:x_r]
 
 
     def filter_areas(self, bboxes):
@@ -132,7 +297,6 @@ class Image(object):
         #fileter out the boxes which are most likely going to be outliers
         for box in bboxes:
             all_areas.append(self.find_area(box))
-
         bboxes = self.remove_outliers(all_areas, bboxes)
 
         return bboxes
@@ -146,11 +310,29 @@ class Image(object):
         #return min_area, max_area, median, average
         return summary
 
+    def sort_bboxes(self, sorted_indxs, bboxes):
+        temp_bboxes = bboxes.copy()
+        for indx, box in enumerate(temp_bboxes):
+            bboxes[indx] = temp_bboxes[sorted_indxs[indx]]
+
+        return bboxes
+
     def remove_outliers(self, area_ls, bboxes):
         """
         an outlier is a point which will lay siginificantly far away from the
         average
         """
+        area_ls = np.array(area_ls)
+        sorted_indxs = area_ls.argsort()
+
+        bboxes = self.sort_bboxes(sorted_indxs, bboxes)
+        #actually puting the areas in their sorted order
+        area_ls = area_ls[sorted_indxs]
+        #converting area_list back to a list so I can use the in-built list
+        #functions
+        area_ls = area_ls.tolist()
+
+
         #if they're going to be only two boxes in the bounding box array
         #they is not point in trying to find the outliers, as one of those
         #boxes will be filtered out which is not what we want
@@ -167,11 +349,19 @@ class Image(object):
             #median value
             #thresh = 1.05
             #thresh = 1.15
-            thresh = 1.20
-            #thresh = 1.20
+            #this as the lower thereshold worked pretty well
+            #thresh_lower = 1.25
+            #thresh_lower = 1.50 #here it started dropping numbers out of the
+            #detected numbers, so maybe try to go down from here
+            #obtained through trial and error through all the images
+            thresh_lower = 1.45
+            #obtained through trial and error
+            thresh_upper = 0.75
+            #
+            #tr09.jpgtr09.jpgthresh = 1.20
             #area can't be a negative number hence,
-            lower_bound = abs(int(median - (thresh * IQR)))
-            upper_bound = int(median + (thresh * IQR))
+            lower_bound = abs(int(median - (thresh_lower * IQR)))
+            upper_bound = int(median + (thresh_upper * IQR))
 
             for area in area_ls:
                 #YOU MIGHT HAVE TO BE CAREFUL ABOUT INDX GOING OUT OF RANGE: PLEASE
@@ -313,6 +503,29 @@ class Image(object):
     def resize_image(self, im, x, y):
         return cv.resize(im, (int(x), int(y)))
 
+#    def group_clusters(self, clusters):
+#        pass
+#
+#
+#    def find_clusters(self,bboxes, thresh_x, thresh_y):
+#        """
+#        """
+#
+#        cluster_ls = []
+#
+#        bboxes = sorted(bboxes, key=lambda x: x[0])
+#        bboxes = self.remove_invalid(bboxes)
+#
+#        for start, curr_box in enumerate(bboxes):
+#            x,y,w,h = curr_box
+#            pt1 = (x,y)
+#            pt2 = (x+w, y+h)
+#
+#            for alt_box in bboxes:
+#                x_alt, y_alt, w_alt, h_alt = alt_box
+#                pt1_alt = (x_alt, y_alt)
+#                pt2_alt = (x_alt + w_alt, y_alt + h_alt)
+
     def group_clusters(self, clusters):
         """
         many boxes where founf by the find_clusters algorithm, this function
@@ -320,6 +533,11 @@ class Image(object):
         the biggest box out of the cluster
         """
         cluster_b = []
+        #NEW
+        #the bboxes are put into pairs whereby each pair is very close to each
+        #other hence, we can just sort by first box as that box will be
+        #left most box out of the two boxes
+        clusters = sorted(clusters, key=lambda x: x[0][0])
 
         for indx, cluster in enumerate(clusters):
             box_one = cluster[0]
@@ -337,11 +555,6 @@ class Image(object):
             nw_x = min(x_1, x_2)
             nw_y = min(y_1, y_2)
 
-            #finding the gap between the clustered boxes
-            #the gap is given by the difference between the end point of the
-            #left most box and the box next to it
-            gap_x = abs(x_2 - (x_1 + w_1))
-            gap_y = abs((y_2 + h_2) - h_1)
 
             nw_box = np.array([nw_x, nw_y, nw_w, nw_h], dtype='int32')
             clusters[indx] = nw_box
@@ -360,38 +573,42 @@ class Image(object):
         """
         cluster = []
 
-        bboxes =  sorted(bboxes, key=lambda x: x[0])
+        print(red+"box\n"+reset, bboxes)
+        bboxes = sorted(bboxes, key=lambda x: x[0])
         bboxes = self.remove_invalid(bboxes)
 
         for start, curr_box in enumerate(bboxes):
             x,y,w,h = curr_box
             pt1 = (x, y)
             pt2 = (x+w, y+h)
-            search_region = bboxes[start:]
-            for alt_box in search_region:
-                if len(search_region) > 0:
-                    x_alt,y_alt,w_alt,h_alt = alt_box
-                    pt1_alt = (x_alt,y_alt)
-                    pt2_alt =(x_alt+w_alt, y_alt+h_alt)
+            #search_region = bboxes[start:]
+            for alt_box in bboxes:
+                #if len(search_region) > 0:
+                x_alt,y_alt,w_alt,h_alt = alt_box
+                pt1_alt = (x_alt,y_alt)
+                pt2_alt =(x_alt+w_alt, y_alt+h_alt)
 
-                    x_diff = abs(pt2[0] - pt1_alt[0])
-                    y_diff = abs(pt2[1] - pt2_alt[1])
+                x_diff = abs(pt2[0] - pt1_alt[0])
+                y_diff = abs(pt2[1] - pt2_alt[1])
+                #y_diff = abs(pt1[1] - pt1_alt[1])
 
 #                    line_seg_x = max(pt2[0], pt2_alt[0])
 #                    line_seg_y = max(pt2[1], pt2_alt[1])
-                    line_seg_x = max(w, w_alt)
-                    line_seg_y = max(h, h_alt)
+                line_seg_x = max(w, w_alt)
+                line_seg_y = max(h, h_alt)
 
-                    line_TOL_x  = line_seg_x * thresh_x
-                    line_TOL_y = line_seg_y * thresh_y
+                line_TOL_x  = line_seg_x * thresh_x
+                line_TOL_y = line_seg_y * thresh_y
 
-                    #if x_diff < pt2[0]  and x_diff < pt2_alt[0]:
-                    #I don't think you're doing this comparison correctly if I
-                    #am being honest
-                    if x_diff <= line_TOL_x:
-                            #if y_diff < h:
-                            if y_diff <= line_TOL_y:
-                                cluster.append([curr_box, alt_box])
+                #if x_diff < pt2[0]  and x_diff < pt2_alt[0]:
+                #I don't think you're doing this comparison correctly if I
+                #am being honest
+                if x_diff <= line_TOL_x:
+                        #if y_diff < h:
+                        if y_diff <= line_TOL_y:
+                            pair = [curr_box, alt_box]
+                            pair = sorted(pair, key=lambda x: x[0])
+                            cluster.append([curr_box, alt_box])
         return cluster
 
     def filter_bounding_boxes(self, bboxes):
@@ -399,6 +616,9 @@ class Image(object):
         we know that for the bounding boxes which will contain the digits
         the height is going to be longer than the width
         """
+        #NEW
+        bboxes = sorted(bboxes, key=lambda x: x[0])
+
         for indx, box in  enumerate(bboxes):
             x,y,w,h = box
             pt1 = (x, y)
@@ -406,17 +626,19 @@ class Image(object):
 
             #if (abs(pt1[0] - pt2[0]) >= abs(pt1[1] - pt2[1])):
             if w >= h:
-                bboxes[indx] = -1
+                bboxes[indx] = [-1, -1, -1, -1]
 
             ratio = h/w
             #we're going to expect the height of the digits to be no more than
             #250% of the widht of the image, and the length to be no less
             #than the width of the bounding box
             print(green+"ratio"+reset, ratio)
-            if ratio < 1.0 or ratio > 3.5:
+            if ratio < 1.10 or ratio > 3.21:
             #if ratio <= 1.5 or ratio >= 2.0:
             #if ratio < 1.0 and ratio > 2.0:
-                bboxes[indx]  = -1
+                bboxes[indx]  = [-1, -1, -1, -1]
+
+        bboxes = self.remove_invalid(bboxes)
 
         return bboxes
 

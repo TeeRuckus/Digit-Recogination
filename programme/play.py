@@ -3,17 +3,16 @@ import numpy as np
 import  numpy.ma as ma
 from Image import Image
 
+some_ids = ['one', 'two', 'three', 'four']
+system_value = [1, 2, 3,4]
 
-bboxes = [[-1, -1, -1, -1], [-1, -1, -1, -1], [9,5,8,6], [10, 20, 30, 40],
-        [100,20,30, 40]]
+for ids, values in zip(some_ids, system_value):
+    if values  ==  2:
+        print("found")
+        del values
+        del ids
 
 
-
-
-del bboxes[0]
-del bboxes[0]
-
-
-print(bboxes)
-bboxes = np.array(bboxes, dtype='int32')
-print(bboxes.mean())
+#I need to unzip the list object
+print(some_ids)
+print(system_value)

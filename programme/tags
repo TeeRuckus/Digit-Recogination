@@ -25,7 +25,7 @@ __init__	DataSet.py	/^    def __init__(self, set_path):$/;"	m	class:Data_Set
 __init__	Errors.py	/^    def __init__(self, mssg):$/;"	m	class:ImageError
 __init__	Errors.py	/^    def __init__(self, mssg):$/;"	m	class:PathError
 __init__	Errors.py	/^    def __init__(self, mssg):$/;"	m	class:modeError
-__init__	Image.py	/^    def __init__(self, im):$/;"	m	class:Image
+__init__	Image.py	/^    def __init__(self, im, img_id):$/;"	m	class:Image
 __init__	ImageLoader.py	/^    def __init__(self, path, mode="HSV"):$/;"	m	class:Image_Loader
 __init__	Trainer.py	/^    def __init__(self, **kwargs):$/;"	m	class:Trainer
 __iter__	ImageLoader.py	/^    def __iter__(self):$/;"	m	class:Image_Loader	file:
@@ -50,7 +50,6 @@ activity_two_hog_rotated	myUtils.py	/^def activity_two_hog_rotated(im, pt1, pt2)
 activity_two_hog_scaled	myUtils.py	/^def activity_two_hog_scaled(im, pt1, pt2):$/;"	f
 all_imgs	playGround.py	/^all_imgs = os.listdir('..\/train_updated\/')$/;"	v
 area_bboxes	Image.py	/^    def area_bboxes(self, bboxes):$/;"	m	class:Image
-bboxes	play.py	/^bboxes = [[-1, -1, -1, -1], [-1, -1, -1, -1], [9,5,8,6], [10, 20, 30, 40],$/;"	v
 bias_im	Trainer.py	/^    def bias_im(self):$/;"	m	class:Trainer
 calc_hist_dist	myUtils.py	/^def calc_hist_dist(primary_hist, in_ls, **kwargs):$/;"	f
 calc_histograms	myUtils.py	/^def calc_histograms(img, channel=0, hist_size=256, hist_range=(0,256)):$/;"	f
@@ -66,6 +65,7 @@ create_labels	ImageLoader.py	/^    def create_labels(self):$/;"	m	class:Image_Lo
 create_one_bbox	playGround.py	/^def create_one_bbox(bboxes):$/;"	f
 create_set	DataSet.py	/^        def create_set(self, set_dir, mode):$/;"	m	class:Data_Set.__set
 create_set	DataSet.py	/^    def create_set(self, in_path):$/;"	m	class:Data_Set
+crop_img	Image.py	/^    def crop_img(self, img, bbox):$/;"	m	class:Image
 crop_img	myUtils.py	/^def crop_img(img, pt1, pt2):$/;"	f
 data	ImageLoader.py	/^    def data(self):$/;"	m	class:Image_Loader
 debug	Image.py	/^    def debug(self):$/;"	m	class:Image
@@ -78,19 +78,25 @@ draw_boxes	Image.py	/^    def draw_boxes(self,bboxes, im, color):$/;"	m	class:Im
 draw_boxes	playGround.py	/^def draw_boxes(bboxes, im, color):$/;"	f
 equalize_hists	Trainer.py	/^    def equalize_hists(self):$/;"	m	class:Trainer
 ext	ImageLoader.py	/^    ext = (".png", ".jpg", ".jpeg")$/;"	v	class:Image_Loader
+extract_digits	Image.py	/^    def extract_digits(self, cropped_image):$/;"	m	class:Image
 extract_grounds	playGround.py	/^def extract_grounds(im):$/;"	f
 filter_areas	Image.py	/^    def filter_areas(self, bboxes):$/;"	m	class:Image
 filter_bounding_boxes	Image.py	/^    def filter_bounding_boxes(self, bboxes):$/;"	m	class:Image
+filter_dominant_color	Image.py	/^    def filter_dominant_color(self, img, bboxes):$/;"	m	class:Image
+filter_heights	Image.py	/^    def filter_heights(self, bboxes):$/;"	m	class:Image
+filter_width	Image.py	/^    def filter_width(self, bboxes):$/;"	m	class:Image
 find_IQR	Image.py	/^    def find_IQR(self, num_summary):$/;"	m	class:Image
 find_area	Image.py	/^    def find_area(self, box):$/;"	m	class:Image
-find_clusters	Image.py	/^    def  find_clusters(self, bboxes):$/;"	m	class:Image
+find_clusters	Image.py	/^    def  find_clusters(self, bboxes, thresh_x, thresh_y):$/;"	m	class:Image
 find_clusters	playGround.py	/^def find_clusters(bboxes):$/;"	f
+find_dominant_color	Image.py	/^    def find_dominant_color(self, img):$/;"	m	class:Image
+find_dominant_color_ls	Image.py	/^    def find_dominant_color_ls(self, color_ls):$/;"	m	class:Image
 find_intersection	Image.py	/^    def find_intersection(self, box_one, box_two, reverse=False):$/;"	m	class:Image
 find_leftmost_point	playGround.py	/^def find_leftmost_point(bboxs, reverse=False):$/;"	f
 find_leftmost_pt	Image.py	/^    def find_leftmost_pt(self, bboxes, reverse=False):$/;"	m	class:Image
 gain_im	Trainer.py	/^    def gain_im(self):$/;"	m	class:Trainer
 generate_labels	myUtils.py	/^def generate_labels(num_images):$/;"	f
-get_ROI	Image.py	/^    def get_ROI(self, im, **kwargs):$/;"	m	class:Image
+get_ROI	Image.py	/^    def get_ROI(self, im, img_id, **kwargs):$/;"	m	class:Image
 get_diff_pixels	myUtils.py	/^def get_diff_pixels(base_comp, comp_ls):$/;"	f
 get_five_num_summary	Image.py	/^    def get_five_num_summary(self, area_ls):$/;"	m	class:Image
 green	Colours.py	/^green = '\\033[32m'$/;"	v
@@ -142,15 +148,17 @@ select_key_point	myUtils.py	/^def select_key_point(im, **kwargs):$/;"	f
 set	DataSet.py	/^    def set(self):$/;"	m	class:Data_Set
 set	DataSet.py	/^    def set(self, nw_set_dir):$/;"	m	class:Data_Set
 set_path	DataSet.py	/^    def set_path(self):$/;"	m	class:Data_Set
-shape	test_image.py	/^    shape = (220, 220, 3)$/;"	v	class:test_image
 show_debug_boxes	Image.py	/^    def show_debug_boxes(self, bboxes, im, title):$/;"	m	class:Image
 show_diff_dist	myUtils.py	/^def show_diff_dist(distance, **kwargs):$/;"	f
 show_diff_hists	myUtils.py	/^def show_diff_hists(base_hist, op_base_hist, op_hists, xLim, **kwargs):$/;"	f
 show_histograms	myUtils.py	/^def show_histograms(image):$/;"	f
 show_img_ls	myUtils.py	/^def show_img_ls(img_ls, fileName):$/;"	f
+some_ids	play.py	/^some_ids = ['one', 'two', 'three', 'four']$/;"	v
+sort_bboxes	Image.py	/^    def sort_bboxes(self, sorted_indxs, bboxes):$/;"	m	class:Image
+system_value	play.py	/^system_value = [1, 2, 3,4]$/;"	v
 test	test_ImageLoader.py	/^    test= Image_Loader(rel_path)$/;"	v	class:test_imageLoader
 test	test_Trainer.py	/^    test = Trainer(test_path=test_path,train_path=train_path,$/;"	v	class:test_Trainer
-test	test_image.py	/^    test = Image(im)$/;"	v	class:test_image
+test	test_image.py	/^    test = Image(im, 1)$/;"	v	class:test_image
 test_DataSet	test_DataSet.py	/^class test_DataSet(unittest.TestCase):$/;"	c
 test_Trainer	test_Trainer.py	/^class test_Trainer(unittest.TestCase):$/;"	c
 test_accessing_image_set	test_DataSet.py	/^    def test_accessing_image_set(self):$/;"	m	class:test_DataSet
@@ -161,6 +169,7 @@ test_create_labels	test_ImageLoader.py	/^    def test_create_labels(self):$/;"	m
 test_debug	test_image.py	/^    def test_debug(self):$/;"	m	class:test_image
 test_display_images	test_ImageLoader.py	/^    def test_display_images(self):$/;"	m	class:test_imageLoader
 test_draw_box	test_image.py	/^    def test_draw_box(self):$/;"	m	class:test_image
+test_extract_digits	test_image.py	/^    def test_extract_digits(self):$/;"	m	class:test_image
 test_find_clusters	test_image.py	/^    def test_find_clusters(self):$/;"	m	class:test_image
 test_find_intersection	test_image.py	/^    def test_find_intersection(self):$/;"	m	class:test_image
 test_finding_left_most_pt	test_image.py	/^    def test_finding_left_most_pt(self):$/;"	m	class:test_image
