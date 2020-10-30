@@ -387,11 +387,14 @@ class Image(object):
 
         #anything which doesn't have this dominant color should be deleted in
         for indx, color in enumerate(section_colors):
-            #safe gaurd to try stop the algorithm from accessing an invalid index
+            #safe gaurd to try stop the algorithm from accessing an
+            #invalid index
             if  indx < len(section_colors):
+                #determing if all the elments of the color array is
+                #realtivley near the domiant color of the image
                 if (abs(color - dominant_color) > TOL).all():
-                    #deleting the bounding box which doesn't have the dominant color
-                    #in it
+                    #deleting the bounding box which doesn't have the
+                     #dominant color in it
                     bboxes[indx] = [-1,-1,-1,-1]
 
         bboxes = self.remove_invalid(bboxes)
@@ -399,22 +402,22 @@ class Image(object):
         return bboxes
 
     def find_dominant_color(self, img):
-        #THIS IS ACTUALLY FINDING THE DOMINANT COLOR WITH OPENCV
         """
-        use the refernce which you used for assigment one for this
-        """
-        #they should be only two colors the background and the foreground of
-        #the plate
-        #img = cv.cvtColor(img.copy(), cv.COLOR_BGR2HSV)
+        IMPORT: img : numpy array of dataype unit8
+        EXPORT:the  palette : numpy array which will represent the most
+        appearing color in the array
 
-        #pixels = np.float32(img.reshape(-1,3))
+        PURPOSE: the purpose is to determing the most appearing color
+        in an image i.e. the dominant color of that image
+        """
         pixels = np.float32(img.flatten())
+        #the should be atleast two dominant colors in an image, the
+        #color which the number is, and the background where the number is
+        #sitting on in the image
         n_colors = 2
 
         criteria = (cv.TERM_CRITERIA_EPS + cv.TERM_CRITERIA_MAX_ITER, 200, 1)
-        #flags = cv.KMEANS_RANDOM_CENTERS
         flags = cv.KMEANS_PP_CENTERS
-
         labels, palette  = cv.kmeans(pixels, n_colors, None, criteria, 10,
                 flags)[1:]
 
@@ -424,78 +427,141 @@ class Image(object):
 
     def find_dominant_color_ls(self, color_ls):
         """
-        to find the domiannt color given a list. This algorihtm is going to use
-        brute force to find the dominant color, and therefore is going to be
-        in-efficient
+        IMPORT: color_ls (a list of numpy arrays )
+        EXPORT: dominant_color (a numpy array)
+
+        PURPOSE: to find the domiannt color given a list. This algorihtm is
+        going to use brute force to find the dominant color, and therefore
+        is going to be very in-efficient to use
         """
 
         temp_color = None
+        #prvious amount of times a previous color has been found
         prev_found_times = 0
+        #the number of times the curren color has been found
         found_times = 0
 
         for color in color_ls:
             temp_color = color
             for count in color_ls:
+                #seeing how many times that specific color which we're
+                #on is found in the array
                 if (count == temp_color).all():
                     found_times += 1
 
+            #this should really be > but aye it works better this way...
             if  found_times >= prev_found_times:
+                #setting this to the new dominant color
                 dominant_color = color
                 prev_found_times = found_times
+                #resetting the counter back to 0
                 found_times = 0
 
         return dominant_color
 
 
     def crop_img(self, img, bbox):
-        #want to make sure that extracted area has padding so it will be easier
-        #to detect the digits in the next sections of the programme
-        padding = 0  # this caused one of your indexes to be invalid
-        x_l = int(bbox[0] - padding)
-        y_l = int(bbox[1] - padding)
-        x_r = int(bbox[0] + bbox[2] + padding)
-        y_r = int(bbox[1] + bbox[3] + padding)
+        """
+        IMPORT:
+            img : a numpy array of datatype uint8
+            bbox : a numpy array of datayype int32
+
+        EXPORT:
+            img : a numpy array of datatype uint8
+
+        PURPOSE: is to crop an image in relative to a given bounding box
+        """
+        x_l = int(bbox[0])
+        y_l = int(bbox[1])
+        x_r = int(bbox[0] + bbox[2])
+        y_r = int(bbox[1] + bbox[3])
 
         return img[y_l:y_r, x_l:x_r]
 
 
     def filter_areas(self, bboxes):
+        """
+        IMPORT: bboxes : a numpy array of datatype int32
+        EXPORT: bboxes : a numpy array of datatype int32
+
+        PURPOSE: it's to find the median area of the bounding boxes
+        and filter any bounding boxes which are not in a range of that
+        median of the image. This a clean up algorithm so most of the noise
+        boxes have been filtered by only the numbers and a couple of noisy
+        boxes will remain in the image
+        """
         all_areas = []
         #getting all the areas of each bounding box in the image, so I can
         #fileter out the boxes which are most likely going to be outliers
         for box in bboxes:
+            #calculating all the areas of the bounding boxes and adding
+            #them to a list
             all_areas.append(self.find_area(box))
         bboxes = self.remove_outliers(all_areas, bboxes)
 
         return bboxes
 
     def get_five_num_summary(self, area_ls):
+        """
+        IMPORT: area_ls (a list of real numbers)
+        EXPORT: summary (a list of 5 real numbers)
+
+        PURPOSE: it's to find the statistics of given numbers. Hence, it
+        will find the max data point, the min data point, the 25th
+        percentile the median, and the 75th percentile data points
+        """
         min_area, max_area = min(area_ls), max(area_ls)
+        #finding the 1st, 2nd, and 3rd quartile of the given data
         percentiles = np.percentile(area_ls, [25, 50, 75])
-        #average = np.mean(area_ls)
         summary = [min_area, percentiles[0], percentiles[1], percentiles[2],
                 max_area]
         #return min_area, max_area, median, average
         return summary
 
     def sort_bboxes(self, sorted_indxs, bboxes):
+        """
+        IMPORT:
+            sorted_indxs : a list of integers
+            bboxes : numpy array of datatype int32
+
+        EXPORT:
+            bboxes: numpy array of datatype int32
+
+        PURPOSE: is to sort a numpy array relative to a given list of
+        indexs
+        """
         temp_bboxes = bboxes.copy()
         for indx, box in enumerate(temp_bboxes):
+            #placing everything in their respective poistion in bounding
+            #boxes
             bboxes[indx] = temp_bboxes[sorted_indxs[indx]]
 
         return bboxes
 
     def remove_outliers(self, area_ls, bboxes):
         """
-        an outlier is a point which will lay siginificantly far away from the
-        average
+        IMPORT:
+            area_ls : list of integers
+            bboxes : a numpy array of datatype int32
+
+        EXPORT:
+            bboxes : a numpy array of datatype int32
+
+        PURPOSE: an outlier is a point which will lay siginificantly far
+        away from the median value of the data
         """
         area_ls = np.array(area_ls)
+        #sorting the area relative to the indexes. Hence, this will
+        #only have the sorted indexes of the array
         sorted_indxs = area_ls.argsort()
 
+        #sorting the bounding boxes, so the bounding boxes are put in
+        #the index which corresponds with its area
         bboxes = self.sort_bboxes(sorted_indxs, bboxes)
+
         #actually puting the areas in their sorted order
         area_ls = area_ls[sorted_indxs]
+
         #converting area_list back to a list so I can use the in-built list
         #functions
         area_ls = area_ls.tolist()
@@ -503,44 +569,37 @@ class Image(object):
 
         #if they're going to be only two boxes in the bounding box array
         #they is not point in trying to find the outliers, as one of those
-        #boxes will be filtered out which is not what we want
+        #boxes will be filtered out which is not what we want as
+        #those boxes are most likely goig to be the boxes which will
+        #contain our digits
         if len(bboxes) > 3:
-            #ordering the areas from the smallest area to the largest area
-            #area_ls = sorted(area_ls, key=lambda a: a[0])
-            #area_ls.sort()
             num_summary = self.get_five_num_summary(area_ls)
+            #finding the inter quartile range of the given dataset
             IQR = self.find_IQR(num_summary)
             median = num_summary[2]
-            #PLAY AROUND WITH THIS THRESH HOLD
-            #the numbers are most likely going to be a similiar size to the
-            #median value
-            #thresh = 1.05
-            #thresh = 1.15
-            #this as the lower thereshold worked pretty well
-            #thresh_lower = 1.25
-            #thresh_lower = 1.50 #here it started dropping numbers out of the
-            #detected numbers, so maybe try to go down from here
+
             #obtained through trial and error through all the images
             thresh_lower = 1.45
             #obtained through trial and error
             thresh_upper = 0.75
-            #
-            #tr09.jpgtr09.jpgthresh = 1.20
-            #area can't be a negative number hence,
+
+            #area can't be a negative number hence we must use the
+            #abosoulte value to calculate the upper and lower bounds the
+            #area can be in
             lower_bound = abs(int(median - (thresh_lower * IQR)))
             upper_bound = int(median + (thresh_upper * IQR))
 
             for area in area_ls:
-                #YOU MIGHT HAVE TO BE CAREFUL ABOUT INDX GOING OUT OF RANGE: PLEASE
-                #DON'T FORGET TO PUT A GUARD HERE
                 indx = area_ls.index(area)
-
+                #filtering away really small boxes
                 if area < lower_bound:
-                    #I am going to set the index of the outlier indexes to -1 because
-                    #if I delete the index straight away it will be hard to keep a
-                    #track on which index belongs to which index in the lists
+                    #I am going to set the index of the outlier indexes to
+                    # -1 because if I delete the index straight away it
+                    #will be hard to keep a track on which index belongs to
+                    # which index in the list
                     bboxes[indx] = [-1, -1, -1, -1]
 
+                #filtering away from large boxes in the image
                 if area > upper_bound:
                     #same reasoning applied above applies here aswell
                     bboxes[indx] = [-1, -1, -1, -1]
@@ -552,13 +611,19 @@ class Image(object):
 
     def find_IQR(self, num_summary):
         """
-        finding the inter-quartile range of the obtained data, so we can
-        filter out the outliers in the data
+        IMPORT: num_summary : a list of real numbers
+        EXPORT: IQR : a real number
+
+        PURPOSE: finding the inter-quartile range of the obtained data, so
+        we can filter out the outliers in the data. The interquartile
+        range is given by the differnce of the third quartile and the
+        first quartile
         """
 
-        #IQR is the difference between the lower  25 percent quartle, and the
-        #upper 75 percent quartile
+        #IQR is the difference between the lower  25 percent quartle, and
+        # the upper 75 percent quartile
         IQR = num_summary[3] - num_summary[1]
+
         return IQR
 
 
@@ -569,12 +634,22 @@ class Image(object):
 
     def find_area(self, box):
         """
-        regardless of the poisiton of the box the area is going to be always
-        w * h
+        IMPORT: box: a numpy array of datatype int32
+        EXPORT: area : a real number
+
+        PURPOSE: Is to calculate the area of a given bounding box, and we
+        know regardless of the poisiton of the box the area is going
+        to be always w * h
         """
         return box[2] * box[3]
 
     def non_max_suppression(self, bboxes):
+        """
+        IMPORT: bboxes : a numpy array of datatype int32
+        EXPORT: bboxes : a numpy array of dataype int32
+
+        PURPOSE:
+        """
         #sorting boxes by the smallest area to the largest area
         #bboxes = sorted(bboxes, key=lambda area:  bboxes[2] * bboxes[3])
         bboxes = sorted(bboxes, key=lambda x: self.find_area(x))
