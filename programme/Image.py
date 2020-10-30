@@ -648,20 +648,19 @@ class Image(object):
         IMPORT: bboxes : a numpy array of datatype int32
         EXPORT: bboxes : a numpy array of dataype int32
 
-        PURPOSE:
+        PURPOSE: this to remove small boxes inside big boxes. This is
+        specifically useful for digits such as 8 and 0, as the middle
+        parts of these numbers typically get detected
         """
         #sorting boxes by the smallest area to the largest area
-        #bboxes = sorted(bboxes, key=lambda area:  bboxes[2] * bboxes[3])
         bboxes = sorted(bboxes, key=lambda x: self.find_area(x))
 
         ##searching for boxes which are inside one another
         for curr_box_indx, curr_box in enumerate(bboxes):
             x,y,w,h = curr_box
-            #ensuring that the algorithm is not comparing to itself, and it's
-            #searching relative to the other boxes
-            #search_space = bboxes[curr_box_indx:]
+            #ensuring that the algorithm is not comparing to itself, and
+            #it's searching relative to the other boxes
             for alt_box in bboxes:
-            #for alt_box in search_space:
                 #safe-gaurd for trying to delete an index which doesn't
                 #exist in the image
                 if curr_box_indx < len(bboxes):
@@ -669,52 +668,38 @@ class Image(object):
                     x_alt,y_alt,w_alt,h_alt = alt_box
                     end_point_curr_box = x + w
                     end_point_alt_box  = x_alt + w_alt
-                    #is the end point of the current box inside the alternate
-                    #box and is the beggining x point inside the alternate box
-                    #aswell
 
-                    #THIS SHIT IS NEW
-#                    diff_end_points = (end_point_curr_box -
-#                            end_point_alt_box)
-                    #diff_end_points = (end_point_alt_box - end_point_curr_box)
-
+                    #if the corners of the alternate box are inside the
+                    #current box then check the heights of the box
                     if x > x_alt and end_point_curr_box < end_point_alt_box:
-                    #if diff_end_points > padding:
-                        #is the height of the current box inside the alternate
-                        #box
+                        #is the height of the current box inside the
+                        #alternate
                         height_curr_box = y + h
                         height_alt_box = y_alt + h_alt
-#                        height_curr_box_end = end_point_curr_box + h
-#                        height_alt_box_end = end_point_alt_box + h_alt
 
-                        #THIS SHIT IS NEW
-#                        diff_height_upper = (height_curr_box - height_alt_box)
-#                        diff_height_lower = (height_curr_box_end -
-#                                height_alt_box_end)
-#                        diff_height_upper = (height_alt_box - height_curr_box)
-#                        diff_height_lower = (height_alt_box_end -
-#                                height_curr_box_end)
-
+                        #if the height of the alternate box is inside
+                        #the current box then the whol box is inside the
+                        #current box hence, we can go ahead and delete this
+                        #box
                         if height_curr_box < height_alt_box and \
                                 y > y_alt:
-#                        if height_curr_box < height_alt_box and \
-#                        height_curr_box_end > height_alt_box:
-#                        if diff_height_upper > padding and \
-#                        diff_height_lower > padding:
-                            #current box is insde another box, we don't need
-                            #this box so we can delete it
                             del bboxes[curr_box_indx]
 
         return bboxes
 
-
-
-    def area_bboxes(self, bboxes):
-        #regardless where the bounding box is located the area is always
-        #going to be w * h
-        return bboxes[2] * bboxes[3]
-
     def make_new_region(self, left_box, right_box):
+        """
+        IMPORT:
+            left_box : a numpy array of dtype int32
+            right box: a numpy array of dtype int32
+
+        EXPORT:  a numpy array of dtype int32
+
+        PURPOSE: it's to combine two bounding boxes to make one big
+        bounding box, and its main use when extracting the region of
+        interest from the image
+
+        """
         #top left corner of the left-most upper most point in the image
         #coordinates
         x = left_box[0]
@@ -724,6 +709,9 @@ class Image(object):
         x_r =  right_box[0] + right_box[2]
         y_r = right_box[1] + right_box[3]
 
+        #since these regions will be bounding boxes, we have to
+        #calculate the width and the height of the new bounding box
+        #which we have found
         w = x_r - x
         h = y_r - y
 
@@ -732,51 +720,53 @@ class Image(object):
 
 
     def show_debug_boxes(self, bboxes, im, title):
-            debug_im = im.copy()
-            blue = (255,0,0)
-            self.draw_boxes(bboxes, debug_im, blue)
-            cv.imshow(title, debug_im)
-            cv.waitKey()
-            cv.destroyAllWindows()
+        """
+        IMPORT:
+        im :  a numpy array of dtype int32
+        title : string
+        EXPORT: none
+
+        PURPOSE: the module is meant to help with debugging purposes, and
+        it's meant to show what's happening at each step of the image
+        segmentation algorithm
+        """
+        debug_im = im.copy()
+        blue = (255,0,0)
+        self.draw_boxes(bboxes, debug_im, blue)
+        cv.imshow(title, debug_im)
+        cv.waitKey()
+        cv.destroyAllWindows()
 
     #FUNCTIONS WHICH WILL HELP TO FIND THE INTEREST AREA
     def resize_image(self, im, x, y):
+        """
+        IMPORT:
+            im :  a numpy array of dtype int32
+            x : an integer number
+            y : an integer number
+
+        EXPORT: im:  a numpy array of dtype int32
+
+        PURPOSE: it's to resize the image to the given specification of
+        x and y of the image
+        """
         return cv.resize(im, (int(x), int(y)))
 
-#    def group_clusters(self, clusters):
-#        pass
-#
-#
-#    def find_clusters(self,bboxes, thresh_x, thresh_y):
-#        """
-#        """
-#
-#        cluster_ls = []
-#
-#        bboxes = sorted(bboxes, key=lambda x: x[0])
-#        bboxes = self.remove_invalid(bboxes)
-#
-#        for start, curr_box in enumerate(bboxes):
-#            x,y,w,h = curr_box
-#            pt1 = (x,y)
-#            pt2 = (x+w, y+h)
-#
-#            for alt_box in bboxes:
-#                x_alt, y_alt, w_alt, h_alt = alt_box
-#                pt1_alt = (x_alt, y_alt)
-#                pt2_alt = (x_alt + w_alt, y_alt + h_alt)
 
     def group_clusters(self, clusters):
         """
-        many boxes where founf by the find_clusters algorithm, this function
-        responsibility it to clean up the bounding boxes found hence, to select
-        the biggest box out of the cluster
+        IMPORT: clusters:  a numpy array of dtype int32
+        EXPORT: clutesrs:  a numpy array of dtype int32
+
+        PURPOSE: many boxes where found by the find_clusters algorithm,
+        this function responsibility it to clean up the bounding boxes
+        found hence, to select the biggest box out of the cluster, and
+        to make this the new box for that section of the image
         """
         cluster_b = []
-        #NEW
-        #the bboxes are put into pairs whereby each pair is very close to each
-        #other hence, we can just sort by first box as that box will be
-        #left most box out of the two boxes
+        #the bboxes are put into pairs whereby each pair is very close to
+        #each other hence, we can just sort by first box as that box will
+        #be left most box out of the two boxes
         clusters = sorted(clusters, key=lambda x: x[0][0])
 
         for indx, cluster in enumerate(clusters):
@@ -790,29 +780,36 @@ class Image(object):
             nw_h = max(h_1, h_2)
             nw_w = max(w_1, w_2)
 
-            #getting the left-most x and y points so we know where the clusters
-            #are going to begin
+            #getting the left-most x and y points so we know where the
+            #clusters are going to begin
             nw_x = min(x_1, x_2)
             nw_y = min(y_1, y_2)
 
 
+            #the new box is going to be the bigger box out of the cluster
+            #which we just found
             nw_box = np.array([nw_x, nw_y, nw_w, nw_h], dtype='int32')
             clusters[indx] = nw_box
-
-            #I have finished analysing the search space now, I want ot move onto
-            #the next pair. This is to avoid dupilcates, and doubling up
-            #of parameters in the programme
         return clusters
 
     def  find_clusters(self, bboxes, thresh_x, thresh_y):
         """
-        the numbers which are in the image should be relatively close to each
-        other hence, we're going to get rid of all the boxes which are not
-        close to each other because the chance of these boxes not been a number
-        is very high
+        IMPORT:
+            bboxes:  a numpy array of dtype int32
+            thresh_x : integer
+            thresh_y : integer
+
+        EXPORT: cluster :  a numpy array of dtype int32
+
+        PURPOSE: the numbers which are in the image should be relatively
+        close to each other hence, we're going to get rid of all the boxes
+        which are not close to each other because the chance of these
+        boxes not been a number is very high
         """
         cluster = []
 
+        #sorting the bounding boxes from the leftmost box to the right
+        #most box
         bboxes = sorted(bboxes, key=lambda x: x[0])
         bboxes = self.remove_invalid(bboxes)
 
@@ -820,30 +817,34 @@ class Image(object):
             x,y,w,h = curr_box
             pt1 = (x, y)
             pt2 = (x+w, y+h)
-            #search_region = bboxes[start:]
             for alt_box in bboxes:
-                #if len(search_region) > 0:
                 x_alt,y_alt,w_alt,h_alt = alt_box
                 pt1_alt = (x_alt,y_alt)
                 pt2_alt =(x_alt+w_alt, y_alt+h_alt)
 
+                #seeing what the gap is between the current box
+                #and the alternate box. Hence, we  grapbbed the images
+                #from left to right the gap is alway going to be
+                #calculated this way
                 x_diff = abs(pt2[0] - pt1_alt[0])
+                #finding the gap between bounding boxes in the vertical
+                #direction
                 y_diff = abs(pt2[1] - pt2_alt[1])
-                #y_diff = abs(pt1[1] - pt1_alt[1])
 
-#                    line_seg_x = max(pt2[0], pt2_alt[0])
-#                    line_seg_y = max(pt2[1], pt2_alt[1])
+                #getting the longest width and height, so we can use
+                #those values to calculate our tolerance. We want to do
+                #this because out tolerance will change with the size of
+                #image instead of having a hard coded value
                 line_seg_x = max(w, w_alt)
                 line_seg_y = max(h, h_alt)
 
                 line_TOL_x  = line_seg_x * thresh_x
                 line_TOL_y = line_seg_y * thresh_y
 
-                #if x_diff < pt2[0]  and x_diff < pt2_alt[0]:
-                #I don't think you're doing this comparison correctly if I
-                #am being honest
+                #if the gap in the horizontal, and vertical direction is
+                #less than the tolerance this is most likely going to be a
+                #cluser of boxes
                 if x_diff <= line_TOL_x:
-                        #if y_diff < h:
                         if y_diff <= line_TOL_y:
                             pair = [curr_box, alt_box]
                             pair = sorted(pair, key=lambda x: x[0])
@@ -852,10 +853,20 @@ class Image(object):
 
     def filter_bounding_boxes(self, bboxes, lower_thresh=1.10, upper_thresh=3.21):
         """
-        we know that for the bounding boxes which will contain the digits
-        the height is going to be longer than the width
+        IMPORT:
+            bboxes:  a numpy array of dtype int32
+            lower_thresh : real number
+            upper_thresh : real number
+
+        EXPORT: bboxes :  a numpy array of dtype int32
+
+        PURPOSE: we know that for the bounding boxes which will contain
+        the digits the height is going to be longer than the width relative
+        to a ratio. Hence, for bounding boxes which exceed this ratio
+        they should be filtered out and discarded
         """
-        #NEW
+        #sorting the bounding boxes from the leftmost to the right most of
+        #of the image
         bboxes = sorted(bboxes, key=lambda x: x[0])
 
         for indx, box in  enumerate(bboxes):
@@ -863,18 +874,11 @@ class Image(object):
             pt1 = (x, y)
             pt2 = (x+w, y+h)
 
-            #if (abs(pt1[0] - pt2[0]) >= abs(pt1[1] - pt2[1])):
-            if w >= h:
-                bboxes[indx] = [-1, -1, -1, -1]
-
             ratio = h/w
-            #we're going to expect the height of the digits to be no more than
-            #250% of the widht of the image, and the length to be no less
-            #than the width of the bounding box
-            #if ratio < 1.10 or ratio > 3.21:
+            #we're going to expect the height of the digits to be no more
+            #than than the width of the bounding box hence filter
+            #boxes which will violate that expectation
             if ratio < lower_thresh or ratio > upper_thresh:
-            #if ratio <= 1.5 or ratio >= 2.0:
-            #if ratio < 1.0 and ratio > 2.0:
                 bboxes[indx]  = [-1, -1, -1, -1]
 
         bboxes = self.remove_invalid(bboxes)
@@ -882,7 +886,23 @@ class Image(object):
         return bboxes
 
     def draw_boxes(self,bboxes, im, color):
+        """
+        IMPORT:
+            bboxes:  a numpy array of dtype int32
+            im:  a numpy array of dtype int32
+            color : a numpy array of three integers which will represent
+            the color
+
+        EXPORT: none
+
+        PURPOSE: to draw a list of bounding boxes onto the image. This
+        function is mainly for vidualisation purposes so the user can
+        see what's going on at each stage of the algorithm in
+        realtion to the produced bounding boxes
+        """
         for box in bboxes:
+            #if they is still an invalid bounding box skip that specific
+            #index
             if box[0] == -1:
                 pass
             else:
@@ -891,16 +911,29 @@ class Image(object):
 
     def find_leftmost_pt(self, bboxes, reverse=False):
         """
-        if reverse is true, it will find the right-most lower most point of the
-        bounding boxes
+        IMPORT:
+            bboxes :  a numpy array of dtype int32
+            reverse : boolean
 
-        Notes:
-            - if a box is inside another box, it's going to find the box  inside
-            because it's comparing in relation to the left point of the box
+        EXPORT: points of a bounding box which will contain the
+        left most points
+
+        PURPOSE: to find the left upper most point of a given set of
+        boudngind boxes if reverse is true, it will find the right-most
+        lower most point of the bounding boxes
+
+        Limitations of this algorithm
+            - if a box is inside another box, it's going to find the box
+            inside because it's comparing in relation to the left point of
+            the box
         """
         bboxes = self.remove_invalid(bboxes)
+        #sorting the bounding boxes from left most to the right most of the
+        #image
         left_most_boxes = sorted(bboxes, key=lambda x: x[0], reverse=reverse)
 
+        #the likely left most box although we have to check if they're
+        #going to be boxes above this box
         temp_box = left_most_boxes[0]
 
         #CASE 1: clear left most box will be met if it fails CASE 2's and
@@ -936,6 +969,13 @@ class Image(object):
         return temp_box[0], temp_box[1], temp_box[2], temp_box[3]
 
     def remove_invalid(self, bboxes):
+        """
+        IMPORT: bboxes:  a numpy array of dtype int32
+        EXPORT: bboxes :  a numpy array of dtype int32
+
+        PURPOSE: to move any bounding box which has set to all -1 from
+        any of the filtering algorithms found in this file
+        """
         if self._DEBUG:
             print('='*80)
             print(red + "og array" + reset, bboxes)
@@ -944,9 +984,11 @@ class Image(object):
 
         nw_bboxes = []
         for indx, box in enumerate(bboxes):
-            #if the first index is equal to -1 the whole box will equal to -1,
-            #and that will be an invalid box
+            #if the first index is equal to -1 the whole box will equal to
+            #-1,and that will be an invalid box
             if box[0] == -1:
+                #ignoring every single box which has a negative one
+                #as its first index
                 pass
             else:
                 nw_bboxes.append(box)
@@ -966,11 +1008,16 @@ class Image(object):
     def find_intersection(self, box_one, box_two, reverse=False):
         """
         IMPORT:
-        EXPORT:
+            box_one :  a numpy array of dtype int32
+            box_two :  a numpy array of dtype int32
+            reverse: boolean
 
-        PURPOSE
-            if you're trying to find the right most corner, set reverse to
-            true, and add the width, and the height of the object of interset
+        EXPORT: a bounding box which is a numpy array
+
+        PURPOSE: to find the intersection between two boxes, this will
+        by defualt find the intersection on the left side of the bounding
+        boxes. Hence, to find the intersetion on right side of the bounding
+        boxes set reverse to true
         """
         temp_boxes = [box_one, box_two]
         #placing the box with the lowest x value at the front
