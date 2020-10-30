@@ -1,14 +1,12 @@
 """
+FILENAME:  Image.py
+
 AUTHOR: Tawana Kwaramba: 19476700
 LAST EDITED:
 
-PURPOSE OF FILE:
-
-TO DO:
-    - for tr08 image figure out how to not get the algorithm not to filter out
-    the number one
-    - filter the images out by color
-    -crop image, and get the ROI from the images
+PURPOSE OF FILE: the purpose of this file is to facilate any based image
+operations. I.e. segmeneting the image to get the region of interest, and
+extracting the digits from the region of interest
 """
 
 from abc import abstractmethod
@@ -20,10 +18,12 @@ from statistics import mode
 
 class Image(object):
     def __init__(self, im, img_id):
+        #set this to true, if you want to see each step of the image
+        #segmentation process
         self._DEBUG = False
-        #self._DEBUG = True
         self._im = self.get_ROI(im, img_id)
 
+    #===========================ACCESORS========================================
     @property
     def im(self):
         return self._im
@@ -36,8 +36,12 @@ class Image(object):
     def im(self, in_im):
         self._im = self.get_ROI(in_im)
 
+    #===========================METHODS=========================================
     def debug(self):
         """
+        IMPORT: none
+        EXPORT: none
+
         PURPOSE: to act as a toggle to witch the debugging features for this
         class
         """
@@ -46,96 +50,146 @@ class Image(object):
         else:
             self._DEBUG = True
 
-    def get_ROI(self, im, img_id, **kwargs):
+    def get_ROI(self, im, img_id):
+        """
+        IMPORT:
+            im : numpy array of data type uint8
+            img_id : integer
 
+        EXPORT:
+            cropped_image : numpy array of data type uint8
+            digits : numpy array of data type uint8
+
+        PURPOSE: it's to extract the region of interest which is the area which
+        contains all the house numbers in the image, and to extract each digit
+        inside that cropped area
+        """
+        #to determine if we need to re-adjust our bounding boxes to meet the
+        #sepcifications of the original images
+        resized = False
+        if im.shape[0] > 900 and im.shape[1] > 900:
+            resized = True
+            im = self.resize_image(im, 536, 884)
+
+        #makind sure that we have actually passed in an image, and not anything
+        #else
         im = self._validate_image(im)
         gray = cv.cvtColor(im, cv.COLOR_BGR2GRAY)
         #decreasing the required memory the image needs but still keeping the
-        #important features
+        #important features of the image
         gray = cv.GaussianBlur(gray, (5,5), 0)
+        #thresholding, so we can extract the background and the foreground of
+        #the image
         thresh = cv.threshold(gray, 0, 255, cv.THRESH_BINARY+cv.THRESH_OTSU)[1]
 
         edge_thresh = 100
+
         #the openCV doc recommends that you will have your upper thresh hold
         #twice as the lower threshold
         canny_trans = cv.Canny(thresh, edge_thresh, edge_thresh * 2)
+        #getting the shape and size of the structual element suitable to this
+        #image. Hence, the window which is going over this image
         rect_kern = cv.getStructuringElement(cv.MORPH_RECT, (5,5))
+
+        #removing the boundaries of the foreground of the image, so we can
+        #have less noise around teh actual digits
         canny_trans = cv.erode(thresh, None, iterations=1)
+        #the numbers are a lot smaller at this point hence, we will expand
+        #those eroded boundaries in order to fill in holes, and to make the
+        #number fuller
         canny_trans = cv.dilate(thresh, None, iterations=1)
-        #canny_trans_invert = canny_trans.max() - canny_trans
 
         if self._DEBUG:
             cv.imshow("found edges after morphology" , canny_trans)
-            #cv.imshow("the inversion of that image", canny_trans_invert)
             cv.waitKey()
             cv.destroyAllWindows()
 
-        #mser = cv.MSER_create(35)
         mser = cv.MSER_create()
         regions, bboxes = mser.detectRegions(canny_trans)
-        #trying to filter the bounding boxes in relation to the heights, and the width
 
         if self._DEBUG:
             self.show_debug_boxes(bboxes, im, "original bounding boxes found")
 
+        #filtering the bounding boxes relative to the height and width. The
+        #heights should be greater thna the heights
         bboxes = self.filter_bounding_boxes(bboxes)
 
         if self._DEBUG:
             self.show_debug_boxes(bboxes, im, "filtered bounding boxes")
 
+        #the numbers should be relative close to each other hence, we're going
+        #to filter out the boxes which are not close to each other
         bboxes = self.find_clusters(bboxes, 1.10, 0.25)
+        #joinning those boxes which are close together, to make one section
         bboxes = self.group_clusters(bboxes)
 
         if self._DEBUG:
             self.show_debug_boxes(bboxes, im, "groups of bounding boxes found")
 
+        #by this stage it will just be the numbers left with some noise
+        #hence we're going to filter out the areas which don't align with the
+        #numbers in the image
         bboxes = self.filter_areas(bboxes)
 
         if self._DEBUG:
             self.show_debug_boxes(bboxes, im, "filtering by the area")
 
 
-        #THIS WAS WORKING BEFORE
+        #when we have a zero or an eight. MSER will detect as bounding boxes
+        #the reigons inside these digits. Hence, we need to remove those regions
+        #so we can crop the full number successfully
         bboxes = self.non_max_suppression(bboxes)
 
         if self._DEBUG:
             self.show_debug_boxes(bboxes, im, "non max suppression")
 
 
+        #the numbers should be at the relative same heights hence, remove any
+        #box which doesn't agree with this height
         bboxes  = self.filter_heights(bboxes)
 
         if self._DEBUG:
             self.show_debug_boxes(bboxes, im, "filtering by the heights in image")
 
+        #the numbers should be at the relative same widths hence, remove any box
+        #which doesn't agree with this
         bboxes  = self.filter_width(bboxes)
 
         if self._DEBUG:
             self.show_debug_boxes(bboxes, im, "filtering by widths of the image")
 
 
+        #by this point they're still some noise boxes left although, they're
+        #more boxes which contain the number left in the image hence, we can
+        #filter these boxes out given the dominant color
         bboxes = self.filter_dominant_color(im.copy(), bboxes)
 
         if self._DEBUG:
             self.show_debug_boxes(bboxes, im, "filtering done by dominant color")
 
 
+        #getting the points required to create our region of interest
+        #getting the left most - upper most bounding box point
         left_pt = self.find_leftmost_pt(bboxes)
+        #getting the right most lower most bounding box in the image
         right_pt = self.find_leftmost_pt(bboxes, True)
 
 
+        #creating a new bounding box which will represent the region of interest
         new_region = self.make_new_region(left_pt, right_pt)
         cropped_image = self.crop_img(im.copy(),new_region)
+        #a padding is needed for better digit detection. If the digit is a
+        #part of the border in some cases that part won't be detected by
+        #MSER
         cropped_image = self.pad_image(cropped_image)
 
-        #doing it this way picks up a lot of duplicates
-        #digits = [self.crop_img(im.copy(), box) for box in bboxes]
         digits = self.extract_digits(cropped_image)
 
         file_name = 'output/DetectedArea' + str(img_id) + ".jpg"
         bbox_file_name = 'output/BoundingBox' +str(img_id) + ".txt"
 
         cv.imwrite(file_name, cropped_image)
-        np.savetxt(bbox_file_name, new_region, delimiter=',')
+        np.savetxt(bbox_file_name, [new_region], delimiter=',')
 
         if self._DEBUG:
             self.show_debug_boxes([new_region], im, "new region found")
@@ -148,11 +202,23 @@ class Image(object):
         return cropped_image, digits
 
     def extract_digits(self, im):
+        """
+        IMPORT:
+                im : numpy array array datatype of uint8
+        EXPORT:
+            list of numpy arrays of datatypes of uint8
+
+        PURPOSE: is to get the region of interest produced by the image, and
+        to extract the individual digits out of this image
+        """
+
         im = self._validate_image(im)
         gray = cv.cvtColor(im, cv.COLOR_BGR2GRAY)
         #decreasing the required memory the image needs but still keeping the
-        #important features
+        #important features of the image
         gray = cv.GaussianBlur(gray, (5,5), 0)
+        #thresholding, so we can extract the background and the foreground of
+        #the image
         thresh = cv.threshold(gray, 0, 255, cv.THRESH_BINARY+cv.THRESH_OTSU)[1]
 
         edge_thresh = 100
@@ -170,7 +236,6 @@ class Image(object):
             cv.waitKey()
             cv.destroyAllWindows()
 
-        #mser = cv.MSER_create(35)
         mser = cv.MSER_create()
         regions, bboxes = mser.detectRegions(canny_trans)
         #trying to filter the bounding boxes in relation to the heights, and the width
@@ -187,6 +252,15 @@ class Image(object):
         return [self.crop_img(im.copy(), box) for box in bboxes]
 
     def pad_image(self, im):
+        """
+        IMPORT: im : numpy array of datatype unit8
+        EXPORT: padded image: numpy array of datatype unit8
+
+        PURPOSE: it's to place a black padding around an image, so that
+        the numbers of the image don't become a part of the border
+        """
+
+        #number of pixels which we want to pad the image with all around
         row_pad = 2
         col_pad = 2
         npad = ((row_pad, col_pad), (row_pad, col_pad), (0,0))
@@ -194,24 +268,37 @@ class Image(object):
 
     def filter_heights(self, bboxes):
         """
+        IMPORT: bboxes : numpy of array of dtype int32
+        EXPORT: bboxes numpy of array of dtype int32
+
+        PURPOSE: to filter out the bounding boxes by height so the bounding
+        boxes which are relativily around the same height will remain in
+        the image
         """
-        #sorting the bounding boxes in relation to the poistion on the image
+        #sorting the bounding boxes in relation to the poistion on the image.
+        #placing the upper most box first in the bboxes list and the lowest
+        #box last in the list
         bboxes = sorted(bboxes, key=lambda y: y[1])
+        #just creating a list which only contains the heights of the bounding
+        #boxes
         heights = [box[1] for box in bboxes]
-        #finding the median height of the bbounding boxes
+        #finding the median height of the bounding boxes
         common_height =  np.median(heights)
 
-        #getting the smalles height, at this stage it should be mostly numbers
-        #which are left as the bounding box
-        #TOL =  bboxes[0][1]
-        #YOU HAVEN'T TRIED THIS ONE OUT AS YET
+        #grabbing the bounding box with the lowest height in the image
+        #and grabbing its width
         TOL = bboxes[-1][3]
-        print(red+"Tolerance of the image"+reset, TOL)
 
         for indx, box in enumerate(bboxes):
+            #a safe gaurd to make sure that we don't try to access an invalid
+            #index of the bounding boxes
             if indx < len(bboxes):
-                print(yellow+"box of the image"+reset, box)
+                #remove the bounding boxes which are not about the
+                #same height as the median value of the bounding boxes
                 if (abs(box[1] - common_height)) >= TOL:
+                    #you don't want to delete the elements as yet, as
+                    #that will make the array smaller, and will cause
+                    #python to try to access an index which is out of range
                     bboxes[indx] = [-1,-1,-1,-1]
 
         bboxes = self.remove_invalid(bboxes)
@@ -219,16 +306,34 @@ class Image(object):
         return bboxes
 
     def filter_width(self, bboxes):
+        """
+        IMPORT: bboxes  : numpy array of datatype int32
+        EXPORT: bboxes  : numpy array of datatype int32
+
+        PURPOSE: the purpose is to filter out boxes which are not
+        relatively close to each other in the provided bounding boxes as
+        these points are most likely going to be noise in the image
+        """
+        #sorting the bounding boxes so we can access the boxes from
+        #left to the right side of the image
         bboxes = sorted(bboxes, key=lambda x: x[0])
+        #grabbing just the widths of all the bounding boxes in the image
         widths = [box[0] for box in bboxes]
 
+        #the numbers in the image should be the middle number by this stage
         common_width = np.median(widths)
 
+        #grabbing the right most box
         TOL = bboxes[-1][2] * 4
 
         for indx, box in enumerate(bboxes):
+            #a safe gaurd to ensure the algorithm doesn't try to index
+            #outside of the list
             if indx < len(bboxes):
                 if (abs(box[0] - common_width)) >= TOL:
+                    #you don't want to delete the elements as yet, as
+                    #that will make the array smaller, and will cause
+                    #python to try to access an index which is out of range
                     bboxes[indx] = [-1,-1,-1,-1]
 
 
@@ -239,42 +344,51 @@ class Image(object):
 
     def filter_dominant_color(self, img, bboxes):
         """
-        the idea is that the numbers should be on the same coloured background
-        and the dominant color should be the background of the image, or that
-        each bounding box should have the same average colours in each bounding
-        box
+        IMPORT:
+                 img : numpy array of dataype uint8
+                 bboxes: numpy array of datatype int32
+
+        EXPORT: bboxes : numy array of dataype int32
+
+        PURPOSE: the idea is that the numbers should be on the same
+        coloured background and the numbers should be the same color aswell
+        and the dominant color should be either the background or
+        the foreground of the image. Hence, filter away any box which
+        are not the same color as the numbers
         """
-        #normalising the image, removing any effects from brightness and contrast
+        #normalising the image, removing any effects from brightness and
+        # contrast
         img = cv.normalize(img, img, 0, 255, cv.NORM_MINMAX)
-        #HSV is the best color space for color based manipulation
-        img = cv.cvtColor(img, cv.COLOR_BGR2GRAY) # the gray-scale images worked
-        #the best from experimenting
+        #best color space to use from experimenting
+        img = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
         img_sections = []
 
         for box in bboxes:
+            #creating a list of images of wahtever is inside the bounding
+            #boxes found in the image
             img_sections.append(self.crop_img(img.copy(), box))
-        #sorting the bboxes from left to right
 
         section_colors = []
-
         for section in img_sections:
-#            cv.imshow("section found", section)
-#            cv.waitKey()
+            #finding the dominant color in each of those cropped sections
+            #before
             section_colors.append(self.find_dominant_color(section))
 
+        #if they is any invalid data remove it from the section colors
+        #list
         section_colors = self.remove_invalid(section_colors)
+        #go throught the list of dominant colors and find the most
+        #occurring color in that given list
         dominant_color = self.find_dominant_color_ls(section_colors)
 
-        #this gave the best results  so far
+        #this gave the best results  so far from trial and error of multiple
+        #values
         TOL = [25, 25, 25]
-        #TOL = [25.5, 25.5, 25.5]
 
         #anything which doesn't have this dominant color should be deleted in
         for indx, color in enumerate(section_colors):
             #safe gaurd to try stop the algorithm from accessing an invalid index
             if  indx < len(section_colors):
-                print(green+"color"+reset, color)
-                print(green+"dominant color"+reset, dominant_color)
                 if (abs(color - dominant_color) > TOL).all():
                     #deleting the bounding box which doesn't have the dominant color
                     #in it
@@ -390,7 +504,6 @@ class Image(object):
         #if they're going to be only two boxes in the bounding box array
         #they is not point in trying to find the outliers, as one of those
         #boxes will be filtered out which is not what we want
-        print(green+"length of box:"+reset, len(bboxes))
         if len(bboxes) > 3:
             #ordering the areas from the smallest area to the largest area
             #area_ls = sorted(area_ls, key=lambda a: a[0])
@@ -527,8 +640,6 @@ class Image(object):
         return bboxes[2] * bboxes[3]
 
     def make_new_region(self, left_box, right_box):
-        print(red+"left_box"+reset, left_box)
-        print(red+"left_box"+reset, right_box)
         #top left corner of the left-most upper most point in the image
         #coordinates
         x = left_box[0]
@@ -627,7 +738,6 @@ class Image(object):
         """
         cluster = []
 
-        print(red+"box\n"+reset, bboxes)
         bboxes = sorted(bboxes, key=lambda x: x[0])
         bboxes = self.remove_invalid(bboxes)
 
@@ -683,11 +793,9 @@ class Image(object):
                 bboxes[indx] = [-1, -1, -1, -1]
 
             ratio = h/w
-            print(yellow+"RATIO"+reset, ratio)
             #we're going to expect the height of the digits to be no more than
             #250% of the widht of the image, and the length to be no less
             #than the width of the bounding box
-            print(green+"ratio"+reset, ratio)
             #if ratio < 1.10 or ratio > 3.21:
             if ratio < lower_thresh or ratio > upper_thresh:
             #if ratio <= 1.5 or ratio >= 2.0:

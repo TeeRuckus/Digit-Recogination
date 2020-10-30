@@ -2,30 +2,32 @@
 AUTHOR: Tawana Kwaramba: 19476700
 LAST EDITED:
 
-PURPOSE OF FILE:
-
-TO DO:
-    - have the trainer to be able to train against occulisions in the image
+PURPOSE OF FILE: the purpose of the file is to facilate the trainning of the
+digits for this programme, and it's also to take in some in-coming digits and
+classify those digits in relation to the trainned data. This file utilise
+kNN for trainning and classification of its data
 """
+from Image import *
 from ImageLoader import *
 from Colours import *
 import numpy as np
 import pickle
 
-#I have choosen to make this its own object so I can test this class by
-#iself, and when the individual trainers inherent from this, I can just
-#test the train method for that class
+#This class is meant to be an abstract class but, #I have choosen to make this
+#its own object so I can test this class by iself, and when the individual
+#trainers inherent from this, I can just test the train method for that specific
+#trainning method
+
 class Trainer(object):
     def __init__(self, **kwargs):
-        """
-        """
+        self._mode = kwargs['mode']
         self._train_path = kwargs['train_path']
         #I am going to use the validation path as the same as the
-        #test path for this data
+        #test path for this data as they're doing the same thing
         self._val_path = kwargs['val_path']
         self._trainner = self.train()
 
-    #ACCESORS
+    #===========================ACCESORS========================================
     @property
     def test_set(self):
         return self._test_set
@@ -43,29 +45,31 @@ class Trainer(object):
         return self._trainner
 
 
-    #DATA SEGMENTATION METHODS
-    def create_data(self,in_path):
-        """
-        """
-        return Data_Set(in_path)
-
-    #@abstractmethod
+    #===========================PUBLIC METHODS==================================
     def train(self):
         """
+        import:None
+        Export: knn (kNN clusters objext)
+
+        PURPSOSE: it is to train the kNearest neigbour classsify given the
+        trainning data of digits from 0 to 9
+
         this algorihtm is adapted from:
             Pysource. 2018. "knn handwrittend digits recoginition - OpenCV 3.4
             with python 4 Tutorial 36. https://www.youtube.com/watch?v=tOVwVvRy
             _Pg&ab_channel=Pysource
         """
-        #checking if a trainnin file already exists in the current directory
-        #if it does, load that file
         trainning_file_name = "kNN_classfier"
         labels_file_name = "kNN_labels"
+
+        #checking if a trainning file already exists in the current directory
+        #if it does, load that file
 
         if trainning_file_name in os.listdir() and \
         labels_file_name in os.listdir()  :
             print(green+"reading in serilised file...."+reset)
-            #load the file
+            #load the file if it exists, this will allow for faster
+            #classification times if the module has been already pre-trainned before
             with open(trainning_file_name, 'rb') as inStrm:
                 trainning_data = pickle.load(inStrm)
 
@@ -75,19 +79,24 @@ class Trainer(object):
             print(green+"creating a new file...."+reset)
             #create a new file
             in_path = self._train_path
-            trainning_im = Image_Loader(in_path)
+            #using image loading object for faster and efficient image loading
+            trainning_im = Image_Loader(in_path, self._mode)
+            #creating the labels based on the file name which the number belongs
+            #too
             labels = trainning_im.create_labels()
 
             trainning_data = []
             labels_data =[]
 
+            #pre-pranning out trainning images, and our trainning data
             for label in labels:
-                #accessing everything at that given label
+                #opening each digit file and storing it at the trainning_im
+                #object
                 trainning_im.path = in_path +str(label)
+                #accessing every image inside the trainning_im object
                 for im in trainning_im:
                     trainning_data.append(im.flatten())
                     labels_data.append(label)
-            #knn only accpets numpy arrays which are float32
             trainning_data = np.array(trainning_data, dtype=np.float32)
             labels_data = np.array(labels_data, dtype=np.float32)
 
@@ -104,21 +113,27 @@ class Trainer(object):
 
         return knn
 
-    def classify(self, k=8):
+    def classify(self, images, k=8):
         """
+        IMPORT: images (list of uint8 numpy arrays i.e. images)
+        EXPORT: results (string): the label  which the classify to the images
+                dist (numpy array): contains the L2 norm distance of each
+                result found
+
+        PURPOSE: it's to assign a label to inputted images
+
         this algorihtm is adapted from:
             Pysource. 2018. "knn handwrittend digits recoginition - OpenCV 3.4
             with python 4 Tutorial 36. https://www.youtube.com/watch?v=tOVwVvRy
             _Pg&ab_channel=Pysource
         """
-        val_path = self._val_path
-        test_im = Image_Loader(val_path)
-
         test_data = []
-        for im in test_im:
+        for im in images:
+            #this needs to be the same size as the provided trainning data
+            im = Image.resize_image(self,im, 28, 40)
             test_data.append(im.flatten())
         #knn classifier only accpets numpy arrays
-        test_data = np.array(test_data, dype=np.float32)
+        test_data = np.array(test_data, dtype=np.float32)
 
         ret, result, neigbours, dist = self.trainner.findNearest(test_data, k)
         return result, dist
@@ -126,22 +141,11 @@ class Trainer(object):
 
 
     #AUGMENTATION OPERATION METHODS
-    def rotate_im(self):
+    def add_noise(self, im):
         """
-        """
+        IMPORT: im (numpy array data type: uint8)
+        EXPORT: im (numpy array data type: uint8)
 
-    def scale_im(self):
-        """
-        """
-
-    def bias_im(self):
-        """
-        """
-
-    def gain_im(self):
-        """
-        """
-
-    def equalize_hists(self):
-        """
+        PURPOSE: it's to add noise to an image, to stop the trainner to
+        over-fitting to the provided trainning data
         """

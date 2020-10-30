@@ -93,17 +93,17 @@ class Image_Loader(object):
         PURPPOSE: to load the image found in the specified path given the
         specified mode to load the image in
         """
-        img = cv.imread(path)
+        convert_img = cv.imread(path)
         if self._mode == 'GRAY':
-            convert_img = cv.cvtColor(img,cv.COLOR_BGR2GRAY)
+            convert_img = cv.cvtColor(convert_img,cv.COLOR_BGR2GRAY)
         elif self._mode == 'HSV':
-            convert_img = cv.cvtColor(img,cv.COLOR_BGR2HSV)
+            convert_img = cv.cvtColor(convert_img,cv.COLOR_BGR2HSV)
         elif self._mode == 'LUV':
-            convert_img = cv.cvtColor(img,cv.COLOR_BGR2Luv)
+            convert_img = cv.cvtColor(convert_img,cv.COLOR_BGR2Luv)
         elif self._mode == 'LAB':
-            convert_img = cv.cvtColor(img,cv.COLOR_BGR2Lab)
+            convert_img = cv.cvtColor(convert_img,cv.COLOR_BGR2Lab)
         elif self._mode == "RGB":
-            convert_img = cv.cvtColor(img,cv.COLOR_BGR2RGB)
+            convert_img = cv.cvtColor(convert_img,cv.COLOR_BGR2RGB)
 
         return convert_img
 
