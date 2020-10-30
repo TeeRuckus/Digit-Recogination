@@ -22,13 +22,17 @@ class PathError(Error):
 
 class modeError(Error):
     """
-    ERROR raised when the user tries to load  in a mode which is not recognised
-    by the programme
+    ERROR raised when the user tries to load  in a mode which is not
+    recognised by the programme
     """
     def __init__(self, mssg):
         self.mssg = red + "ERROR " + reset + mssg
 
 
 class ImageError(Error):
+    """
+    ERROR raised when the user tries to load  in a mode which is not
+    recognised by the programme
+    """
     def __init__(self, mssg):
         self.mssg = red + "ERROR " + reset + mssg

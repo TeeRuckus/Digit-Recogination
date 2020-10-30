@@ -29,6 +29,7 @@ class Image_Loader(object):
         self._data = self.load(self.path)
         self._image_indx = 0
 
+    #===========================ACCESORS========================================
     @property
     def path(self):
         return self._path
@@ -48,10 +49,12 @@ class Image_Loader(object):
         #re-loading the data at the new path
         self._data = self.load(self.path)
 
+    #===========================SETTERS=========================================
     @mode.setter
     def mode(self, nw_mode):
         self._mode = self.__validate_mode(nw_mode)
 
+    #===========================PUBLIC METHODS==================================
     def load(self, path):
         """
         IMPORT: path (string)

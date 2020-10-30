@@ -885,30 +885,6 @@ class Image(object):
 
         return bboxes
 
-    def draw_boxes(self,bboxes, im, color):
-        """
-        IMPORT:
-            bboxes:  a numpy array of dtype int32
-            im:  a numpy array of dtype int32
-            color : a numpy array of three integers which will represent
-            the color
-
-        EXPORT: none
-
-        PURPOSE: to draw a list of bounding boxes onto the image. This
-        function is mainly for vidualisation purposes so the user can
-        see what's going on at each stage of the algorithm in
-        realtion to the produced bounding boxes
-        """
-        for box in bboxes:
-            #if they is still an invalid bounding box skip that specific
-            #index
-            if box[0] == -1:
-                pass
-            else:
-                x,y,w,h = box
-                cv.rectangle(im, (x,y), (x+w, y+h), color, 1)
-
     def find_leftmost_pt(self, bboxes, reverse=False):
         """
         IMPORT:
@@ -1046,10 +1022,17 @@ class Image(object):
     def draw_boxes(self, bboxes, im, color=(0,0,255)):
         """
         IMPORT:
-        EXPORT:
+            bboxes:  a numpy array of dtype int32
+            im:  a numpy array of dtype int32
+            color : a numpy array of three integers which will represent
+            the color
 
-        PURPOSE: it's to draw a bounding box which is either a shape of a
-        rectangle or a square
+        EXPORT: none
+
+        PURPOSE: to draw a list of bounding boxes onto the image. This
+        function is mainly for vidualisation purposes so the user can
+        see what's going on at each stage of the algorithm in
+        realtion to the produced bounding boxes
         """
         for box in bboxes:
             #if the box has been labelled by a negative -1 by a filtering
@@ -1061,6 +1044,14 @@ class Image(object):
                 cv.rectangle(im, (x,y), (x+w, y+h), color, 2)
 
     def _validate_image(self, in_im):
+        """
+        IMPORT: in_im : a numpy array of dtype int32
+        EXPORT: in_im :  a numpy array of dtype int32
+
+        PURPOSE: to determine if the thing which is  been passed into
+        the image class is actually an image, and if it's the
+        right data types for images
+        """
         #an image is going to be an numpy matrice
         if not type(in_im) == np.ndarray:
             #all loaded images, are an unsigned interger by defualt
