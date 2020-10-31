@@ -106,7 +106,6 @@ class test_image(unittest.TestCase):
         #CASE 6: they is  a box inside a box
     def test_get_ROI(self):
         #toggling the debugging feature on
-        self.test.debug()
         all_imgs = os.listdir('../train_updated/')
         #interest = ['tr05.jpg', 'tr09.jpg']
         #interest = ['tr08.jpg', 'tr25.jpg']

@@ -78,7 +78,7 @@ class Image(object):
         #doesn't alter the results obtained
 
         #20 worked really well for this image
-        im  = cv.convertScaleAbs(im, alpha=1, beta=-20)
+        im  = cv.convertScaleAbs(im, alpha=1, beta=-10)
 
         #to determine if we need to re-adjust our bounding boxes to meet the
         #sepcifications of the original images
@@ -269,6 +269,7 @@ class Image(object):
             self.show_debug_boxes(bboxes, im, "original bounding boxes found")
 
         bboxes = self.filter_bounding_boxes(bboxes, 1.1, 4.8)
+        bboxes = self.non_max_suppression(bboxes)
         bboxes = self.non_max_suppression(bboxes)
         #sorting the bounding boxes so they read left to right, and it's
         #displayed in the right order
