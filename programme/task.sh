@@ -3,7 +3,7 @@ python3 main.py
 red='\033[0;31m'
 reset='\033[0m'
 
-echo "\n \t \t \t \t ${red} AoTTENTION TUTOR ${reset}\n"
+echo "\n \t \t \t \t ${red} ATTENTION TUTOR ${reset}\n"
 
 
 echo "
