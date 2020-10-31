@@ -1,0 +1,9 @@
+\babel@toc {english}{}
+\contentsline {part}{I\hspace {1em}Discussion of programme Implementation}{1}%
+\contentsline {section}{\numberline {1}Overview of programme}{2}%
+\contentsline {section}{\numberline {2}Approach to image extraction}{3}%
+\contentsline {section}{\numberline {3}Approach to image classification}{6}%
+\contentsline {part}{II\hspace {1em}Discussion of produced Results}{8}%
+\contentsline {section}{\numberline {4}references}{9}%
+\contentsline {section}{Appendices}{10}%
+\contentsline {section}{\numberline {A}print out of code}{10}%

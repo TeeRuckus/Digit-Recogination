@@ -1,0 +1,39 @@
+Latex commands which might be useful
+
+#including images into your latex document
+\begin{figure}[htp]
+\includegraphics[width=\linewidth]{questionOne.jpg}
+\centerin
+\caption{Question One - Acceleration vs time diagram \emph{Source}: Figure reproduced from Howard (n.d, 4)}
+\label{Question One - Acceleration vs time diagram}
+\end{figure}
+
+#including equations in your latex document
+\begin{figure}[htp]
+	\begin{problem}
+	\begin{center}	
+%----------------------------------------------------------------------------------------
+	\begin{equation}
+		[insert your equation here]
+	\end{equation}	
+%----------------------------------------------------------------------------------------
+	\end{center}
+	\end{problem}
+	
+	\caption{Calculation of velocity and displacement equations for time 0 - 100}
+	\label{Calculation of velocity and displacement equations for time 0 - 10}
+\end{figure}
+
+
+#including a page as a pdf with a title
+
+\includepdf[
+  scale=0.9,
+  pages=9,
+  pagecommand=\section{Meeting Minutes},
+]{Assignment_2020.pdf}
+\includepdf[pages=8]{Assignment_2020.pdf}
+\newpage
+
+i = interest\ rate, P_{x} = present\ value, and\ F_{x} = future\ value
+

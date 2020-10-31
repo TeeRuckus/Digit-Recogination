@@ -1,0 +1,192 @@
+\documentclass[
+	12pt, % Default font size, values between 10pt-12pt are allowed
+	%letterpaper, % Uncomment for US letter paper size
+	%spanish, % Uncomment for Spanish
+]{fphw}
+
+% Template-specific packages
+\usepackage[utf8]{inputenc} % Required for inputting international characters
+\usepackage[T1]{fontenc} % Output font encoding for international characters
+\usepackage{mathpazo} % Use the Palatino font
+\usepackage{graphicx} % Required for including images
+\usepackage{subfig}
+\graphicspath{ {figures/} }
+\usepackage{array}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{booktabs} % Required for better horizontal rules in tables
+\usepackage{listings} % Required for insertion of code
+\usepackage{enumerate} % To modify the enumerate environment
+\usepackage[section]{placeins}
+\usepackage{wrapfig}
+\usepackage{pdfpages}
+\usepackage[section]{placeins}
+\usepackage{flafter}
+\usepackage{natbib}
+\usepackage{appendix}
+%delete after, this is to place dummy text on the page
+\usepackage[english]{babel}
+\usepackage{setspace}
+
+
+\counterwithin*{equation}{section}
+\counterwithin*{equation}{subsection}
+\counterwithin*{equation}{subsubsection}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{1.5em}
+\onehalfspacing
+%\setstretch{1.25}
+%----------------------------------------------------------------------------------------
+%	ASSIGNMENT IN FORMATION
+%----------------------------------------------------------------------------------------
+
+\title{Machine Perception Final Assignment} % Assignment title
+\author{Tawana Kwaramba: 19476700} % Student name
+\date{October 30, 2020} % Due date
+\institute{Curtin University \\ Faculty of Science and Engineering: School of Civil and Mechanical Engineering} % Institute or school name
+\class{Machine Perception - COMP3007} % Course or class name
+\professor{Senjian An}
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+\pagenumbering{gobble}
+\maketitle
+\newpage
+
+\includepdf[
+  scale=1,
+  pages=-,
+%  landscape=true,
+]{"DeclarationOfOriginality_v1.1"}
+\newpage
+\begin{spacing}{0.1}
+\newpage
+%\section*{Introduction}
+\newpage
+\tableofcontents
+%\newpage
+%\listoftables
+\newpage
+\listoffigures
+\newpage
+\listoftables
+\newpage
+\end{spacing}
+\pagenumbering{arabic}
+
+%----------------------------------------------------------------------------------------
+%	Managment report
+%----------------------------------------------------------------------------------------
+\part{Discussion of programme Implementation}
+\newpage
+
+\includepdf[
+  scale=0.99,
+  pages=-,
+  landscape=true,
+  pagecommand=\section{Overview of programme},
+]{"files/uml"}
+
+\newpage
+\section{Approach to image extraction}
+This report won’t discuss the derivation of specific thresholds and numbers, as those numbers were arrived largely from trial and error. Albeit, throughout the report I will be mainly focusing on the ideas which this programme hinges on, and I will be only discussing the pipeline which ultimately gave the best results otherwise, the report will become lengthy. Furthermore, the discussion of handling file input and output won’t be discussed as this process is quite trivial. The assignment was approached by building on top of the algorithms and process built in the practicals, and from assignment one additionally from algorithms and information sourced from YouTube videos and online tutorials, the specific algorithms sourced from the tutorials are referenced in the actual programme. /par
+
+Computers are not typically as smart as humans, with humans we detect certain features straight away such as digits hence, for a computer to be able to detect features of interest we have to give the computers certain bounds and limits on how the item of interest can be (reference). Therefore, with this in mind, the basic approach of this programme is for the algorithm to detect as much bounding boxes around the blobs of the image, and to filter out any bounding box which is not a number this process is allegorical to sifting out wheat. /par
+
+The first step in this pipeline is to pre-process the image to enable a blob detection algorithm to detect the blobs efficiently and effectively in the image (reference). The pre-processing of the image includes turning the image into the grey-scale colour space as MSER requires the image to be in this colour space. Additionally, grey-scale colour space decreases the memory requirement of the image while keeping the vital information about the image hence, allowing for faster processing times, and blob detection times (reference). Another pre-processing step which may be required is re-sizing the image if it’s above 900x900 pixels, I have discovered through experimenting and the validation images this algorithm will work well for images below 900x900 pixels this is mainly due to the nature of MSER. Additionally, an image above 900x900 will be great memory overhead hence slowing down processing and detection times of the algorithm (reference). Furthermore, the image needs to be blurred, so the memory required for the image is decreased but the important features of the image are kept such as edges and corners of the image, the image in the programme will be blurred through the gaussian kernel (reference). \par
+
+Thereafter, the image is ready for foreground and background segmentation, and noise removal. This is achieved through the application of Otsu thresholding which will convert the image into a black and white image whereby the black will represent the background of the image, and the white will represent the foreground of the image (reference). This is done because we know that the region of interest (digits) is going to be in the foreground image. Thereafter, the canny edge is conducted on this image, so that algorithm can pick up the edges of the image, this will allow pre-filtering of noisy edges and will pick up the eminent features of the image since gaussian blur and thresholding have already been applied to the image. Once a binary image is created of the edges of the image, morphological operations are done; the first operation which is conducted is erosion, the purpose of this is to remove the very small edges or spots in the image i.e. to remove noise from the image. After the noise has been removed we then dilate the image the purpose is to make the left interesting features of the image to be a lot fuller, to fill inside the edges of the number, and to remove any noise inside foreground areas. After the pre-processing of the image, the image is ready for blob detection through MSER.\par
+
+The choice of blob detection was MSER as this was the better-suited blob detection algorithm for the extraction of digits. This is because MSER looks for connected areas, areas of uniform intensity, and an area which is surrounded by a contrasting background (An 2020) which are all criteria which are best suited for detecting digits. It is expect the area of the digits to be connected especially after the morphological dilation operation conducted in the image pre-processing, it’s expect the digit found in the image to be of the same colour hence in a grayscale image this will appear as the same intensity, and finally, we’re going to expect the digits to be sitting on some form of background or plaque hence the digits will be surrounded by a contrasting background. Therefore, making MSER a feasible algorithm for digit detection given the training data. \par
+
+The last overall stage of the extraction of digits is applying the filters on all the bounding boxes, and deleting bounding boxes which are not digits hence by the end the remaining bounding boxes should be the desired digits. The first filtering which is conducted is concerning the dimension of the bounding boxes, we know that the digits are going to be tall hence digits will have a longer height than width therefore, we’re going to calculate the ratio of height to width of each bounding box and if the ratio is an integer greater than one the height of the bounding box is greater than the width hence, this bounding box is most likely to be a digit. With this observation introduces the first limitation of this algorithm, filtering digits in this manner will not allow detecting digits when the image is 90 degrees the width of the bounding boxes will become the height, and the height will suddenly become the width, therefore, if this algorithm was applied to an image which has been rotated 90 degrees it will filter away the digits in the image. Furthermore, it’s expected that this algorithm will slow down linearly with increasing image size as it will access every single bounding box once in the image thus been an O(N) algorithm.\par
+
+The next filtering which is done is the clustering and the grouping of bounding boxes, we can assume from the given training data that the digits in the test pictures are going to relatively close to one another at least no more than the width of the bounding box of a digit. Therefore, this algorithm will go through each bounding box, and try to find the pair bounding boxes i.e. a bounding box which is close to the current bounding box then the algorithm will make those two boxes a cluster. The manner this algorithm finds clusters can potentially introduce limitations as boxes can be close together but not be the digits hence, this algorithm can introduce more noise into the image if the filtering in the last step was unsuccessful. Furthermore, it’s expected that this algorithm will increase exponentially with the size of the image, and the number of the bounding boxes as this algorithm is an $O(N^2)$ as it touches each bounding boxes at least two times when doing comparisons in one sweep hence doing $N x N$ comparisons. After the group of clusters are found, these pair of bounding boxes are going to be turned into one bounding box hence, this algorithm will look at each pair passed in from finding the bounding boxes, and it will determine the bigger box out of the pair, and will make that bounding box the new bounding box which will represent that pair. \par
+
+Sequentially, the algorithm will filter the remaining bounding boxes concerning the median area of the remaining bounding boxes, this algorithm is implemented in this order because the dominant remaining bounding boxes are the bounding boxes which are surrounding the digits with extremely small boxes, and extremely large boxes remaining. Hence, since the digits are going to be relatively the same size we will expect that the median area of the bounding boxes to be the area which is a digit or very close to a digit. Therefore, the median area is found, and the interquartile range for the areas of the bounding boxes are found, and any box which lays below or above that inter-quartile range is filtered out. An obvious limitation of this filtering is that it heavily relies on the fact that the previous filters have successfully filtered out a great proportion of the bounding boxes otherwise, this algorithm may filter out the digits if they are still a great proportion of clusters remaining as these clusters can shift the median and filter out the actual digits in the image. This algorithm is expected to linearly increase in time complexity with the increasing number of bounding boxes, and image size as this algorithm has a time complexity of $O(N)$ as this algorithm only touches each element in its list at least once at each comparison. \par
+
+Thereafter, non-max suppression is applied to the remaining bounding boxes, non-max suppression is the idea of getting smaller boxes which are inside a bigger box, and or deleting boxes which overlap with another box to a certain degree (Sambasivarao 2019)(Rosebrock 2014). Detecting digits such as a 0 and 8 will result in the inner parts of those digits been detected as a bounding box if this isn’t filtered out this will impact how the algorithm will create the region of interest as the algorithm is going to join the leftmost point with the rightmost corner of the bounding box which is the furthest to the right side relative to the left corner. Therefore, these little areas are going to be filtered out to avoid the region of interest been from the left most corner to the right side corner of one of these boxes. An evident limitation of this algorithm is the use case where the digits are on a plaque where the height of the plaque is greater than the width, hence this bounding box didn’t get filtered out by the previous algorithm and this algorithm will delete each box inside of it which would be the digits for the image. This algorithm is expected to exponentially increase with image size, and with the number of bounding boxes found in an image as the time complexity of this algorithm is going to be $O(N^2)$ as it’s going to do N by N comparisons on each sweep of the algorithm.\par
+
+Afterwards, simple filtering of the width and the height of the bounding boxes is conducted relative to the median positions of the bounding boxes as the filtering done in the previous steps will have isolated the digits in the image. The same manner as the filtering of the areas was conducted in, is the same manner as these two filters will be conducted in, and these algorithms will have similar time complexities and limitations.\par
+
+Then after, just as an extra pre-cautious step and to ensure that all the noise in the image is completely removed filtering of the bounding boxes is done relative to the dominant colour in each bounding box. It’s expected that the bounding box of each digit will have the same dominant colour, and they’ll be more bounding boxes with digits left in this stage. Albeit this assumption introduces the limitation of this algorithm which is that it heavily relies on the performance of previous filtering algorithms hence, if the previous algorithms didn’t filter out sufficient amount of boxes this algorithm may end up filtering out the wrong type of boxes. After each dominant colour is found, the idea of filtering each bounding box is the same as the idea discussed when filtering for the area in the image.\par
+
+The last step is to crop the region of interest, and the digits out of the image, by this stage the filters should’ve filtered out all the bounding boxes which are not digits. Thus, we can extract each of these bounding boxes, and expect to find digits at each position of these bounding boxes. These extractions are the ones which are going to be used when trying to determine what the house number is in the given image. Additionally, from the remaining bounding boxes the algorithm will find the leftmost point in the image, and the rightmost point of the image and join these points together to create a new bounding box, this bounding box will be the bounding box which will contain all the digits of the image.
+
+\section{Approach to image classification}
+
+The classification of this programme is done through a simple implementation of k nearest neighbour (kNN) even though more sophisticated and better-performing classifiers such as support vector machines (SVM), a plethora of neural networks, template matching, and surfeit supervised classifiers could’ve been used to classify the digits but weren’t used because; k nearest neighbour is highly feasible for this application the digits are going to be on a high contrast background with the digits been a unique colour, other classifiers have extra steps and process for classifying which is not need in this use case, and additionally, the fundamental design principle of this programme is KISS (keeping it simple stupid) therefore using other classifiers will over-complicate the classification process of this algorithm.\par
+
+Before, we can train the kNN algorithm we need to prepare our data. Typically, you would initially re-size all the training data so that they’re the same dimension although this programme doesn’t do this step as the provided training data is homogeneous in size. Therefore, all we need to do is turn our multiple dimensioned images in row vectors, and for each image, we should have an accompanying list with a label on what each row vector is supposed to be. Then after the data is prepared, we can make kNN classifier by training the row vectors concerning the labels provided. A prevailing problem with supervised learning algorithms is that they tend to overfit to their training data, therefore, to combat against that the training has some additional noise added to it to avoid over-classification by kNN algorithm. \par
+
+Thereafter we created our classifier we can use the classifier to classify our desired data. Before we classify our desired data we need to ensure that the data is appropriate for classification hence, we need to ensure that the data to be classified is the same size as the training data which was provided and that the image has some padding from the border of the image and the item to be classified otherwise, this may result in some in-correct classification of the data. Consequently, we use the kNN classifier created in the previous section to classify the data of interest.
+
+\newpage
+\part{Discussion of produced Results}
+\newpage
+
+\section{references}
+
+\newpage
+\appendix
+\appendixpage
+\addappheadtotoc
+
+\section{print out of code}
+%\includepdf[
+%  scale=0.99,
+%  pages=-,
+%  landscape=true,
+%  pagecommand=\section{Task 1: Gantt Chart for Mechanical Engineering},
+%]{"gant_chart/table_5_gantt_chart"}
+%\newpage
+
+
+
+%\subsection{part a: critical path analysis}\hfill\\
+
+
+
+
+%\includepdf[
+%  scale=0.99,
+%  pages=-,
+%  landscape=true,
+%  pagecommand=\section{Task 3: Master Plan Gantt Chart},
+%]{"gant_chart/master_gantt"}
+%\newpage
+
+
+
+%CHECKED
+%\begin{figure}[htp]
+%	\begin{problem}
+%	\begin{center}	%----------------------------------------------------------------------------------------
+%	\begin{equation}
+%		\sum Revenue_{year 7} = P_{7}(ad) + P_{7}(rebate) + p_{7}(fare)
+%	\end{equation}
+%	Given,
+%	\begin{equation}
+%	P_{x} = \frac{F_{x}}{(1 + i)^{x}}, i = interest\ rate, P_{x} = present\ value,\ and\ F_{x} = future\ value
+%	\end{equation}
+%	\begin{equation}
+%	P_{7}(ad) = \frac{200k}{(1+0.032)^7} = 160\ 425.0246
+%	\end{equation}
+%	\begin{equation}
+%	P_{7}(rebate) = \frac{500k}{(1+0.032)^7} = 401\ 062.5616
+%	\end{equation}
+%	\begin{equation}
+%	P_{7}(fare) = \frac{5\ 810\ 770N}{(1+0.032)^7} = 4\ 660\ 964.602N
+%	\end{equation}
+%	\begin{equation}
+%	\therefore\sum Revenue_{year 7} = 4\ 660\ 964.60N + 561\ 487.59
+%	\end{equation}		%----------------------------------------------------------------------------------------
+%	\end{center}
+%	\end{problem}
+%	\caption{Derivation of 7th year revenue}
+%	\label{Derivation of 7th year revenue}
+%\end{figure}
+
+
+\end{document}
