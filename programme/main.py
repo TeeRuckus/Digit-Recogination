@@ -47,7 +47,7 @@ if __name__ == '__main__':
 
         #indexing 1 as I only the result of the classifify as classify returns
         #the result and the distance of the image
-        result = trainner.classify(digits.im[1])[1]
+        result, other = trainner.classify(digits.im[1])
         base_file_name = 'output/House'
         #creating the file name based on the numbers found
         #I need to use list operations in able to convert the number found in
@@ -57,10 +57,11 @@ if __name__ == '__main__':
         #they's only  one number inside in the second dimension of the array
         #hence, I am just extracting all those numbers from that second
         #dimension
-        house_num = [house_num[ii][0] for ii in range(len(house_num))]
+        house_num = [int(house_num[ii][0]) for ii in range(len(house_num))]
         #taking a house number from an array of strings, and converting it to
         #just a string by itself
         house_num = ''.join(map(str, house_num))
+        print(green+"HOUSE NUMBER:"+reset, house_num)
         complete_file_name = base_file_name + house_num + ".txt"
 
         with open(complete_file_name, 'w') as inStrm:

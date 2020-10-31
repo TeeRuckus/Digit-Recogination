@@ -95,6 +95,9 @@ class Trainer(object):
                 trainning_im.path = in_path +str(label)
                 #accessing every image inside the trainning_im object
                 for im in trainning_im:
+                    im = self.add_noise(im)
+                    im = Image.pad_image(self, im)
+                    im = Image.resize_image(self, im, 28, 40)
                     trainning_data.append(im.flatten())
                     labels_data.append(label)
             trainning_data = np.array(trainning_data, dtype=np.float32)
@@ -129,12 +132,14 @@ class Trainer(object):
         """
         test_data = []
         for im in images:
+            #we need to pad the image, so the area of interest is away
+            #from the border of the image
+            im = Image.pad_image(self, im)
             #this needs to be the same size as the provided trainning data
             im = Image.resize_image(self,im, 28, 40)
             test_data.append(im.flatten())
         #knn classifier only accpets numpy arrays
         test_data = np.array(test_data, dtype=np.float32)
-
         ret, result, neigbours, dist = self.trainner.findNearest(test_data, k)
         return result, dist
 
@@ -147,5 +152,13 @@ class Trainer(object):
         EXPORT: im (numpy array data type: uint8)
 
         PURPOSE: it's to add noise to an image, to stop the trainner to
-        over-fitting to the provided trainning data
+        over-fitting to the provided trainning data.
         """
+        mean = (5,5,5)
+        sigma = (5, 5, 5)
+        noise = np.zeros(im.shape, dtype='int8')
+        #75 works well
+        cv.randn(noise, (25, 25, 25), (200, 200, 200))
+
+        ret = cv.add(im, noise, dtype=cv.CV_8UC3)
+        return ret

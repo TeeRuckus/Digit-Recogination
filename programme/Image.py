@@ -20,7 +20,8 @@ class Image(object):
     def __init__(self, im, img_id):
         #set this to true, if you want to see each step of the image
         #segmentation process
-        self._DEBUG = False
+        self._DEBUG = True
+        #self._DEBUG = False
         self._im = self.get_ROI(im, img_id)
 
     #===========================ACCESORS========================================
@@ -50,6 +51,9 @@ class Image(object):
         else:
             self._DEBUG = True
 
+    #if digits is true, the algorithm will run this function again to extract
+    #the digits out of the cropped image otherwise, it won't invoke that
+    #inner function
     def get_ROI(self, im, img_id):
         """
         IMPORT:
@@ -64,6 +68,18 @@ class Image(object):
         contains all the house numbers in the image, and to extract each digit
         inside that cropped area
         """
+
+        #normilising the images so the colors in the image can be
+        #consistent
+        norm_img = np.zeros(im.shape[:2])
+        im = cv.normalize(im, norm_img, 0, 255, cv.NORM_MINMAX)
+
+        #correcting the colors of the image so over exposure in light
+        #doesn't alter the results obtained
+
+        #20 worked really well for this image
+        im  = cv.convertScaleAbs(im, alpha=1, beta=-20)
+
         #to determine if we need to re-adjust our bounding boxes to meet the
         #sepcifications of the original images
         resized = False
@@ -202,6 +218,12 @@ class Image(object):
             cv.waitKey()
             cv.destroyAllWindows()
 
+        if self._DEBUG:
+            for  index, im in enumerate(digits):
+                cv.imshow("digit %s" % index, im)
+            cv.waitKey()
+            cv.destroyAllWindows()
+
         return cropped_image, digits
 
     def extract_digits(self, im):
@@ -251,6 +273,8 @@ class Image(object):
         #sorting the bounding boxes so they read left to right, and it's
         #displayed in the right order
         bboxes = sorted(bboxes, key=lambda x: x[0])
+        #removing all duplicate bounding boxes in the same row
+        bboxes = np.unique(bboxes, axis=0)
 
         return [self.crop_img(im.copy(), box) for box in bboxes]
 
@@ -264,8 +288,8 @@ class Image(object):
         """
 
         #number of pixels which we want to pad the image with all around
-        row_pad = 2
-        col_pad = 2
+        row_pad = 3
+        col_pad = 3
         npad = ((row_pad, col_pad), (row_pad, col_pad), (0,0))
         return np.pad(im, pad_width=npad, mode='constant', constant_values=0)
 
