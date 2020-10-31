@@ -120,27 +120,3 @@ class test_image(unittest.TestCase):
                 cv.imshow("digit: %s" %num, digit)
             cv.waitKey()
             cv.destroyAllWindows()
-
-
-#    def test_extract_digits(self):
-#        #toggling the debugging feature on
-#        self.test.debug()
-#        all_imgs = os.listdir('output/')
-#        #interest = ['tr05.jpg', 'tr09.jpg']
-#        #interest = ['tr08.jpg', 'tr25.jpg']
-#        #interest = ['tr09.jpg', 'tr12.jpg', 'tr03.jpg', 'tr08.jpg', 'tr02.jpg']
-#        image_files = [ii for ii in all_imgs if ii[0] == 'D']
-#
-#        for img_id, path in enumerate(image_files):
-#            print(red+"this is the path: "+reset, path)
-#            im = cv.imread("output/" + path)
-#            self.test.extract_digits(im, img_id)
-
-    #I know this work, I will test it properly when I have time at
-    #the end :-)
-    def test_draw_box(self):
-        pass
-
-    def test_find_clusters(self):
-        pass
-

@@ -86,7 +86,10 @@ class Image(object):
 
         #the openCV doc recommends that you will have your upper thresh hold
         #twice as the lower threshold
+
+        #this doesn't really have any performance boost to be honest
         canny_trans = cv.Canny(thresh, edge_thresh, edge_thresh * 2)
+        cv.waitKey()
         #getting the shape and size of the structual element suitable to this
         #image. Hence, the window which is going over this image
         rect_kern = cv.getStructuringElement(cv.MORPH_RECT, (5,5))
