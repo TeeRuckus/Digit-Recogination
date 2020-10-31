@@ -20,7 +20,7 @@ class Image(object):
     def __init__(self, im, img_id):
         #set this to true, if you want to see each step of the image
         #segmentation process
-        self._DEBUG = True
+        self._DEBUG = False
         #self._DEBUG = False
         self._im = self.get_ROI(im, img_id)
 
@@ -207,7 +207,9 @@ class Image(object):
         file_name = 'output/DetectedArea' + str(img_id) + ".jpg"
         bbox_file_name = 'output/BoundingBox' +str(img_id) + ".txt"
 
-        cv.imwrite(file_name, cropped_image)
+        #cv.imwrite(file_name, cropped_image)
+        self.draw_boxes(bboxes, im, (255,0,0))
+        cv.imwrite(file_name, im)
         np.savetxt(bbox_file_name, [new_region], delimiter=',')
 
         if self._DEBUG:

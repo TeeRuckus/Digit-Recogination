@@ -18,6 +18,7 @@ from Colours import *
 #paths of the located files:
 test_path = '/home/student/test/'
 trainning_path = '/home/student/train/'
+val_path = '/home/student/val'
 
 if __name__ == '__main__':
     #extracting the region of interest to the output file
