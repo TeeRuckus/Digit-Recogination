@@ -63,7 +63,7 @@ if __name__ == '__main__':
         #just a string by itself
         house_num = ''.join(map(str, house_num))
         print(green+"HOUSE NUMBER:"+reset, house_num)
-        complete_file_name = base_file_name + str(im_id) + ".txt"
+        complete_file_name = base_file_name + house_num + ".txt"
 
         with open(complete_file_name, 'w') as inStrm:
             inStrm.write('Building {}'. format(house_num))

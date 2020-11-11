@@ -1,64 +1,66 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2020.10.3)  31 OCT 2020 11:16
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 2.9.7380 64-bit) (preloaded format=pdflatex 2020.4.18)  31 OCT 2020 16:00
 entering extended mode
- restricted \write18 enabled.
- %&-line parsing enabled.
-**"19476700 Tawana Kwaraamba.tex"
-(./19476700 Tawana Kwaraamba.tex
-LaTeX2e <2017-04-15>
-Babel <3.18> and hyphenation patterns for 9 language(s) loaded.
-(./fphw.cls
+**"./19476700 Tawana Kwaraamba.tex"
+("19476700 Tawana Kwaraamba.tex"
+LaTeX2e <2020-02-02> patch level 5
+L3 programming layer <2020-04-06> (fphw.cls
 Document Class: fphw 2019/03/19
-(/usr/share/texlive/texmf-dist/tex/latex/fancyhdr/fancyhdr.sty
-Package: fancyhdr 2017/06/30 v3.9a Extensive control of page headers and footer
+
+("C:\Users\tawan\AppData\Local\Programs\MiKTeX 2.9\tex/latex/fancyhdr\fancyhdr.
+sty"
+Package: fancyhdr 2019/01/31 v3.10 Extensive control of page headers and footer
 s
-\f@nch@headwidth=\skip41
-\f@nch@O@elh=\skip42
-\f@nch@O@erh=\skip43
-\f@nch@O@olh=\skip44
-\f@nch@O@orh=\skip45
-\f@nch@O@elf=\skip46
-\f@nch@O@erf=\skip47
-\f@nch@O@olf=\skip48
-\f@nch@O@orf=\skip49
+\f@nch@headwidth=\skip47
+\f@nch@O@elh=\skip48
+\f@nch@O@erh=\skip49
+\f@nch@O@olh=\skip50
+\f@nch@O@orh=\skip51
+\f@nch@O@elf=\skip52
+\f@nch@O@erf=\skip53
+\f@nch@O@olf=\skip54
+\f@nch@O@orf=\skip55
 )
-(/usr/share/texlive/texmf-dist/tex/latex/base/article.cls
-Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
-(/usr/share/texlive/texmf-dist/tex/latex/base/size12.clo
-File: size12.clo 2014/09/29 v1.4h Standard LaTeX file (size option)
+("C:\Users\tawan\AppData\Local\Programs\MiKTeX 2.9\tex/latex/base\article.cls"
+Document Class: article 2019/12/20 v1.4l Standard LaTeX document class
+("C:\Users\tawan\AppData\Local\Programs\MiKTeX 2.9\tex/latex/base\size12.clo"
+File: size12.clo 2019/12/20 v1.4l Standard LaTeX file (size option)
 )
-\c@part=\count79
-\c@section=\count80
-\c@subsection=\count81
-\c@subsubsection=\count82
-\c@paragraph=\count83
-\c@subparagraph=\count84
-\c@figure=\count85
-\c@table=\count86
-\abovecaptionskip=\skip50
-\belowcaptionskip=\skip51
-\bibindent=\dimen102
+\c@part=\count167
+\c@section=\count168
+\c@subsection=\count169
+\c@subsubsection=\count170
+\c@paragraph=\count171
+\c@subparagraph=\count172
+\c@figure=\count173
+\c@table=\count174
+\abovecaptionskip=\skip56
+\belowcaptionskip=\skip57
+\bibindent=\dimen134
 )
-(/usr/share/texlive/texmf-dist/tex/latex/titlesec/titlesec.sty
-Package: titlesec 2016/03/21 v2.10.2 Sectioning titles
-\ttl@box=\box26
-\beforetitleunit=\skip52
-\aftertitleunit=\skip53
-\ttl@plus=\dimen103
-\ttl@minus=\dimen104
-\ttl@toksa=\toks14
-\titlewidth=\dimen105
-\titlewidthlast=\dimen106
-\titlewidthfirst=\dimen107
+("C:\Users\tawan\AppData\Local\Programs\MiKTeX 2.9\tex/latex/titlesec\titlesec.
+sty"
+Package: titlesec 2019/10/16 v2.13 Sectioning titles
+\ttl@box=\box45
+\beforetitleunit=\skip58
+\aftertitleunit=\skip59
+\ttl@plus=\dimen135
+\ttl@minus=\dimen136
+\ttl@toksa=\toks15
+\titlewidth=\dimen137
+\titlewidthlast=\dimen138
+\titlewidthfirst=\dimen139
 )
-(/usr/share/texlive/texmf-dist/tex/latex/xcolor/xcolor.sty
+("C:\Users\tawan\AppData\Local\Programs\MiKTeX 2.9\tex/latex/xcolor\xcolor.sty"
 Package: xcolor 2016/05/11 v2.12 LaTeX color extensions (UK)
 
-(/usr/share/texlive/texmf-dist/tex/latex/graphics-cfg/color.cfg
+("C:\Users\tawan\AppData\Local\Programs\MiKTeX 2.9\tex/latex/graphics-cfg\color
+.cfg"
 File: color.cfg 2016/01/02 v1.6 sample color configuration
 )
 Package xcolor Info: Driver file: pdftex.def on input line 225.
 
-(/usr/share/texlive/texmf-dist/tex/latex/graphics-def/pdftex.def
+("C:\Users\tawan\AppData\Local\Programs\MiKTeX 2.9\tex/latex/graphics-def\pdfte
+x.def"
 File: pdftex.def 2018/01/08 v1.0l Graphics/color driver for pdftex
 )
 Package xcolor Info: Model `cmy' substituted by `cmy0' on input line 1348.
@@ -71,788 +73,419 @@ Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1369.
 Package xcolor Info: Model `Gray' substituted by `gray' on input line 1370.
 Package xcolor Info: Model `wave' substituted by `hsb' on input line 1371.
 )
-(/usr/share/texlive/texmf-dist/tex/latex/titlesec/block.tss
-File: block.tss 2016/03/15
-)
-(/usr/share/texlive/texmf-dist/tex/latex/geometry/geometry.sty
-Package: geometry 2010/09/12 v5.6 Page Geometry
+("C:\Users\tawan\AppData\Local\Programs\MiKTeX 2.9\tex/latex/geometry\geometry.
+sty"
+Package: geometry 2020/01/02 v5.9 Page Geometry
 
-(/usr/share/texlive/texmf-dist/tex/latex/graphics/keyval.sty
+("C:\Users\tawan\AppData\Local\Programs\MiKTeX 2.9\tex/latex/graphics\keyval.st
+y"
 Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
-\KV@toks@=\toks15
+\KV@toks@=\toks16
 )
-(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ifpdf.sty
-Package: ifpdf 2017/03/15 v3.2 Provides the ifpdf switch
-)
-(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ifvtex.sty
-Package: ifvtex 2016/05/16 v1.6 Detect VTeX and its facilities (HO)
-Package ifvtex Info: VTeX not detected.
-)
-(/usr/share/texlive/texmf-dist/tex/generic/ifxetex/ifxetex.sty
-Package: ifxetex 2010/09/12 v0.6 Provides ifxetex conditional
-)
-\Gm@cnth=\count87
-\Gm@cntv=\count88
-\c@Gm@tempcnt=\count89
-\Gm@bindingoffset=\dimen108
-\Gm@wd@mp=\dimen109
-\Gm@odd@mp=\dimen110
-\Gm@even@mp=\dimen111
-\Gm@layoutwidth=\dimen112
-\Gm@layoutheight=\dimen113
-\Gm@layouthoffset=\dimen114
-\Gm@layoutvoffset=\dimen115
-\Gm@dimlist=\toks16
-)
-! Undefined control sequence.
-l.107 \counterwithin
-                    *{equation}{section}
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-
-! LaTeX Error: Missing \begin{document}.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.107 \counterwithin*
-                     {equation}{section}
-You're in trouble here.  Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-! Undefined control sequence.
-l.108 \counterwithin
-                    *{equation}{subsection}
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-\problembox=\box27
-) (/usr/share/texlive/texmf-dist/tex/latex/base/inputenc.sty
-Package: inputenc 2015/03/17 v1.2c Input encoding file
-\inpenc@prehook=\toks17
-\inpenc@posthook=\toks18
-
-(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
-File: utf8.def 2017/01/28 v1.1t UTF-8 support for inputenc
-Now handling font encoding OML ...
-... no UTF-8 mapping file for font encoding OML
-Now handling font encoding T1 ...
-... processing UTF-8 mapping file for font encoding T1
-
-(/usr/share/texlive/texmf-dist/tex/latex/base/t1enc.dfu
-File: t1enc.dfu 2017/01/28 v1.1t UTF-8 support for inputenc
-   defining Unicode char U+00A0 (decimal 160)
-   defining Unicode char U+00A1 (decimal 161)
-   defining Unicode char U+00A3 (decimal 163)
-   defining Unicode char U+00AB (decimal 171)
-   defining Unicode char U+00AD (decimal 173)
-   defining Unicode char U+00BB (decimal 187)
-   defining Unicode char U+00BF (decimal 191)
-   defining Unicode char U+00C0 (decimal 192)
-   defining Unicode char U+00C1 (decimal 193)
-   defining Unicode char U+00C2 (decimal 194)
-   defining Unicode char U+00C3 (decimal 195)
-   defining Unicode char U+00C4 (decimal 196)
-   defining Unicode char U+00C5 (decimal 197)
-   defining Unicode char U+00C6 (decimal 198)
-   defining Unicode char U+00C7 (decimal 199)
-   defining Unicode char U+00C8 (decimal 200)
-   defining Unicode char U+00C9 (decimal 201)
-   defining Unicode char U+00CA (decimal 202)
-   defining Unicode char U+00CB (decimal 203)
-   defining Unicode char U+00CC (decimal 204)
-   defining Unicode char U+00CD (decimal 205)
-   defining Unicode char U+00CE (decimal 206)
-   defining Unicode char U+00CF (decimal 207)
-   defining Unicode char U+00D0 (decimal 208)
-   defining Unicode char U+00D1 (decimal 209)
-   defining Unicode char U+00D2 (decimal 210)
-   defining Unicode char U+00D3 (decimal 211)
-   defining Unicode char U+00D4 (decimal 212)
-   defining Unicode char U+00D5 (decimal 213)
-   defining Unicode char U+00D6 (decimal 214)
-   defining Unicode char U+00D8 (decimal 216)
-   defining Unicode char U+00D9 (decimal 217)
-   defining Unicode char U+00DA (decimal 218)
-   defining Unicode char U+00DB (decimal 219)
-   defining Unicode char U+00DC (decimal 220)
-   defining Unicode char U+00DD (decimal 221)
-   defining Unicode char U+00DE (decimal 222)
-   defining Unicode char U+00DF (decimal 223)
-   defining Unicode char U+00E0 (decimal 224)
-   defining Unicode char U+00E1 (decimal 225)
-   defining Unicode char U+00E2 (decimal 226)
-   defining Unicode char U+00E3 (decimal 227)
-   defining Unicode char U+00E4 (decimal 228)
-   defining Unicode char U+00E5 (decimal 229)
-   defining Unicode char U+00E6 (decimal 230)
-   defining Unicode char U+00E7 (decimal 231)
-   defining Unicode char U+00E8 (decimal 232)
-   defining Unicode char U+00E9 (decimal 233)
-   defining Unicode char U+00EA (decimal 234)
-   defining Unicode char U+00EB (decimal 235)
-   defining Unicode char U+00EC (decimal 236)
-   defining Unicode char U+00ED (decimal 237)
-   defining Unicode char U+00EE (decimal 238)
-   defining Unicode char U+00EF (decimal 239)
-   defining Unicode char U+00F0 (decimal 240)
-   defining Unicode char U+00F1 (decimal 241)
-   defining Unicode char U+00F2 (decimal 242)
-   defining Unicode char U+00F3 (decimal 243)
-   defining Unicode char U+00F4 (decimal 244)
-   defining Unicode char U+00F5 (decimal 245)
-   defining Unicode char U+00F6 (decimal 246)
-   defining Unicode char U+00F8 (decimal 248)
-   defining Unicode char U+00F9 (decimal 249)
-   defining Unicode char U+00FA (decimal 250)
-   defining Unicode char U+00FB (decimal 251)
-   defining Unicode char U+00FC (decimal 252)
-   defining Unicode char U+00FD (decimal 253)
-   defining Unicode char U+00FE (decimal 254)
-   defining Unicode char U+00FF (decimal 255)
-   defining Unicode char U+0100 (decimal 256)
-   defining Unicode char U+0101 (decimal 257)
-   defining Unicode char U+0102 (decimal 258)
-   defining Unicode char U+0103 (decimal 259)
-   defining Unicode char U+0104 (decimal 260)
-   defining Unicode char U+0105 (decimal 261)
-   defining Unicode char U+0106 (decimal 262)
-   defining Unicode char U+0107 (decimal 263)
-   defining Unicode char U+0108 (decimal 264)
-   defining Unicode char U+0109 (decimal 265)
-   defining Unicode char U+010A (decimal 266)
-   defining Unicode char U+010B (decimal 267)
-   defining Unicode char U+010C (decimal 268)
-   defining Unicode char U+010D (decimal 269)
-   defining Unicode char U+010E (decimal 270)
-   defining Unicode char U+010F (decimal 271)
-   defining Unicode char U+0110 (decimal 272)
-   defining Unicode char U+0111 (decimal 273)
-   defining Unicode char U+0112 (decimal 274)
-   defining Unicode char U+0113 (decimal 275)
-   defining Unicode char U+0114 (decimal 276)
-   defining Unicode char U+0115 (decimal 277)
-   defining Unicode char U+0116 (decimal 278)
-   defining Unicode char U+0117 (decimal 279)
-   defining Unicode char U+0118 (decimal 280)
-   defining Unicode char U+0119 (decimal 281)
-   defining Unicode char U+011A (decimal 282)
-   defining Unicode char U+011B (decimal 283)
-   defining Unicode char U+011C (decimal 284)
-   defining Unicode char U+011D (decimal 285)
-   defining Unicode char U+011E (decimal 286)
-   defining Unicode char U+011F (decimal 287)
-   defining Unicode char U+0120 (decimal 288)
-   defining Unicode char U+0121 (decimal 289)
-   defining Unicode char U+0122 (decimal 290)
-   defining Unicode char U+0123 (decimal 291)
-   defining Unicode char U+0124 (decimal 292)
-   defining Unicode char U+0125 (decimal 293)
-   defining Unicode char U+0128 (decimal 296)
-   defining Unicode char U+0129 (decimal 297)
-   defining Unicode char U+012A (decimal 298)
-   defining Unicode char U+012B (decimal 299)
-   defining Unicode char U+012C (decimal 300)
-   defining Unicode char U+012D (decimal 301)
-   defining Unicode char U+012E (decimal 302)
-   defining Unicode char U+012F (decimal 303)
-   defining Unicode char U+0130 (decimal 304)
-   defining Unicode char U+0131 (decimal 305)
-   defining Unicode char U+0132 (decimal 306)
-   defining Unicode char U+0133 (decimal 307)
-   defining Unicode char U+0134 (decimal 308)
-   defining Unicode char U+0135 (decimal 309)
-   defining Unicode char U+0136 (decimal 310)
-   defining Unicode char U+0137 (decimal 311)
-   defining Unicode char U+0139 (decimal 313)
-   defining Unicode char U+013A (decimal 314)
-   defining Unicode char U+013B (decimal 315)
-   defining Unicode char U+013C (decimal 316)
-   defining Unicode char U+013D (decimal 317)
-   defining Unicode char U+013E (decimal 318)
-   defining Unicode char U+0141 (decimal 321)
-   defining Unicode char U+0142 (decimal 322)
-   defining Unicode char U+0143 (decimal 323)
-   defining Unicode char U+0144 (decimal 324)
-   defining Unicode char U+0145 (decimal 325)
-   defining Unicode char U+0146 (decimal 326)
-   defining Unicode char U+0147 (decimal 327)
-   defining Unicode char U+0148 (decimal 328)
-   defining Unicode char U+014A (decimal 330)
-   defining Unicode char U+014B (decimal 331)
-   defining Unicode char U+014C (decimal 332)
-   defining Unicode char U+014D (decimal 333)
-   defining Unicode char U+014E (decimal 334)
-   defining Unicode char U+014F (decimal 335)
-   defining Unicode char U+0150 (decimal 336)
-   defining Unicode char U+0151 (decimal 337)
-   defining Unicode char U+0152 (decimal 338)
-   defining Unicode char U+0153 (decimal 339)
-   defining Unicode char U+0154 (decimal 340)
-   defining Unicode char U+0155 (decimal 341)
-   defining Unicode char U+0156 (decimal 342)
-   defining Unicode char U+0157 (decimal 343)
-   defining Unicode char U+0158 (decimal 344)
-   defining Unicode char U+0159 (decimal 345)
-   defining Unicode char U+015A (decimal 346)
-   defining Unicode char U+015B (decimal 347)
-   defining Unicode char U+015C (decimal 348)
-   defining Unicode char U+015D (decimal 349)
-   defining Unicode char U+015E (decimal 350)
-   defining Unicode char U+015F (decimal 351)
-   defining Unicode char U+0160 (decimal 352)
-   defining Unicode char U+0161 (decimal 353)
-   defining Unicode char U+0162 (decimal 354)
-   defining Unicode char U+0163 (decimal 355)
-   defining Unicode char U+0164 (decimal 356)
-   defining Unicode char U+0165 (decimal 357)
-   defining Unicode char U+0168 (decimal 360)
-   defining Unicode char U+0169 (decimal 361)
-   defining Unicode char U+016A (decimal 362)
-   defining Unicode char U+016B (decimal 363)
-   defining Unicode char U+016C (decimal 364)
-   defining Unicode char U+016D (decimal 365)
-   defining Unicode char U+016E (decimal 366)
-   defining Unicode char U+016F (decimal 367)
-   defining Unicode char U+0170 (decimal 368)
-   defining Unicode char U+0171 (decimal 369)
-   defining Unicode char U+0172 (decimal 370)
-   defining Unicode char U+0173 (decimal 371)
-   defining Unicode char U+0174 (decimal 372)
-   defining Unicode char U+0175 (decimal 373)
-   defining Unicode char U+0176 (decimal 374)
-   defining Unicode char U+0177 (decimal 375)
-   defining Unicode char U+0178 (decimal 376)
-   defining Unicode char U+0179 (decimal 377)
-   defining Unicode char U+017A (decimal 378)
-   defining Unicode char U+017B (decimal 379)
-   defining Unicode char U+017C (decimal 380)
-   defining Unicode char U+017D (decimal 381)
-   defining Unicode char U+017E (decimal 382)
-   defining Unicode char U+01CD (decimal 461)
-   defining Unicode char U+01CE (decimal 462)
-   defining Unicode char U+01CF (decimal 463)
-   defining Unicode char U+01D0 (decimal 464)
-   defining Unicode char U+01D1 (decimal 465)
-   defining Unicode char U+01D2 (decimal 466)
-   defining Unicode char U+01D3 (decimal 467)
-   defining Unicode char U+01D4 (decimal 468)
-   defining Unicode char U+01E2 (decimal 482)
-   defining Unicode char U+01E3 (decimal 483)
-   defining Unicode char U+01E6 (decimal 486)
-   defining Unicode char U+01E7 (decimal 487)
-   defining Unicode char U+01E8 (decimal 488)
-   defining Unicode char U+01E9 (decimal 489)
-   defining Unicode char U+01EA (decimal 490)
-   defining Unicode char U+01EB (decimal 491)
-   defining Unicode char U+01F0 (decimal 496)
-   defining Unicode char U+01F4 (decimal 500)
-   defining Unicode char U+01F5 (decimal 501)
-   defining Unicode char U+0218 (decimal 536)
-   defining Unicode char U+0219 (decimal 537)
-   defining Unicode char U+021A (decimal 538)
-   defining Unicode char U+021B (decimal 539)
-   defining Unicode char U+0232 (decimal 562)
-   defining Unicode char U+0233 (decimal 563)
-   defining Unicode char U+1E02 (decimal 7682)
-   defining Unicode char U+1E03 (decimal 7683)
-   defining Unicode char U+200C (decimal 8204)
-   defining Unicode char U+2010 (decimal 8208)
-   defining Unicode char U+2011 (decimal 8209)
-   defining Unicode char U+2012 (decimal 8210)
-   defining Unicode char U+2013 (decimal 8211)
-   defining Unicode char U+2014 (decimal 8212)
-   defining Unicode char U+2015 (decimal 8213)
-   defining Unicode char U+2018 (decimal 8216)
-   defining Unicode char U+2019 (decimal 8217)
-   defining Unicode char U+201A (decimal 8218)
-   defining Unicode char U+201C (decimal 8220)
-   defining Unicode char U+201D (decimal 8221)
-   defining Unicode char U+201E (decimal 8222)
-   defining Unicode char U+2030 (decimal 8240)
-   defining Unicode char U+2031 (decimal 8241)
-   defining Unicode char U+2039 (decimal 8249)
-   defining Unicode char U+203A (decimal 8250)
-   defining Unicode char U+2423 (decimal 9251)
-   defining Unicode char U+1E20 (decimal 7712)
-   defining Unicode char U+1E21 (decimal 7713)
-)
-Now handling font encoding OT1 ...
-... processing UTF-8 mapping file for font encoding OT1
-
-(/usr/share/texlive/texmf-dist/tex/latex/base/ot1enc.dfu
-File: ot1enc.dfu 2017/01/28 v1.1t UTF-8 support for inputenc
-   defining Unicode char U+00A0 (decimal 160)
-   defining Unicode char U+00A1 (decimal 161)
-   defining Unicode char U+00A3 (decimal 163)
-   defining Unicode char U+00AD (decimal 173)
-   defining Unicode char U+00B8 (decimal 184)
-   defining Unicode char U+00BF (decimal 191)
-   defining Unicode char U+00C5 (decimal 197)
-   defining Unicode char U+00C6 (decimal 198)
-   defining Unicode char U+00D8 (decimal 216)
-   defining Unicode char U+00DF (decimal 223)
-   defining Unicode char U+00E6 (decimal 230)
-   defining Unicode char U+00EC (decimal 236)
-   defining Unicode char U+00ED (decimal 237)
-   defining Unicode char U+00EE (decimal 238)
-   defining Unicode char U+00EF (decimal 239)
-   defining Unicode char U+00F8 (decimal 248)
-   defining Unicode char U+0131 (decimal 305)
-   defining Unicode char U+0141 (decimal 321)
-   defining Unicode char U+0142 (decimal 322)
-   defining Unicode char U+0152 (decimal 338)
-   defining Unicode char U+0153 (decimal 339)
-   defining Unicode char U+0174 (decimal 372)
-   defining Unicode char U+0175 (decimal 373)
-   defining Unicode char U+0176 (decimal 374)
-   defining Unicode char U+0177 (decimal 375)
-   defining Unicode char U+0218 (decimal 536)
-   defining Unicode char U+0219 (decimal 537)
-   defining Unicode char U+021A (decimal 538)
-   defining Unicode char U+021B (decimal 539)
-   defining Unicode char U+2013 (decimal 8211)
-   defining Unicode char U+2014 (decimal 8212)
-   defining Unicode char U+2018 (decimal 8216)
-   defining Unicode char U+2019 (decimal 8217)
-   defining Unicode char U+201C (decimal 8220)
-   defining Unicode char U+201D (decimal 8221)
-)
-Now handling font encoding OMS ...
-... processing UTF-8 mapping file for font encoding OMS
-
-(/usr/share/texlive/texmf-dist/tex/latex/base/omsenc.dfu
-File: omsenc.dfu 2017/01/28 v1.1t UTF-8 support for inputenc
-   defining Unicode char U+00A7 (decimal 167)
-   defining Unicode char U+00B6 (decimal 182)
-   defining Unicode char U+00B7 (decimal 183)
-   defining Unicode char U+2020 (decimal 8224)
-   defining Unicode char U+2021 (decimal 8225)
-   defining Unicode char U+2022 (decimal 8226)
-)
-Now handling font encoding OMX ...
-... no UTF-8 mapping file for font encoding OMX
-Now handling font encoding U ...
-... no UTF-8 mapping file for font encoding U
-   defining Unicode char U+00A9 (decimal 169)
-   defining Unicode char U+00AA (decimal 170)
-   defining Unicode char U+00AE (decimal 174)
-   defining Unicode char U+00BA (decimal 186)
-   defining Unicode char U+02C6 (decimal 710)
-   defining Unicode char U+02DC (decimal 732)
-   defining Unicode char U+200C (decimal 8204)
-   defining Unicode char U+2026 (decimal 8230)
-   defining Unicode char U+2122 (decimal 8482)
-   defining Unicode char U+2423 (decimal 9251)
+("C:\Users\tawan\AppData\Local\Programs\MiKTeX 2.9\tex/generic/iftex\ifvtex.sty
+"
+Package: ifvtex 2019/10/25 v1.7 ifvtex legacy package. Use iftex instead.
+ ("C:\Users\tawan\AppData\Local\Programs\MiKTeX 2.9\tex/generic/iftex\iftex.sty
+"
+Package: iftex 2020/03/06 v1.0d TeX engine tests
 ))
-(/usr/share/texlive/texmf-dist/tex/latex/base/fontenc.sty
-Package: fontenc 2017/04/05 v2.0i Standard LaTeX package
+\Gm@cnth=\count175
+\Gm@cntv=\count176
+\c@Gm@tempcnt=\count177
+\Gm@bindingoffset=\dimen140
+\Gm@wd@mp=\dimen141
+\Gm@odd@mp=\dimen142
+\Gm@even@mp=\dimen143
+\Gm@layoutwidth=\dimen144
+\Gm@layoutheight=\dimen145
+\Gm@layouthoffset=\dimen146
+\Gm@layoutvoffset=\dimen147
+\Gm@dimlist=\toks17
 
-(/usr/share/texlive/texmf-dist/tex/latex/base/t1enc.def
-File: t1enc.def 2017/04/05 v2.0i Standard LaTeX file
-LaTeX Font Info:    Redeclaring font encoding T1 on input line 48.
-))
-(/usr/share/texlive/texmf-dist/tex/latex/psnfss/mathpazo.sty
-Package: mathpazo 2005/04/12 PSNFSS-v9.2a Palatino w/ Pazo Math (D.Puga, WaS) 
+("C:\Users\tawan\AppData\Local\Programs\MiKTeX 2.9\tex/latex/geometry\geometry.
+cfg"))
+\problembox=\box46
+)
+("C:\Users\tawan\AppData\Local\Programs\MiKTeX 2.9\tex/latex/base\inputenc.sty"
+Package: inputenc 2018/08/11 v1.3c Input encoding file
+\inpenc@prehook=\toks18
+\inpenc@posthook=\toks19
+) ("C:\Users\tawan\AppData\Local\Programs\MiKTeX 2.9\tex/latex/base\fontenc.sty
+"
+Package: fontenc 2020/02/11 v2.0o Standard LaTeX package
+)
+("C:\Users\tawan\AppData\Local\Programs\MiKTeX 2.9\tex/latex/psnfss\mathpazo.st
+y"
+Package: mathpazo 2020/03/25 PSNFSS-v9.3 Palatino w/ Pazo Math (D.Puga, WaS) 
 \symupright=\mathgroup4
 )
-(/usr/share/texlive/texmf-dist/tex/latex/graphics/graphicx.sty
-Package: graphicx 2017/06/01 v1.1a Enhanced LaTeX Graphics (DPC,SPQR)
+("C:\Users\tawan\AppData\Local\Programs\MiKTeX 2.9\tex/latex/graphics\graphicx.
+sty"
+Package: graphicx 2019/11/30 v1.2a Enhanced LaTeX Graphics (DPC,SPQR)
 
-(/usr/share/texlive/texmf-dist/tex/latex/graphics/graphics.sty
-Package: graphics 2017/06/25 v1.2c Standard LaTeX Graphics (DPC,SPQR)
+("C:\Users\tawan\AppData\Local\Programs\MiKTeX 2.9\tex/latex/graphics\graphics.
+sty"
+Package: graphics 2019/11/30 v1.4a Standard LaTeX Graphics (DPC,SPQR)
 
-(/usr/share/texlive/texmf-dist/tex/latex/graphics/trig.sty
+("C:\Users\tawan\AppData\Local\Programs\MiKTeX 2.9\tex/latex/graphics\trig.sty"
 Package: trig 2016/01/03 v1.10 sin cos tan (DPC)
 )
-(/usr/share/texlive/texmf-dist/tex/latex/graphics-cfg/graphics.cfg
+("C:\Users\tawan\AppData\Local\Programs\MiKTeX 2.9\tex/latex/graphics-cfg\graph
+ics.cfg"
 File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
 )
-Package graphics Info: Driver file: pdftex.def on input line 99.
+Package graphics Info: Driver file: pdftex.def on input line 105.
 )
-\Gin@req@height=\dimen116
-\Gin@req@width=\dimen117
+\Gin@req@height=\dimen148
+\Gin@req@width=\dimen149
 )
-(/usr/share/texlive/texmf-dist/tex/latex/subfig/subfig.sty
+("C:\Users\tawan\AppData\Local\Programs\MiKTeX 2.9\tex/latex/subfig\subfig.sty"
 Package: subfig 2005/06/28 ver: 1.3 subfig package
 
-(/usr/share/texlive/texmf-dist/tex/latex/caption/caption.sty
-Package: caption 2016/02/21 v3.3-144 Customizing captions (AR)
+("C:\Users\tawan\AppData\Local\Programs\MiKTeX 2.9\tex/latex/caption\caption.st
+y"
+Package: caption 2020/01/03 v3.4h Customizing captions (AR)
 
-(/usr/share/texlive/texmf-dist/tex/latex/caption/caption3.sty
-Package: caption3 2016/05/22 v1.7-166 caption3 kernel (AR)
-Package caption3 Info: TeX engine: e-TeX on input line 67.
-\captionmargin=\dimen118
-\captionmargin@=\dimen119
-\captionwidth=\dimen120
-\caption@tempdima=\dimen121
-\caption@indent=\dimen122
-\caption@parindent=\dimen123
-\caption@hangindent=\dimen124
+("C:\Users\tawan\AppData\Local\Programs\MiKTeX 2.9\tex/latex/caption\caption3.s
+ty"
+Package: caption3 2020/01/03 v1.8h caption3 kernel (AR)
+Package caption3 Info: TeX engine: e-TeX on input line 61.
+\captionmargin=\dimen150
+\captionmargin@=\dimen151
+\captionwidth=\dimen152
+\caption@tempdima=\dimen153
+\caption@indent=\dimen154
+\caption@parindent=\dimen155
+\caption@hangindent=\dimen156
+Package caption Info: Standard document class detected.
 )
-\c@ContinuedFloat=\count90
+\c@caption@flags=\count178
+\c@continuedfloat=\count179
 )
-\c@KVtest=\count91
-\sf@farskip=\skip54
-\sf@captopadj=\dimen125
-\sf@capskip=\skip55
-\sf@nearskip=\skip56
-\c@subfigure=\count92
-\c@subfigure@save=\count93
-\c@lofdepth=\count94
-\c@subtable=\count95
-\c@subtable@save=\count96
-\c@lotdepth=\count97
-\sf@top=\skip57
-\sf@bottom=\skip58
+\c@KVtest=\count180
+\sf@farskip=\skip60
+\sf@captopadj=\dimen157
+\sf@capskip=\skip61
+\sf@nearskip=\skip62
+\c@subfigure=\count181
+\c@subfigure@save=\count182
+\c@lofdepth=\count183
+\c@subtable=\count184
+\c@subtable@save=\count185
+\c@lotdepth=\count186
+\sf@top=\skip63
+\sf@bottom=\skip64
 )
-(/usr/share/texlive/texmf-dist/tex/latex/tools/array.sty
-Package: array 2016/10/06 v2.4d Tabular extension package (FMi)
-\col@sep=\dimen126
-\extrarowheight=\dimen127
-\NC@list=\toks19
-\extratabsurround=\skip59
-\backup@length=\skip60
+("C:\Users\tawan\AppData\Local\Programs\MiKTeX 2.9\tex/latex/tools\array.sty"
+Package: array 2019/08/31 v2.4l Tabular extension package (FMi)
+\col@sep=\dimen158
+\ar@mcellbox=\box47
+\extrarowheight=\dimen159
+\NC@list=\toks20
+\extratabsurround=\skip65
+\backup@length=\skip66
+\ar@cellbox=\box48
 )
-(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsmath.sty
-Package: amsmath 2017/09/02 v2.17a AMS math features
-\@mathmargin=\skip61
+("C:\Users\tawan\AppData\Local\Programs\MiKTeX 2.9\tex/latex/amsmath\amsmath.st
+y"
+Package: amsmath 2020/01/20 v2.17e AMS math features
+\@mathmargin=\skip67
 
 For additional information on amsmath, use the `?' option.
-(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amstext.sty
+
+("C:\Users\tawan\AppData\Local\Programs\MiKTeX 2.9\tex/latex/amsmath\amstext.st
+y"
 Package: amstext 2000/06/29 v2.01 AMS text
 
-(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsgen.sty
+("C:\Users\tawan\AppData\Local\Programs\MiKTeX 2.9\tex/latex/amsmath\amsgen.sty
+"
 File: amsgen.sty 1999/11/30 v2.0 generic functions
-\@emptytoks=\toks20
-\ex@=\dimen128
+\@emptytoks=\toks21
+\ex@=\dimen160
 ))
-(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsbsy.sty
+("C:\Users\tawan\AppData\Local\Programs\MiKTeX 2.9\tex/latex/amsmath\amsbsy.sty
+"
 Package: amsbsy 1999/11/29 v1.2d Bold Symbols
-\pmbraise@=\dimen129
+\pmbraise@=\dimen161
 )
-(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsopn.sty
+("C:\Users\tawan\AppData\Local\Programs\MiKTeX 2.9\tex/latex/amsmath\amsopn.sty
+"
 Package: amsopn 2016/03/08 v2.02 operator names
 )
-\inf@bad=\count98
-LaTeX Info: Redefining \frac on input line 213.
-\uproot@=\count99
-\leftroot@=\count100
-LaTeX Info: Redefining \overline on input line 375.
-\classnum@=\count101
-\DOTSCASE@=\count102
-LaTeX Info: Redefining \ldots on input line 472.
-LaTeX Info: Redefining \dots on input line 475.
-LaTeX Info: Redefining \cdots on input line 596.
-\Mathstrutbox@=\box28
-\strutbox@=\box29
-\big@size=\dimen130
-LaTeX Font Info:    Redeclaring font encoding OML on input line 712.
-LaTeX Font Info:    Redeclaring font encoding OMS on input line 713.
-\macc@depth=\count103
-\c@MaxMatrixCols=\count104
-\dotsspace@=\muskip10
-\c@parentequation=\count105
-\dspbrk@lvl=\count106
-\tag@help=\toks21
-\row@=\count107
-\column@=\count108
-\maxfields@=\count109
-\andhelp@=\toks22
-\eqnshift@=\dimen131
-\alignsep@=\dimen132
-\tagshift@=\dimen133
-\tagwidth@=\dimen134
-\totwidth@=\dimen135
-\lineht@=\dimen136
-\@envbody=\toks23
-\multlinegap=\skip62
-\multlinetaggap=\skip63
-\mathdisplay@stack=\toks24
-LaTeX Info: Redefining \[ on input line 2817.
-LaTeX Info: Redefining \] on input line 2818.
+\inf@bad=\count187
+LaTeX Info: Redefining \frac on input line 227.
+\uproot@=\count188
+\leftroot@=\count189
+LaTeX Info: Redefining \overline on input line 389.
+\classnum@=\count190
+\DOTSCASE@=\count191
+LaTeX Info: Redefining \ldots on input line 486.
+LaTeX Info: Redefining \dots on input line 489.
+LaTeX Info: Redefining \cdots on input line 610.
+\Mathstrutbox@=\box49
+\strutbox@=\box50
+\big@size=\dimen162
+LaTeX Font Info:    Redeclaring font encoding OML on input line 733.
+LaTeX Font Info:    Redeclaring font encoding OMS on input line 734.
+\macc@depth=\count192
+\c@MaxMatrixCols=\count193
+\dotsspace@=\muskip16
+\c@parentequation=\count194
+\dspbrk@lvl=\count195
+\tag@help=\toks22
+\row@=\count196
+\column@=\count197
+\maxfields@=\count198
+\andhelp@=\toks23
+\eqnshift@=\dimen163
+\alignsep@=\dimen164
+\tagshift@=\dimen165
+\tagwidth@=\dimen166
+\totwidth@=\dimen167
+\lineht@=\dimen168
+\@envbody=\toks24
+\multlinegap=\skip68
+\multlinetaggap=\skip69
+\mathdisplay@stack=\toks25
+LaTeX Info: Redefining \[ on input line 2859.
+LaTeX Info: Redefining \] on input line 2860.
 )
-(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/amssymb.sty
+("C:\Users\tawan\AppData\Local\Programs\MiKTeX 2.9\tex/latex/amsfonts\amssymb.s
+ty"
 Package: amssymb 2013/01/14 v3.01 AMS font symbols
 
-(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/amsfonts.sty
+("C:\Users\tawan\AppData\Local\Programs\MiKTeX 2.9\tex/latex/amsfonts\amsfonts.
+sty"
 Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
 \symAMSa=\mathgroup5
 \symAMSb=\mathgroup6
+LaTeX Font Info:    Redeclaring math symbol \hbar on input line 98.
 LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
 (Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
 ))
-(/usr/share/texlive/texmf-dist/tex/latex/booktabs/booktabs.sty
-Package: booktabs 2016/04/27 v1.618033 publication quality tables
-\heavyrulewidth=\dimen137
-\lightrulewidth=\dimen138
-\cmidrulewidth=\dimen139
-\belowrulesep=\dimen140
-\belowbottomsep=\dimen141
-\aboverulesep=\dimen142
-\abovetopsep=\dimen143
-\cmidrulesep=\dimen144
-\cmidrulekern=\dimen145
-\defaultaddspace=\dimen146
-\@cmidla=\count110
-\@cmidlb=\count111
-\@aboverulesep=\dimen147
-\@belowrulesep=\dimen148
-\@thisruleclass=\count112
-\@lastruleclass=\count113
-\@thisrulewidth=\dimen149
+("C:\Users\tawan\AppData\Local\Programs\MiKTeX 2.9\tex/latex/booktabs\booktabs.
+sty"
+Package: booktabs 2020/01/12 v1.61803398 Publication quality tables
+\heavyrulewidth=\dimen169
+\lightrulewidth=\dimen170
+\cmidrulewidth=\dimen171
+\belowrulesep=\dimen172
+\belowbottomsep=\dimen173
+\aboverulesep=\dimen174
+\abovetopsep=\dimen175
+\cmidrulesep=\dimen176
+\cmidrulekern=\dimen177
+\defaultaddspace=\dimen178
+\@cmidla=\count199
+\@cmidlb=\count266
+\@aboverulesep=\dimen179
+\@belowrulesep=\dimen180
+\@thisruleclass=\count267
+\@lastruleclass=\count268
+\@thisrulewidth=\dimen181
 )
-(/usr/share/texlive/texmf-dist/tex/latex/listings/listings.sty
-\lst@mode=\count114
-\lst@gtempboxa=\box30
-\lst@token=\toks25
-\lst@length=\count115
-\lst@currlwidth=\dimen150
-\lst@column=\count116
-\lst@pos=\count117
-\lst@lostspace=\dimen151
-\lst@width=\dimen152
-\lst@newlines=\count118
-\lst@lineno=\count119
-\lst@maxwidth=\dimen153
+("C:\Users\tawan\AppData\Local\Programs\MiKTeX 2.9\tex/latex/listings\listings.
+sty"
+\lst@mode=\count269
+\lst@gtempboxa=\box51
+\lst@token=\toks26
+\lst@length=\count270
+\lst@currlwidth=\dimen182
+\lst@column=\count271
+\lst@pos=\count272
+\lst@lostspace=\dimen183
+\lst@width=\dimen184
+\lst@newlines=\count273
+\lst@lineno=\count274
+\lst@maxwidth=\dimen185
 
-(/usr/share/texlive/texmf-dist/tex/latex/listings/lstmisc.sty
-File: lstmisc.sty 2015/06/04 1.6 (Carsten Heinz)
-\c@lstnumber=\count120
-\lst@skipnumbers=\count121
-\lst@framebox=\box31
+("C:\Users\tawan\AppData\Local\Programs\MiKTeX 2.9\tex/latex/listings\lstmisc.s
+ty"
+File: lstmisc.sty 2020/03/24 1.8d (Carsten Heinz)
+\c@lstnumber=\count275
+\lst@skipnumbers=\count276
+\lst@framebox=\box52
 )
-(/usr/share/texlive/texmf-dist/tex/latex/listings/listings.cfg
-File: listings.cfg 2015/06/04 1.6 listings configuration
+("C:\Users\tawan\AppData\Local\Programs\MiKTeX 2.9\tex/latex/listings\listings.
+cfg"
+File: listings.cfg 2020/03/24 1.8d listings configuration
 ))
-Package: listings 2015/06/04 1.6 (Carsten Heinz)
+Package: listings 2020/03/24 1.8d (Carsten Heinz)
 
-(/usr/share/texlive/texmf-dist/tex/latex/tools/enumerate.sty
+("C:\Users\tawan\AppData\Local\Programs\MiKTeX 2.9\tex/latex/tools\enumerate.st
+y"
 Package: enumerate 2015/07/23 v3.00 enumerate extensions (DPC)
-\@enLab=\toks26
+\@enLab=\toks27
 )
-(/usr/share/texlive/texmf-dist/tex/latex/placeins/placeins.sty
+("C:\Users\tawan\AppData\Local\Programs\MiKTeX 2.9\tex/latex/placeins\placeins.
+sty"
 Package: placeins 2005/04/18  v 2.2
 )
-(/usr/share/texlive/texmf-dist/tex/latex/wrapfig/wrapfig.sty
-\wrapoverhang=\dimen154
-\WF@size=\dimen155
-\c@WF@wrappedlines=\count122
-\WF@box=\box32
-\WF@everypar=\toks27
+("C:\Users\tawan\AppData\Local\Programs\MiKTeX 2.9\tex/latex/wrapfig\wrapfig.st
+y"
+\wrapoverhang=\dimen186
+\WF@size=\dimen187
+\c@WF@wrappedlines=\count277
+\WF@box=\box53
+\WF@everypar=\toks28
 Package: wrapfig 2003/01/31  v 3.6
 )
-(/usr/share/texlive/texmf-dist/tex/latex/pdfpages/pdfpages.sty
-Package: pdfpages 2017/10/31 v0.5l Insert pages of external PDF documents (AM)
+("C:\Users\tawan\AppData\Local\Programs\MiKTeX 2.9\tex/latex/pdfpages\pdfpages.
+sty"
+Package: pdfpages 2020/01/28 v0.5q Insert pages of external PDF documents (AM)
 
-(/usr/share/texlive/texmf-dist/tex/latex/base/ifthen.sty
+("C:\Users\tawan\AppData\Local\Programs\MiKTeX 2.9\tex/latex/base\ifthen.sty"
 Package: ifthen 2014/09/29 v1.1c Standard LaTeX ifthen package (DPC)
 )
-(/usr/share/texlive/texmf-dist/tex/latex/tools/calc.sty
-Package: calc 2014/10/28 v4.3 Infix arithmetic (KKT,FJ)
-\calc@Acount=\count123
-\calc@Bcount=\count124
-\calc@Adimen=\dimen156
-\calc@Bdimen=\dimen157
-\calc@Askip=\skip64
-\calc@Bskip=\skip65
+("C:\Users\tawan\AppData\Local\Programs\MiKTeX 2.9\tex/latex/tools\calc.sty"
+Package: calc 2017/05/25 v4.3 Infix arithmetic (KKT,FJ)
+\calc@Acount=\count278
+\calc@Bcount=\count279
+\calc@Adimen=\dimen188
+\calc@Bdimen=\dimen189
+\calc@Askip=\skip70
+\calc@Bskip=\skip71
 LaTeX Info: Redefining \setlength on input line 80.
 LaTeX Info: Redefining \addtolength on input line 81.
-\calc@Ccount=\count125
-\calc@Cskip=\skip66
+\calc@Ccount=\count280
+\calc@Cskip=\skip72
 )
-(/usr/share/texlive/texmf-dist/tex/latex/eso-pic/eso-pic.sty
-Package: eso-pic 2015/07/21 v2.0g eso-pic (RN)
+("C:\Users\tawan\AppData\Local\Programs\MiKTeX 2.9\tex/latex/eso-pic\eso-pic.st
+y"
+Package: eso-pic 2018/04/12 v2.0h eso-pic (RN)
 
-(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/atbegshi.sty
-Package: atbegshi 2016/06/09 v1.18 At begin shipout hook (HO)
+("C:\Users\tawan\AppData\Local\Programs\MiKTeX 2.9\tex/generic/atbegshi\atbegsh
+i.sty"
+Package: atbegshi 2019/12/05 v1.19 At begin shipout hook (HO)
 
-(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/infwarerr.sty
-Package: infwarerr 2016/05/16 v1.4 Providing info/warning/error messages (HO)
+("C:\Users\tawan\AppData\Local\Programs\MiKTeX 2.9\tex/generic/infwarerr\infwar
+err.sty"
+Package: infwarerr 2019/12/03 v1.5 Providing info/warning/error messages (HO)
 )
-(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ltxcmds.sty
-Package: ltxcmds 2016/05/16 v1.23 LaTeX kernel commands for general use (HO)
+("C:\Users\tawan\AppData\Local\Programs\MiKTeX 2.9\tex/generic/ltxcmds\ltxcmds.
+sty"
+Package: ltxcmds 2019/12/15 v1.24 LaTeX kernel commands for general use (HO)
 )))
-\AM@pagewidth=\dimen158
-\AM@pageheight=\dimen159
+\AM@pagewidth=\dimen190
+\AM@pageheight=\dimen191
 
-(/usr/share/texlive/texmf-dist/tex/latex/pdfpages/pppdftex.def
-File: pppdftex.def 2017/10/31 v0.5l Pdfpages driver for pdfTeX (AM)
+("C:\Users\tawan\AppData\Local\Programs\MiKTeX 2.9\tex/latex/pdfpages\pppdftex.
+def"
+File: pppdftex.def 2020/01/28 v0.5q Pdfpages driver for pdfTeX (AM)
 )
-\AM@pagebox=\box33
-\AM@global@opts=\toks28
-\AM@toc@title=\toks29
-\c@AM@survey=\count126
-\AM@templatesizebox=\box34
+\AM@pagebox=\box54
+\AM@global@opts=\toks29
+\AM@pagecnt=\count281
+\AM@toc@title=\toks30
+\c@AM@survey=\count282
+\AM@templatesizebox=\box55
 )
-(/usr/share/texlive/texmf-dist/tex/latex/base/flafter.sty
-Package: flafter 2017/04/11 v1.4a Standard LaTeX floats after reference (FMi)
+("C:\Users\tawan\AppData\Local\Programs\MiKTeX 2.9\tex/latex/base\flafter.sty"
+Package: flafter 2018/11/28 v1.4d Standard LaTeX floats after reference (FMi)
 Applying: [2015/01/01] float order in 2-column on input line 49.
 Already applied: [0000/00/00] float order in 2-column on input line 151.
-)
-(/usr/share/texlive/texmf-dist/tex/latex/natbib/natbib.sty
+) ("C:\Users\tawan\AppData\Local\Programs\MiKTeX 2.9\tex/latex/natbib\natbib.st
+y"
 Package: natbib 2010/09/13 8.31b (PWD, AO)
-\bibhang=\skip67
-\bibsep=\skip68
+\bibhang=\skip73
+\bibsep=\skip74
 LaTeX Info: Redefining \cite on input line 694.
-\c@NAT@ctr=\count127
+\c@NAT@ctr=\count283
 )
-(/usr/share/texlive/texmf-dist/tex/latex/appendix/appendix.sty
-Package: appendix 2009/09/02 v1.2b extra appendix facilities
-\c@@pps=\count128
-\c@@ppsavesec=\count129
-\c@@ppsaveapp=\count130
+("C:\Users\tawan\AppData\Local\Programs\MiKTeX 2.9\tex/latex/appendix\appendix.
+sty"
+Package: appendix 2020/02/08 v1.2c extra appendix facilities
+\c@@pps=\count284
+\c@@ppsavesec=\count285
+\c@@ppsaveapp=\count286
 )
-(/usr/share/texlive/texmf-dist/tex/generic/babel/babel.sty
-Package: babel 2018/02/14 3.18 The Babel package
-
-(/usr/share/texlive/texmf-dist/tex/generic/babel/switch.def
-File: switch.def 2018/02/14 3.18 Babel switching mechanism
+("C:\Users\tawan\AppData\Local\Programs\MiKTeX 2.9\tex/generic/babel\babel.sty"
+Package: babel 2020/03/22 3.42 The Babel package
+("C:\Users\tawan\AppData\Local\Programs\MiKTeX 2.9\tex/generic/babel\switch.def
+"
+File: switch.def 2020/03/22 3.42 Babel switching mechanism
 )
-(/usr/share/texlive/texmf-dist/tex/generic/babel-english/english.ldf
+*************************************
+* Local config file bblopts.cfg used
+*
+("C:\Users\tawan\AppData\Local\Programs\MiKTeX 2.9\tex/latex/arabi\bblopts.cfg"
+File: bblopts.cfg 2005/09/08 v0.1 add Arabic and Farsi to "declared" options of
+ babel
+)
+("C:\Users\tawan\AppData\Local\Programs\MiKTeX 2.9\tex/latex/babel-english\engl
+ish.ldf"
 Language: english 2017/06/06 v3.3r English support from the babel system
 
-(/usr/share/texlive/texmf-dist/tex/generic/babel/babel.def
-File: babel.def 2018/02/14 3.18 Babel common definitions
-\babel@savecnt=\count131
-\U@D=\dimen160
+("C:\Users\tawan\AppData\Local\Programs\MiKTeX 2.9\tex/generic/babel\babel.def"
+File: babel.def 2020/03/22 3.42 Babel common definitions
+\babel@savecnt=\count287
+\U@D=\dimen192
 
-(/usr/share/texlive/texmf-dist/tex/generic/babel/txtbabel.def)
-\bbl@dirlevel=\count132
+("C:\Users\tawan\AppData\Local\Programs\MiKTeX 2.9\tex/generic/babel\txtbabel.d
+ef")
+\bbl@readstream=\read2
+\bbl@dirlevel=\count288
 )
-\l@canadian = a dialect from \language\l@american 
-\l@australian = a dialect from \language\l@british 
-\l@newzealand = a dialect from \language\l@british 
+Package babel Info: \l@canadian = using hyphenrules for english
+(babel)             (\language0) on input line 102.
+Package babel Info: \l@australian = using hyphenrules for ukenglish
+(babel)             (\language76) on input line 105.
+Package babel Info: \l@newzealand = using hyphenrules for ukenglish
+(babel)             (\language76) on input line 108.
 ))
-(/usr/share/texlive/texmf-dist/tex/latex/setspace/setspace.sty
+("C:\Users\tawan\AppData\Local\Programs\MiKTeX 2.9\tex/latex/setspace\setspace.
+sty"
 Package: setspace 2011/12/19 v6.7a set line spacing
 )
-! Undefined control sequence.
-l.32 \counterwithin
-                   *{equation}{section}
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-
-! LaTeX Error: Missing \begin{document}.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.32 \counterwithin*
-                    {equation}{section}
-You're in trouble here.  Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-! Undefined control sequence.
-l.33 \counterwithin
-                   *{equation}{subsection}
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Undefined control sequence.
-l.34 \counterwithin
-                   *{equation}{subsubsection}
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-(./19476700 Tawana Kwaraamba.aux)
+("C:\Users\tawan\AppData\Local\Programs\MiKTeX 2.9\tex/latex/l3backend\l3backen
+d-pdfmode.def"
+File: l3backend-pdfmode.def 2020-03-12 L3 backend support: PDF mode
+\l__kernel_color_stack_int=\count289
+\l__pdf_internal_box=\box56
+) ("19476700 Tawana Kwaraamba.aux")
 \openout1 = `"19476700 Tawana Kwaraamba.aux"'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 52.
 LaTeX Font Info:    ... okay on input line 52.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 52.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 52.
 LaTeX Font Info:    ... okay on input line 52.
 LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 52.
 LaTeX Font Info:    ... okay on input line 52.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 52.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 52.
+LaTeX Font Info:    ... okay on input line 52.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 52.
 LaTeX Font Info:    ... okay on input line 52.
 LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 52.
 LaTeX Font Info:    ... okay on input line 52.
 LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 52.
 LaTeX Font Info:    ... okay on input line 52.
-LaTeX Font Info:    Try loading font information for T1+ppl on input line 52.
+LaTeX Font Info:    Trying to load font information for T1+ppl on input line 52
+.
 
-(/usr/share/texlive/texmf-dist/tex/latex/psnfss/t1ppl.fd
+("C:\Users\tawan\AppData\Local\Programs\MiKTeX 2.9\tex/latex/psnfss\t1ppl.fd"
 File: t1ppl.fd 2001/06/04 font definitions for T1/ppl.
 )
-(/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+("C:\Users\tawan\AppData\Local\Programs\MiKTeX 2.9\tex/context/base/mkii\supp-p
+df.mkii"
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count133
-\scratchdimen=\dimen161
-\scratchbox=\box35
-\nofMPsegments=\count134
-\nofMParguments=\count135
-\everyMPshowfont=\toks30
-\MPscratchCnt=\count136
-\MPscratchDim=\dimen162
-\MPnumerator=\count137
-\makeMPintoPDFobject=\count138
-\everyMPtoPDFconversion=\toks31
-) (/usr/share/texlive/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
-Package: epstopdf-base 2016/05/15 v2.6 Base part for package epstopdf
-
-(/usr/share/texlive/texmf-dist/tex/latex/oberdiek/grfext.sty
-Package: grfext 2016/05/16 v1.2 Manage graphics extensions (HO)
-
-(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/kvdefinekeys.sty
-Package: kvdefinekeys 2016/05/16 v1.4 Define keys (HO)
-))
-(/usr/share/texlive/texmf-dist/tex/latex/oberdiek/kvoptions.sty
-Package: kvoptions 2016/05/16 v3.12 Key value format for package options (HO)
-
-(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/kvsetkeys.sty
-Package: kvsetkeys 2016/05/16 v1.17 Key value parser (HO)
-
-(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/etexcmds.sty
-Package: etexcmds 2016/05/16 v1.6 Avoid name clashes with e-TeX commands (HO)
-
-(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ifluatex.sty
-Package: ifluatex 2016/05/16 v1.4 Provides the ifluatex switch (HO)
-Package ifluatex Info: LuaTeX not detected.
+\scratchcounter=\count290
+\scratchdimen=\dimen193
+\scratchbox=\box57
+\nofMPsegments=\count291
+\nofMParguments=\count292
+\everyMPshowfont=\toks31
+\MPscratchCnt=\count293
+\MPscratchDim=\dimen194
+\MPnumerator=\count294
+\makeMPintoPDFobject=\count295
+\everyMPtoPDFconversion=\toks32
 )
-Package etexcmds Info: Could not find \expanded.
-(etexcmds)             That can mean that you are not using pdfTeX 1.50 or
-(etexcmds)             that some package has redefined \expanded.
-(etexcmds)             In the latter case, load this package earlier.
-)))
-(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/pdftexcmds.sty
-Package: pdftexcmds 2018/01/21 v0.26 Utility functions of pdfTeX for LuaTeX (HO
-)
-Package pdftexcmds Info: LuaTeX not detected.
-Package pdftexcmds Info: \pdf@primitive is available.
-Package pdftexcmds Info: \pdf@ifprimitive is available.
-Package pdftexcmds Info: \pdfdraftmode found.
-)
+("C:\Users\tawan\AppData\Local\Programs\MiKTeX 2.9\tex/latex/epstopdf-pkg\epsto
+pdf-base.sty"
+Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
 Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
-38.
-Package grfext Info: Graphics extension search list:
-(grfext)             [.pdf,.png,.jpg,.mps,.jpeg,.jbig2,.jb2,.PDF,.PNG,.JPG,.JPE
-G,.JBIG2,.JB2,.eps]
-(grfext)             \AppendGraphicsExtensions on input line 456.
-
-(/usr/share/texlive/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
-File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
-e
-))
+85.
+)
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
 *geometry* verbose mode - [ preamble ] result:
@@ -892,58 +525,1221 @@ Package caption Info: subfig package v1.3 is loaded.
 Package caption Info: listings package is loaded.
 Package caption Info: wrapfig package is loaded.
 Package caption Info: End \AtBeginDocument code.
-\c@lstlisting=\count139
-\AtBeginShipoutBox=\box36
-(/usr/share/texlive/texmf-dist/tex/latex/oberdiek/pdflscape.sty
-Package: pdflscape 2016/05/14 v0.11 Display of landscape pages in PDF (HO)
+\c@lstlisting=\count296
+\AtBeginShipoutBox=\box58
 
-(/usr/share/texlive/texmf-dist/tex/latex/graphics/lscape.sty
+("C:\Users\tawan\AppData\Local\Programs\MiKTeX 2.9\tex/latex/pdflscape\pdflscap
+e.sty"
+Package: pdflscape 2019/12/05 v0.12 Display of landscape pages in PDF (HO)
+
+("C:\Users\tawan\AppData\Local\Programs\MiKTeX 2.9\tex/latex/graphics\lscape.st
+y"
 Package: lscape 2000/10/22 v3.01 Landscape Pages (DPC)
 )
 Package pdflscape Info: Auto-detected driver: pdftex on input line 81.
 )
-LaTeX Font Info:    Font shape `T1/ppl/bx/n' in size <20.74> not available
-(Font)              Font shape `T1/ppl/b/n' tried instead on input line 54.
+<curtin_logo.png, id=1, 455.7025pt x 142.5325pt>
+File: curtin_logo.png Graphic file (type png)
+<use curtin_logo.png>
+Package pdftex.def Info: curtin_logo.png  used on input line 54.
+(pdftex.def)             Requested size: 512.14963pt x 160.19205pt.
+ [1
+
+{C:/Users/tawan/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map} <./curtin_lo
+go.png>]
+<DeclarationOfOriginality_v1.1.pdf, id=10, 597.23125pt x 845.1575pt>
+File: DeclarationOfOriginality_v1.1.pdf Graphic file (type pdf)
+<use DeclarationOfOriginality_v1.1.pdf>
+Package pdftex.def Info: DeclarationOfOriginality_v1.1.pdf  used on input line 
+61.
+(pdftex.def)             Requested size: 597.22978pt x 845.15544pt.
+File: DeclarationOfOriginality_v1.1.pdf Graphic file (type pdf)
+<use DeclarationOfOriginality_v1.1.pdf>
+Package pdftex.def Info: DeclarationOfOriginality_v1.1.pdf  used on input line 
+61.
+(pdftex.def)             Requested size: 597.22978pt x 845.15544pt.
+<DeclarationOfOriginality_v1.1.pdf, id=13, page=1, 597.23125pt x 845.1575pt>
+File: DeclarationOfOriginality_v1.1.pdf Graphic file (type pdf)
+<use DeclarationOfOriginality_v1.1.pdf, page 1>
+Package pdftex.def Info: DeclarationOfOriginality_v1.1.pdf , page1 used on inpu
+t line 61.
+(pdftex.def)             Requested size: 597.22978pt x 845.15544pt.
+File: DeclarationOfOriginality_v1.1.pdf Graphic file (type pdf)
+<use DeclarationOfOriginality_v1.1.pdf, page 1>
+Package pdftex.def Info: DeclarationOfOriginality_v1.1.pdf , page1 used on inpu
+t line 61.
+(pdftex.def)             Requested size: 597.22978pt x 845.15544pt.
+File: DeclarationOfOriginality_v1.1.pdf Graphic file (type pdf)
+<use DeclarationOfOriginality_v1.1.pdf, page 1>
+Package pdftex.def Info: DeclarationOfOriginality_v1.1.pdf , page1 used on inpu
+t line 61.
+(pdftex.def)             Requested size: 597.22978pt x 845.15544pt.
+File: DeclarationOfOriginality_v1.1.pdf Graphic file (type pdf)
+<use DeclarationOfOriginality_v1.1.pdf, page 1>
+Package pdftex.def Info: DeclarationOfOriginality_v1.1.pdf , page1 used on inpu
+t line 61.
+(pdftex.def)             Requested size: 597.22978pt x 845.15544pt.
+File: DeclarationOfOriginality_v1.1.pdf Graphic file (type pdf)
+<use DeclarationOfOriginality_v1.1.pdf, page 1>
+Package pdftex.def Info: DeclarationOfOriginality_v1.1.pdf , page1 used on inpu
+t line 61.
+(pdftex.def)             Requested size: 597.22978pt x 845.15544pt.
+ [2 <./DeclarationOfOriginality_v1.1.pdf>]
+("19476700 Tawana Kwaraamba.toc")
+\tf@toc=\write3
+\openout3 = `"19476700 Tawana Kwaraamba.toc"'.
+
+ [3] ("19476700 Tawana Kwaraamba.lof"
+LaTeX Font Info:    Trying to load font information for OT1+ppl on input line 2
+.
+
+("C:\Users\tawan\AppData\Local\Programs\MiKTeX 2.9\tex/latex/psnfss\ot1ppl.fd"
+File: ot1ppl.fd 2001/06/04 font definitions for OT1/ppl.
+)
+LaTeX Font Info:    Trying to load font information for OML+zplm on input line 
+2.
+("C:\Users\tawan\AppData\Local\Programs\MiKTeX 2.9\tex/latex/psnfss\omlzplm.fd"
+File: omlzplm.fd 2002/09/08 Fontinst v1.914 font definitions for OML/zplm.
+)
+LaTeX Font Info:    Trying to load font information for OMS+zplm on input line 
+2.
+ ("C:\Users\tawan\AppData\Local\Programs\MiKTeX 2.9\tex/latex/psnfss\omszplm.fd
+"
+File: omszplm.fd 2002/09/08 Fontinst v1.914 font definitions for OMS/zplm.
+)
+LaTeX Font Info:    Trying to load font information for OMX+zplm on input line 
+2.
+
+("C:\Users\tawan\AppData\Local\Programs\MiKTeX 2.9\tex/latex/psnfss\omxzplm.fd"
+File: omxzplm.fd 2002/09/08 Fontinst v1.914 font definitions for OMX/zplm.
+)
+LaTeX Font Info:    Trying to load font information for OT1+zplm on input line 
+2.
+ ("C:\Users\tawan\AppData\Local\Programs\MiKTeX 2.9\tex/latex/psnfss\ot1zplm.fd
+"
+File: ot1zplm.fd 2002/09/08 Fontinst v1.914 font definitions for OT1/zplm.
+)
+LaTeX Font Info:    Font shape `U/msa/m/n' will be
+(Font)              scaled to size 12.50409pt on input line 2.
+LaTeX Font Info:    Font shape `U/msa/m/n' will be
+(Font)              scaled to size 9.37807pt on input line 2.
+LaTeX Font Info:    Font shape `U/msa/m/n' will be
+(Font)              scaled to size 7.29405pt on input line 2.
+LaTeX Font Info:    Font shape `U/msb/m/n' will be
+(Font)              scaled to size 12.50409pt on input line 2.
+LaTeX Font Info:    Font shape `U/msb/m/n' will be
+(Font)              scaled to size 9.37807pt on input line 2.
+LaTeX Font Info:    Font shape `U/msb/m/n' will be
+(Font)              scaled to size 7.29405pt on input line 2.
+)
+\tf@lof=\write4
+\openout4 = `"19476700 Tawana Kwaraamba.lof"'.
+
+ [4] ("19476700 Tawana Kwaraamba.lot")
+\tf@lot=\write5
+\openout5 = `"19476700 Tawana Kwaraamba.lot"'.
+
+ [5] [1]
+<files/uml.pdf, id=55, 845.07718pt x 598.15468pt>
+File: files/uml.pdf Graphic file (type pdf)
+<use files/uml.pdf>
+Package pdftex.def Info: files/uml.pdf  used on input line 89.
+(pdftex.def)             Requested size: 845.07512pt x 598.15321pt.
+File: files/uml.pdf Graphic file (type pdf)
+<use files/uml.pdf>
+Package pdftex.def Info: files/uml.pdf  used on input line 89.
+(pdftex.def)             Requested size: 845.07512pt x 598.15321pt.
+<files/uml.pdf, id=58, page=1, 845.07718pt x 598.15468pt>
+File: files/uml.pdf Graphic file (type pdf)
+<use files/uml.pdf, page 1>
+Package pdftex.def Info: files/uml.pdf , page1 used on input line 89.
+(pdftex.def)             Requested size: 845.07512pt x 598.15321pt.
+File: files/uml.pdf Graphic file (type pdf)
+<use files/uml.pdf, page 1>
+Package pdftex.def Info: files/uml.pdf , page1 used on input line 89.
+(pdftex.def)             Requested size: 836.629pt x 592.17496pt.
+File: files/uml.pdf Graphic file (type pdf)
+<use files/uml.pdf, page 1>
+Package pdftex.def Info: files/uml.pdf , page1 used on input line 89.
+(pdftex.def)             Requested size: 836.629pt x 592.17496pt.
+File: files/uml.pdf Graphic file (type pdf)
+<use files/uml.pdf, page 1>
+Package pdftex.def Info: files/uml.pdf , page1 used on input line 89.
+(pdftex.def)             Requested size: 836.629pt x 592.17496pt.
+File: files/uml.pdf Graphic file (type pdf)
+<use files/uml.pdf, page 1>
+Package pdftex.def Info: files/uml.pdf , page1 used on input line 89.
+(pdftex.def)             Requested size: 836.629pt x 592.17496pt.
+ [2 <./files/uml.pdf
+
+pdfTeX warning: pdflatex (file ./files/uml.pdf): PDF inclusion: invalid other r
+esource which is no dict (key 'ProcSets', type <array>); ignored.
+>] [3] [4] [5] [6] [7] [8]
+<output/DetectedArea0.jpg, id=101, 225.84375pt x 225.84375pt>
+File: output/DetectedArea0.jpg Graphic file (type jpg)
+<use output/DetectedArea0.jpg>
+Package pdftex.def Info: output/DetectedArea0.jpg  used on input line 131.
+(pdftex.def)             Requested size: 125.4761pt x 125.47916pt.
+<output/DetectedArea1.jpg, id=102, 538.01pt x 887.315pt>
+File: output/DetectedArea1.jpg Graphic file (type jpg)
+<use output/DetectedArea1.jpg>
+Package pdftex.def Info: output/DetectedArea1.jpg  used on input line 146.
+(pdftex.def)             Requested size: 150.57286pt x 248.32465pt.
+<output/DetectedArea2.jpg, id=103, 225.84375pt x 225.84375pt>
+File: output/DetectedArea2.jpg Graphic file (type jpg)
+<use output/DetectedArea2.jpg>
+Package pdftex.def Info: output/DetectedArea2.jpg  used on input line 161.
+(pdftex.def)             Requested size: 125.4761pt x 125.47916pt.
+<output/DetectedArea3.jpg, id=104, 259.97125pt x 194.7275pt>
+File: output/DetectedArea3.jpg Graphic file (type jpg)
+<use output/DetectedArea3.jpg>
+Package pdftex.def Info: output/DetectedArea3.jpg  used on input line 176.
+(pdftex.def)             Requested size: 125.4761pt x 93.98512pt.
+<output/DetectedArea4.jpg, id=105, 265.99374pt x 265.99374pt>
+File: output/DetectedArea4.jpg Graphic file (type jpg)
+<use output/DetectedArea4.jpg>
+Package pdftex.def Info: output/DetectedArea4.jpg  used on input line 191.
+(pdftex.def)             Requested size: 125.4761pt x 125.47571pt.
+<output/DetectedArea5.jpg, id=106, 259.97125pt x 194.7275pt>
+File: output/DetectedArea5.jpg Graphic file (type jpg)
+<use output/DetectedArea5.jpg>
+Package pdftex.def Info: output/DetectedArea5.jpg  used on input line 206.
+(pdftex.def)             Requested size: 125.4761pt x 93.98512pt.
+ [9 <./output/DetectedArea0.jpg> <./output/DetectedArea1.jpg>] [10 <./output/De
+tectedArea2.jpg> <./output/DetectedArea3.jpg> <./output/DetectedArea4.jpg>] [11
+ <./output/DetectedArea5.jpg>]
+Overfull \hbox (33.55818pt too wide) in paragraph at lines 227--228
+\T1/ppl/m/n/12 southeast-2-prod-fleet01-xythos.s3.ap-southeast-2.amazonaws.com/
+5dc3e34515a0e/4348643?response-
+ []
 
 
-! LaTeX Error: Unknown graphics extension: .png".
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.54 \maketitle
-               
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-[1
-
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
-
-! LaTeX Error: Unknown graphics extension: .1".pdf.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.61 ]{"DeclarationOfOriginality_v1.1"}
-                                       
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-! Undefined control sequence.
-\AM@getpagecount ...ource {\AM@currentdocname@fix 
-                                                  }\edef \AM@pagecount {\the...
-l.61 ]{"DeclarationOfOriginality_v1.1"}
-                                       
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
+Overfull \hbox (120.7835pt too wide) in paragraph at lines 227--228
+\T1/ppl/m/n/12 cache-control=private%2C%20max-age%3D21600&response-content-disp
+osition=inline%3B%20filename%2A%3DUTF-
+ []
 
 
-!pdfTeX error: pdflatex (file /usr/share/texlive/texmf-dist/tex/latex/tools/.te
-x): unknown type of image
- ==> Fatal error occurred, no output PDF file produced!
+Overfull \hbox (92.23528pt too wide) in paragraph at lines 227--228
+\T1/ppl/m/n/12 8%27%27lecture03_feature_detection.pdf&response-content-type=app
+lication%2Fpdf&X-Amz-Algorithm=AWS4-
+ []
+
+
+Overfull \hbox (69.18593pt too wide) in paragraph at lines 227--228
+\T1/ppl/m/n/12 HMAC-SHA256&X-Amz-Date=20201030T210000Z&X-Amz-SignedHeaders=host
+&X-Amz-Expires=21600&X-
+ []
+
+
+Overfull \hbox (63.0295pt too wide) in paragraph at lines 227--228
+\T1/ppl/m/n/12 Amz-Credential=AKIAYDKQORRYZBCCQFY5%2F20201030%2Fap-southeast-2%
+2Fs3%2Faws4_request&X-
+ []
+
+
+Overfull \hbox (26.62114pt too wide) in paragraph at lines 230--231
+\T1/ppl/m/n/12 search. https://www.pyimagesearch.com/2014/11/17/non-maximum-sup
+pression-object-detection-
+ []
+
+
+Overfull \hbox (22.97385pt too wide) in paragraph at lines 232--233
+[]\T1/ppl/m/n/12 Sambasivarao, K. 2019. Non-maximum Sup-pres-sion (NMS)". http
+s://towardsdatascience.com/non-
+ []
+
+[12]
+("C:\Users\tawan\AppData\Local\Programs\MiKTeX 2.9\tex/latex/listings\lstlang1.
+sty"
+File: lstlang1.sty 2020/03/24 1.8d listings language file
+) (files/main.py
+Overfull \hbox (27.85587pt too wide) in paragraph at lines 7--8
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (49.45609pt too wide) in paragraph at lines 8--9
+[][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (20.65579pt too wide) in paragraph at lines 9--10
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+LaTeX Font Info:    Trying to load font information for TS1+ppl on input line 1
+3.
+("C:\Users\tawan\AppData\Local\Programs\MiKTeX 2.9\tex/latex/psnfss\ts1ppl.fd"
+File: ts1ppl.fd 2001/06/04 font definitions for TS1/ppl.
+)
+Overfull \hbox (35.05594pt too wide) in paragraph at lines 33--34
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (20.65579pt too wide) in paragraph at lines 38--39
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+[13]
+Overfull \hbox (49.45609pt too wide) in paragraph at lines 39--40
+[][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (56.65616pt too wide) in paragraph at lines 40--41
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (63.85623pt too wide) in paragraph at lines 43--44
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (20.65579pt too wide) in paragraph at lines 44--45
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (49.45609pt too wide) in paragraph at lines 49--50
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (42.25601pt too wide) in paragraph at lines 54--55
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (63.85623pt too wide) in paragraph at lines 57--58
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (35.05594pt too wide) in paragraph at lines 58--59
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (27.85587pt too wide) in paragraph at lines 61--62
+[][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (42.25601pt too wide) in paragraph at lines 62--63
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+) [14] (files/Trainer.py
+Overfull \hbox (35.05594pt too wide) in paragraph at lines 5--6
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (42.25601pt too wide) in paragraph at lines 6--7
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (13.45572pt too wide) in paragraph at lines 7--8
+[][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (49.45609pt too wide) in paragraph at lines 16--17
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (20.65579pt too wide) in paragraph at lines 17--18
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (63.85623pt too wide) in paragraph at lines 18--19
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (63.85623pt too wide) in paragraph at lines 30--31
+[][][][][][][] 
+ []
+
+[15
+
+]
+Overfull \hbox (63.85623pt too wide) in paragraph at lines 48--49
+[][][][][][][][][] 
+ []
+
+
+Overfull \hbox (20.65579pt too wide) in paragraph at lines 54--55
+[][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (49.45609pt too wide) in paragraph at lines 58--59
+[][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (56.65616pt too wide) in paragraph at lines 59--60
+[][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (42.25601pt too wide) in paragraph at lines 65--66
+[][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (92.65652pt too wide) in paragraph at lines 72--73
+[][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (49.45609pt too wide) in paragraph at lines 82--83
+[][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+[16]
+Overfull \hbox (63.85623pt too wide) in paragraph at lines 84--85
+[][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (27.85587pt too wide) in paragraph at lines 93--94
+[][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (42.25601pt too wide) in paragraph at lines 122--123
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (13.45572pt too wide) in paragraph at lines 123--124
+[][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+[17]
+Overfull \hbox (49.45609pt too wide) in paragraph at lines 129--130
+[][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (56.65616pt too wide) in paragraph at lines 130--131
+[][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (20.65579pt too wide) in paragraph at lines 138--139
+[][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (49.45609pt too wide) in paragraph at lines 143--144
+[][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+) [18] (files/Image.py
+Overfull \hbox (6.25565pt too wide) in paragraph at lines 7--8
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (13.45572pt too wide) in paragraph at lines 8--9
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (63.85623pt too wide) in paragraph at lines 27--28
+[][][][][][][] 
+ []
+
+
+Overfull \hbox (63.85623pt too wide) in paragraph at lines 40--41
+[][][][][][][] 
+ []
+
+[19
+
+]
+Overfull \hbox (35.05594pt too wide) in paragraph at lines 46--47
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (42.25601pt too wide) in paragraph at lines 54--55
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (6.25565pt too wide) in paragraph at lines 55--56
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (56.65616pt too wide) in paragraph at lines 67--68
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (49.45609pt too wide) in paragraph at lines 68--69
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (35.05594pt too wide) in paragraph at lines 83--84
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+[20]
+Overfull \hbox (56.65616pt too wide) in paragraph at lines 90--91
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (42.25601pt too wide) in paragraph at lines 94--95
+[][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (42.25601pt too wide) in paragraph at lines 97--98
+[][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (56.65616pt too wide) in paragraph at lines 99--101
+[][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (35.05594pt too wide) in paragraph at lines 103--104
+[][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (42.25601pt too wide) in paragraph at lines 109--110
+[][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (20.65579pt too wide) in paragraph at lines 113--114
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (20.65579pt too wide) in paragraph at lines 116--117
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (27.85587pt too wide) in paragraph at lines 117--118
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+[21]
+Overfull \hbox (49.45609pt too wide) in paragraph at lines 130--132
+[][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (27.85587pt too wide) in paragraph at lines 132--133
+[][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (6.25565pt too wide) in paragraph at lines 137--139
+[][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (49.45609pt too wide) in paragraph at lines 139--140
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (27.85587pt too wide) in paragraph at lines 142--143
+[][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (56.65616pt too wide) in paragraph at lines 146--148
+[][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (42.25601pt too wide) in paragraph at lines 149--150
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (35.05594pt too wide) in paragraph at lines 157--158
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (63.85623pt too wide) in paragraph at lines 158--159
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (42.25601pt too wide) in paragraph at lines 166--167
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+[22]
+Overfull \hbox (78.25638pt too wide) in paragraph at lines 171--173
+[][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (63.85623pt too wide) in paragraph at lines 173--174
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (71.0563pt too wide) in paragraph at lines 178--181
+[][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (35.05594pt too wide) in paragraph at lines 181--182
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (35.05594pt too wide) in paragraph at lines 182--183
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (71.0563pt too wide) in paragraph at lines 187--190
+[][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (63.85623pt too wide) in paragraph at lines 197--198
+[][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (20.65579pt too wide) in paragraph at lines 200--201
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (6.25565pt too wide) in paragraph at lines 201--202
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+[23]
+Overfull \hbox (35.05594pt too wide) in paragraph at lines 238--239
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (42.25601pt too wide) in paragraph at lines 244--245
+[][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (42.25601pt too wide) in paragraph at lines 247--248
+[][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (56.65616pt too wide) in paragraph at lines 249--251
+[][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+[24]
+Overfull \hbox (35.05594pt too wide) in paragraph at lines 252--253
+[][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (13.45572pt too wide) in paragraph at lines 262--263
+[][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (107.05667pt too wide) in paragraph at lines 268--270
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (49.45609pt too wide) in paragraph at lines 271--273
+[][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (6.25565pt too wide) in paragraph at lines 276--277
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (6.25565pt too wide) in paragraph at lines 293--294
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+[25]
+Overfull \hbox (42.25601pt too wide) in paragraph at lines 297--299
+[][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (27.85587pt too wide) in paragraph at lines 304--305
+[][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (6.25565pt too wide) in paragraph at lines 305--306
+[][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (42.25601pt too wide) in paragraph at lines 308--309
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (27.85587pt too wide) in paragraph at lines 309--310
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (42.25601pt too wide) in paragraph at lines 312--313
+[][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (42.25601pt too wide) in paragraph at lines 323--324
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (27.85587pt too wide) in paragraph at lines 331--332
+[][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+[26]
+Overfull \hbox (6.25565pt too wide) in paragraph at lines 344--345
+[][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (6.25565pt too wide) in paragraph at lines 350--351
+[][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (27.85587pt too wide) in paragraph at lines 353--354
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (27.85587pt too wide) in paragraph at lines 366--367
+[][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+[27]
+Overfull \hbox (27.85587pt too wide) in paragraph at lines 384--385
+[][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (6.25565pt too wide) in paragraph at lines 389--390
+[][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (13.45572pt too wide) in paragraph at lines 397--398
+[][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (13.45572pt too wide) in paragraph at lines 403--404
+[][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (35.05594pt too wide) in paragraph at lines 414--415
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (42.25601pt too wide) in paragraph at lines 418--419
+[][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+[28]
+Overfull \hbox (20.65579pt too wide) in paragraph at lines 445--446
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (42.25601pt too wide) in paragraph at lines 449--450
+[][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (20.65579pt too wide) in paragraph at lines 451--452
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+[29]
+Overfull \hbox (27.85587pt too wide) in paragraph at lines 463--464
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (20.65579pt too wide) in paragraph at lines 464--465
+[][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (6.25565pt too wide) in paragraph at lines 482--483
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (6.25565pt too wide) in paragraph at lines 502--503
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+[30]
+Overfull \hbox (27.85587pt too wide) in paragraph at lines 519--520
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (20.65579pt too wide) in paragraph at lines 520--521
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (20.65579pt too wide) in paragraph at lines 524--525
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (13.45572pt too wide) in paragraph at lines 525--526
+[][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (6.25565pt too wide) in paragraph at lines 539--540
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+[31]
+Overfull \hbox (35.05594pt too wide) in paragraph at lines 546--547
+[][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (6.25565pt too wide) in paragraph at lines 565--566
+[][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (6.25565pt too wide) in paragraph at lines 580--581
+[][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+[32]
+Overfull \hbox (27.85587pt too wide) in paragraph at lines 595--596
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (6.25565pt too wide) in paragraph at lines 600--601
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (20.65579pt too wide) in paragraph at lines 601--602
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (6.25565pt too wide) in paragraph at lines 617--618
+[][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (20.65579pt too wide) in paragraph at lines 626--627
+[][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (27.85587pt too wide) in paragraph at lines 628--629
+[][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+[33]
+Overfull \hbox (20.65579pt too wide) in paragraph at lines 647--648
+[][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (13.45572pt too wide) in paragraph at lines 653--654
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (13.45572pt too wide) in paragraph at lines 670--671
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+[34]
+Overfull \hbox (6.25565pt too wide) in paragraph at lines 691--692
+[][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (13.45572pt too wide) in paragraph at lines 697--698
+[][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (35.05594pt too wide) in paragraph at lines 704--705
+[][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (6.25565pt too wide) in paragraph at lines 711--712
+[][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (27.85587pt too wide) in paragraph at lines 712--713
+[][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+[35] [36]
+Overfull \hbox (13.45572pt too wide) in paragraph at lines 759--760
+[][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (13.45572pt too wide) in paragraph at lines 797--798
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+[37]
+Overfull \hbox (13.45572pt too wide) in paragraph at lines 798--799
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (13.45572pt too wide) in paragraph at lines 819--820
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (6.25565pt too wide) in paragraph at lines 834--835
+[][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (20.65579pt too wide) in paragraph at lines 835--836
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+[38]
+Overfull \hbox (6.25565pt too wide) in paragraph at lines 866--867
+[][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (6.25565pt too wide) in paragraph at lines 874--875
+[][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (20.65579pt too wide) in paragraph at lines 875--876
+[][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+[39]
+Overfull \hbox (78.25638pt too wide) in paragraph at lines 884--885
+[][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (27.85587pt too wide) in paragraph at lines 894--895
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (20.65579pt too wide) in paragraph at lines 898--899
+[][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (13.45572pt too wide) in paragraph at lines 908--909
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+[40]
+Overfull \hbox (6.25565pt too wide) in paragraph at lines 932--933
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (20.65579pt too wide) in paragraph at lines 933--934
+[][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (27.85587pt too wide) in paragraph at lines 937--938
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (42.25601pt too wide) in paragraph at lines 939--941
+[][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (13.45572pt too wide) in paragraph at lines 945--946
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (13.45572pt too wide) in paragraph at lines 951--952
+[][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (27.85587pt too wide) in paragraph at lines 957--958
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (13.45572pt too wide) in paragraph at lines 958--959
+[][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (27.85587pt too wide) in paragraph at lines 959--960
+[][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (6.25565pt too wide) in paragraph at lines 963--964
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+[41]
+Overfull \hbox (20.65579pt too wide) in paragraph at lines 993--994
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (20.65579pt too wide) in paragraph at lines 1003--1004
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+[42]
+Overfull \hbox (13.45572pt too wide) in paragraph at lines 1024--1025
+[][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (27.85587pt too wide) in paragraph at lines 1025--1026
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (35.05594pt too wide) in paragraph at lines 1030--1031
+[][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (42.25601pt too wide) in paragraph at lines 1037--1038
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+[43]
+Overfull \hbox (6.25565pt too wide) in paragraph at lines 1057--1058
+[][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (13.45572pt too wide) in paragraph at lines 1068--1069
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (56.65616pt too wide) in paragraph at lines 1089--1091
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+) [44] [45] (files/ImageLoader.py
+Overfull \hbox (63.85623pt too wide) in paragraph at lines 5--6
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (42.25601pt too wide) in paragraph at lines 6--7
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (63.85623pt too wide) in paragraph at lines 7--8
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (27.85587pt too wide) in paragraph at lines 17--18
+[][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (42.25601pt too wide) in paragraph at lines 24--25
+[][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (63.85623pt too wide) in paragraph at lines 32--33
+[][][][][][][] 
+ []
+
+[46
+
+]
+Overfull \hbox (63.85623pt too wide) in paragraph at lines 52--53
+[][][][][][][] 
+ []
+
+
+Overfull \hbox (63.85623pt too wide) in paragraph at lines 57--58
+[][][][][][][][][] 
+ []
+
+
+Overfull \hbox (35.05594pt too wide) in paragraph at lines 66--67
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (35.05594pt too wide) in paragraph at lines 67--68
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (13.45572pt too wide) in paragraph at lines 81--82
+[][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+[47]
+Overfull \hbox (27.85587pt too wide) in paragraph at lines 84--85
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (13.45572pt too wide) in paragraph at lines 96--97
+[][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (6.25565pt too wide) in paragraph at lines 116--117
+[][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (27.85587pt too wide) in paragraph at lines 122--123
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+[48]
+Overfull \hbox (92.65652pt too wide) in paragraph at lines 133--134
+[][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (56.65616pt too wide) in paragraph at lines 142--143
+[][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (71.0563pt too wide) in paragraph at lines 151--152
+[][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+[49]
+Overfull \hbox (13.45572pt too wide) in paragraph at lines 169--170
+[][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (35.05594pt too wide) in paragraph at lines 170--171
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (63.85623pt too wide) in paragraph at lines 173--174
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (42.25601pt too wide) in paragraph at lines 187--189
+[][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (42.25601pt too wide) in paragraph at lines 195--196
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+) [50] (files/Colours.py
+Overfull \hbox (6.25565pt too wide) in paragraph at lines 5--6
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (13.45572pt too wide) in paragraph at lines 8--9
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+) [51
+
+] (files/Errors.py
+Overfull \hbox (42.25601pt too wide) in paragraph at lines 5--6
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (6.25565pt too wide) in paragraph at lines 16--17
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+) [52
+
+] ("19476700 Tawana Kwaraamba.aux") ) 
+Here is how much of TeX's memory you used:
+ 9898 strings out of 480896
+ 141834 string characters out of 2898165
+ 603982 words of memory out of 3000000
+ 25564 multiletter control sequences out of 15000+200000
+ 562312 words of font info for 78 fonts, out of 3000000 for 9000
+ 1141 hyphenation exceptions out of 8191
+ 50i,19n,49p,1460b,1919s stack positions out of 5000i,500n,10000p,200000b,50000s
+{C:/Users/tawan/AppData/Local/Programs/MiK
+TeX 2.9/fonts/enc/dvips/base/8r.enc}<C:/Users/tawan/AppData/Local/Programs/MiKT
+eX 2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/tawan/AppData/Local/P
+rograms/MiKTeX 2.9/fonts/type1/urw/palatino/uplb8a.pfb><C:/Users/tawan/AppData/
+Local/Programs/MiKTeX 2.9/fonts/type1/urw/palatino/uplr8a.pfb><C:/Users/tawan/A
+ppData/Local/Programs/MiKTeX 2.9/fonts/type1/urw/palatino/uplri8a.pfb>
+Output written on "19476700 Tawana Kwaraamba.pdf" (57 pages, 611040 bytes).
+PDF statistics:
+ 263 PDF objects out of 1000 (max. 8388607)
+ 0 named destinations out of 1000 (max. 500000)
+ 76 words of extra memory for PDF output out of 10000 (max. 10000000)
+

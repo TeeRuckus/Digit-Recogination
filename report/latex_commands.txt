@@ -36,4 +36,4 @@ Latex commands which might be useful
 \newpage
 
 i = interest\ rate, P_{x} = present\ value, and\ F_{x} = future\ value
-
+\lstinputlisting[language=Python]{../programme/main.py}

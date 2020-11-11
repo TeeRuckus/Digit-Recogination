@@ -206,14 +206,11 @@ class Image(object):
 
         file_name = 'output/DetectedArea' + str(img_id) + ".jpg"
         bbox_file_name = 'output/BoundingBox' +str(img_id) + ".txt"
-        #saving the orignal image whihch was passed into the pgromme
-        og_img = 'output/test' +str(img_id) + '.jpg'
-        cv.imwrite(og_img, im)
 
         #cv.imwrite(file_name, cropped_image)
         self.draw_boxes(bboxes, im, (255,0,0))
         cv.imwrite(file_name, im)
-        np.savetxt(bbox_file_name, [new_region], delimiter=',', fmt= '%d')
+        np.savetxt(bbox_file_name, [new_region], delimiter=',')
 
         if self._DEBUG:
             self.show_debug_boxes([new_region], im, "new region found")

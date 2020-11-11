@@ -125,15 +125,139 @@ Thereafter we created our classifier we can use the classifier to classify our d
 \newpage
 \part{Discussion of produced Results}
 \newpage
+\begin{figure}[htp]
+	\begin{problem}
+	\begin{center}
+	\includegraphics[width=0.25\linewidth]{"output/DetectedArea0"}
+%----------------------------------------------------------------------------------------
+	\\this image produced a bounding box with the follow coordinates: [8, 9.4, 66, 54]\\
+	The classifier of this image produced the following numbers: 33
+
+%----------------------------------------------------------------------------------------
+	\end{center}
+	\end{problem}
+	\caption{Results for the house number 35}
+	\label{Results for the house number 35}
+\end{figure}
+
+\begin{figure}[htp]
+	\begin{problem}
+	\begin{center}
+	\includegraphics[width=0.30\linewidth]{"output/DetectedArea1"}
+%----------------------------------------------------------------------------------------
+	\\this image produced a bounding box with the follow coordinates: [198, 147, 600, 103]\\
+	The classifier of this image produced the following numbers: 302
+
+%----------------------------------------------------------------------------------------
+	\end{center}
+	\end{problem}
+	\caption{Results for the house number 302}
+	\label{Results for the house number 302}
+\end{figure}
+
+\begin{figure}[htp]
+	\begin{problem}
+	\begin{center}
+	\includegraphics[width=0.25\linewidth]{"output/DetectedArea2"}
+%----------------------------------------------------------------------------------------
+	\\this image produced a bounding box with the follow coordinates: [76, 90, 59, 50]\\
+	The classifier of this image produced the following numbers: 70
+
+%----------------------------------------------------------------------------------------
+	\end{center}
+	\end{problem}
+	\caption{Results for the house number 71}
+	\label{Results for the house number 71}
+\end{figure}
+
+\begin{figure}[htp]
+	\begin{problem}
+	\begin{center}
+	\includegraphics[width=0.25\linewidth]{"output/DetectedArea3"}
+%----------------------------------------------------------------------------------------
+	\\this image produced a bounding box with the follow coordinates: [48, 1, 210, 145]\\
+	The classifier of this image produced the following numbers: 4826
+
+%----------------------------------------------------------------------------------------
+	\end{center}
+	\end{problem}
+	\caption{Results for the house number 48}
+	\label{Results for the house number 48}
+\end{figure}
+
+\begin{figure}[htp]
+	\begin{problem}
+	\begin{center}
+	\includegraphics[width=0.25\linewidth]{"output/DetectedArea4"}
+%----------------------------------------------------------------------------------------
+	\\this image produced a bounding box with the follow coordinates: [80, 90, 107, 79]\\
+	The classifier of this image produced the following numbers: 28
+
+%----------------------------------------------------------------------------------------
+	\end{center}
+	\end{problem}
+	\caption{Results for the house number 26}
+	\label{Results for the house number 26}
+\end{figure}
+
+\begin{figure}[htp]
+	\begin{problem}
+	\begin{center}
+	\includegraphics[width=0.25\linewidth]{"output/DetectedArea5"}
+%----------------------------------------------------------------------------------------
+	\\this image produced a bounding box with the follow coordinates: [56, 54, 109, 103]\\
+	The classifier of this image produced the following numbers: 94
+
+%----------------------------------------------------------------------------------------
+	\end{center}
+	\end{problem}
+	\caption{Results for the house number 94}
+	\label{Results for the house number 94}
+\end{figure}
+
+\section{Discussion}
+As can be seen from the produced results, the image classifier is unable to classify some images successfully as seen figure \ref{Results for the house number 35}, \ref{Results for the house number 71}, and \ref{Results for the house number 48}. Since the classifier can only classify half of the images successfully it can be said that the classifier has a classification accuracy of 50\%.\par
+
+They're two reasons for the low classification score of the images firstly, some of the images weren't segmented properly i.e. the bounding boxes were bounding more than just the digits namely the results produced in figure \ref{Results for the house number 48}. Therefore when the image class segmented the bounding boxes out of the image it also segmented the brick which was on the top right of the image hence, the kNN classify will try to fit a number to this segment. Since they are no digit in this segment it will output random numbers. This behaviour is observed through the outputted number of the classify of 4826, the first two digits are the correct classified digits of the house number and the 26 is what kNN thinks the brick is. Additionally, for this case, the results could've been improved by running a check of L2-Norm distance calculated for the segmented image and if that distance isn't above a specific threshold the classify won't classify that digit as it doesn't closely represent any number in its data set. But the nature of kNN is that it will find the closest fitting distance for an image regardless of how far that distance is away from any data point in the dataset.\par
+
+Secondly, poor classification can be explained by the training data produced. Some digits in the training data set have more examples than other digits this will cause the kNN classifier to overfit to digits with more examples in the training data set namely, in the training data set they were 10 examples of a 1, and 13 examples of 0 hence, kNN will more classify something which closely represents a 0 as zero than the digit it is as can be seen in figure \ref{Results for the house number 71}. Moreover, they're 10 examples of a 5, and 18 examples of a 3 hence the classify will classify anything which marginally looks like a 5 as a 3 as seen in the results in \ref{Results for the house number 35}. For future work to produce better results, a  function can be implemented which gets the minimum number of training examples from each labelled data-set and truncates all the data sets to be the length of the minimum data set found so the kNN classifier won't over-fit to any specific digit in the training data set. Furthermore, since kNN segments images based on colour, a common approach is to introduce noise to each example in the data set this approach did provide better classification performance. In the earlier stages of the algorithm whereby noise wasn't introduced to the data set, the programme would classify the four seen in figure \ref{Results for the house number 94}.
 
 \section{references}
+
+An. Senjian. 2020. “Machine Perception Lecture 03”. Power point slides..https://learn-ap-southeast-2-prod-fleet01-xythos.s3.ap-southeast-2.amazonaws.com/5dc3e34515a0e/4348643?response-cache-control=private\%2C\%20max-age\%3D21600\&response-content-disposition=inline\%3B\%20filename\%2A\%3DUTF-8\%27\%27lecture03\_feature\_detection.pdf\&response-content-type=application\%2Fpdf\&X-Amz-Algorithm=AWS4-HMAC-SHA256\&X-Amz-Date=20201030T210000Z\&X-Amz-SignedHeaders=host\&X-Amz-Expires=21600\&X-Amz-Credential=AKIAYDKQORRYZBCCQFY5\%2F20201030\%2Fap-southeast-2\%2Fs3\%2Faws4\_request\&X-Amz-Signature=4263cc0edf55555ee8cd4010f52d0ea712914f2cc1fbf608a718041516f0a45c
+
+
+Rosebrock, Adrian. 2014. “Non-maximum Suppression for object detection in Python”. Pyimagesearch. https://www.pyimagesearch.com/2014/11/17/non-maximum-suppression-object-detection-python/
+
+Sambasivarao, K. 2019. “Non-maximum Suppression (NMS)". https://towardsdatascience.com/non-maximum-suppression-nms-93ce178e177c
 
 \newpage
 \appendix
 \appendixpage
 \addappheadtotoc
 
-\section{print out of code}
+\section{main.py}
+\lstinputlisting[language=Python]{files/main.py}
+\clearpage
+\newpage
+\section{Trainer.py}
+\lstinputlisting[language=Python]{files/Trainer.py}
+\clearpage
+\newpage
+	\section{Image.py}
+\lstinputlisting[language=Python]{files/Image.py}
+\clearpage
+\newpage
+\section{ImageLoader.py}
+\lstinputlisting[language=Python]{files/ImageLoader.py}
+\clearpage
+\newpage
+\section{Colours.py}
+\lstinputlisting[language=Python]{files/Colours.py}
+\clearpage
+\newpage
+\section{Errors.py}
+\lstinputlisting[language=Python]{files/Errors.py}
 %\includepdf[
 %  scale=0.99,
 %  pages=-,

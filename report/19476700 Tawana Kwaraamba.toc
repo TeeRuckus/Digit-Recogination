@@ -4,6 +4,12 @@
 \contentsline {section}{\numberline {2}Approach to image extraction}{3}%
 \contentsline {section}{\numberline {3}Approach to image classification}{6}%
 \contentsline {part}{II\hspace {1em}Discussion of produced Results}{8}%
-\contentsline {section}{\numberline {4}references}{9}%
-\contentsline {section}{Appendices}{10}%
-\contentsline {section}{\numberline {A}print out of code}{10}%
+\contentsline {section}{\numberline {4}Discussion}{11}%
+\contentsline {section}{\numberline {5}references}{12}%
+\contentsline {section}{Appendices}{13}%
+\contentsline {section}{\numberline {A}main.py}{13}%
+\contentsline {section}{\numberline {B}Trainer.py}{15}%
+\contentsline {section}{\numberline {C}Image.py}{19}%
+\contentsline {section}{\numberline {D}ImageLoader.py}{46}%
+\contentsline {section}{\numberline {E}Colours.py}{51}%
+\contentsline {section}{\numberline {F}Errors.py}{52}%
